@@ -139,3 +139,4 @@ nbdist/
 
 
 # End of https://www.gitignore.io/api/webstorm,netbeans,intellij
+/mavenproject1/wet/target/
