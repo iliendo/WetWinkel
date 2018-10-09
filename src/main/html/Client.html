@@ -14,35 +14,32 @@
 </head>
 
 <body>
-  <!-- Always shows a header, even in smaller screens. -->
+  <!--Header-->
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <!-- Title -->
         <span class="mdl-layout-title">Wetwinkel</span>
-        <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
-        <!-- Navigation. We hide it in small screens. -->
-        <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="">Home</a>
           <a class="mdl-navigation__link" href="">Formulieren</a>
           <a class="mdl-navigation__link" href="">About</a>
         </nav>
       </div>
     </header>
-    <main class="mdl-layout__content">
-      <div class="page-content">
+
+
+    <div class="content-grid mdl-grid">
+
+    <div class="mdl-layout-spacer"></div>
+
+      <div class="mdl-cell mdl-cell--6-col">
         <form id="input_form">
           <form action="#">
             <div class="mdl-textfield mdl-js-textfield">
               <input class="mdl-textfield__input" type="text" id="initialen">
               <label class="mdl-textfield__label" for="initialen">Initialen</label>
-            </div>
-          </form>
-          <form action="#">
-            <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="text" id="tussenvoegsel">
-              <label class="mdl-textfield__label" for="tussenvoegsel">Tussenvoegsel</label>
             </div>
           </form>
           <form action="#">
@@ -94,15 +91,76 @@
               <label class="mdl-textfield__label" for="email">E-mail adres</label>
             </div>
           </form>
-
         </form>
+      </div>
+
+        <div class="mdl-cell mdl-cell--6-col">
+          <form id="input_form">
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="tussenvoegsel">
+                <label class="mdl-textfield__label" for="tussenvoegsel">Tussenvoegsel</label>
+              </div>
+            </form>
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="achternaam">
+                <label class="mdl-textfield__label" for="achternaam">Achternaam</label>
+              </div>
+            </form>
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="straatnaam">
+                <label class="mdl-textfield__label" for="straatnaam">Straatnaam</label>
+              </div>
+            </form>
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="postcode">
+                <label class="mdl-textfield__label" for="postcode">Postcode</label>
+              </div>
+            </form>
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="huisnummer">
+                <label class="mdl-textfield__label" for="huisnummer">Huisnummer</label>
+                <span class="mdl-textfield__error">Dit is geen nummer.</span>
+              </div>
+            </form>
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="toevoeging">
+                <label class="mdl-textfield__label" for="toevoeging">Toevoeging</label>
+              </div>
+            </form>
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="land">
+                <label class="mdl-textfield__label" for="land">Land</label>
+              </div>
+            </form>
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="telefoonnummer">
+                <label class="mdl-textfield__label" for="telefoonnummer">Telefoonnummer</label>
+              </div>
+            </form>
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="email">
+                <label class="mdl-textfield__label" for="email">E-mail adres</label>
+              </div>
+            </form>
+          </form>
 
         <script src="js/insert.js"></script>
         <p id="demo">A Paragraph.</p>
 
         <button onclick="myFunction()">Try it</button>
       </div>
-    </main>
+
+      <div class="mdl-layout-spacer"></div>
+    </div>
   </div>
 
 </body>
