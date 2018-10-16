@@ -9,7 +9,7 @@ function login(user, password) {
     switch (user.value) {
         case "admin@wetwinkel.nl":
             if (password.value = "12345") {
-                window.open("Client.html", "_self")
+                window.open("Cl.html", "_self")
             } else {
                 console.log("password is wrong");
             }

@@ -30,8 +30,12 @@
         </nav>
       </div>
     </header>
+
+
     <main class="mdl-layout__content">
       <div class="page-content">
+        <table style="width:100%">
+          <tr>
         <form id="input_form">
           <form action="#">
             <div class="mdl-textfield mdl-js-textfield">
@@ -63,6 +67,10 @@
               <label class="mdl-textfield__label" for="postcode">Postcode</label>
             </div>
           </form>
+        </form>
+          </tr>
+
+          <tr>
           <form action="#">
             <div class="mdl-textfield mdl-js-textfield">
               <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="huisnummer">
@@ -94,7 +102,8 @@
               <label class="mdl-textfield__label" for="email">E-mail adres</label>
             </div>
           </form>
-
+          </tr>
+        </table>
         </form>
 
         <script src="js/insert.js"></script>

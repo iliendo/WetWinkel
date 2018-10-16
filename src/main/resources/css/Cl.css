@@ -51,6 +51,31 @@ body {
     width: 100%
 }
 
+.tb1 {
+    float:left;
+    width:50%;
+}
+
+.tb2 {
+    float:right;
+    width:50%;
+    border:none;
+}
+
+.hp {
+    float:left;
+}
+
+.this-button {
+    margin-top: 20px;
+
+}
+
+.main-divje {
+    margin-top: 64px;
+}
+
+
 .success-help {
     padding: 0 15px;
     vertical-align: 0px;
