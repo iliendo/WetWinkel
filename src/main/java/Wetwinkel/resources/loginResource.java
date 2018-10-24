@@ -1,6 +1,5 @@
 package Wetwinkel.resources;
 
-import Wetwinkel.Database.Database;
 import Wetwinkel.Objects.Credentials;
 import Wetwinkel.Objects.User;
 import Wetwinkel.Service.RepositoryService;

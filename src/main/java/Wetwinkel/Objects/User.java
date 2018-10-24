@@ -1,14 +1,14 @@
 package Wetwinkel.Objects;
 
-import Wetwinkel.util.Security;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.security.NoSuchAlgorithmException;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue

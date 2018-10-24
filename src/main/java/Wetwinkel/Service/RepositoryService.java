@@ -68,7 +68,7 @@ public class RepositoryService {
 
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        String sql = "SELECT * FROM User WHERE email = ? AND wachtwoord = ?";
+        String sql = "SELECT * FROM users WHERE email = ? AND wachtwoord = ?";
         Query statement = em.createNativeQuery(sql);
 
         String hashedPassword = Security.getHashedPassword(password, email);
