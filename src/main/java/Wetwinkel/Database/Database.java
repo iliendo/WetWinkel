@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
         name = "java:comp/env/jdbc/wetwinkelDb",
         className = "com.mysql.cj.jdbc.MysqlXADataSource",
         url = "jdbc:mysql://145.92.203.241:3306/ztourakm0011",
-        user = "tourakm",
+        user = "tourakm0011",
         password = "FBJFf4sFjV3Wg3")
 @Stateless
 public class Database {
