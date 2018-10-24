@@ -21,12 +21,9 @@ function login(user, password) {
             if (password.value = "12345") {
                 window.open("Client.html", "_self");
                 break;
-            } else {
-                console.log("password is wrong");
-                break;
             }
         default:
-            console.log("email wrong");
+            console.log("email or password is wrong");
             break;
     }
 }

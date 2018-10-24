@@ -13,8 +13,7 @@
     background: url('https://getmdl.io/assets/demos/transparent.jpg') center / cover;
 }
 body {
-    background-color: rgba(0, 0, 0, 0.0392156862745098);
-    background: linear-gradient(-45deg, rgba(16, 0, 78, 0.3686274509803922), rgba(20, 4, 81, 0));
+    background: rgba(0, 0, 0, 0.0392156862745098) linear-gradient(-45deg, rgba(16, 0, 78, 0.3686274509803922), rgba(20, 4, 81, 0));
 }
 .demo-header .mdl-layout__header-row {
     padding-left: 40px;
