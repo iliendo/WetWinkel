@@ -16,11 +16,19 @@ password.addEventListener("keyup", function(event) {
 });
 
 function login(user, password) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:8080/wetwinkel_war/rest/login", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-        "email": user,
-        "password": password
-    }));
+    console.log("henk is groot, henk is de grootste");
+    xhr = new XMLHttpRequest();
+    var url = "http://localhost:8080/wetwinkel_war/rest/login";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            console.log(json);
+        } else {
+            console.log(xhr.status);
+        }
+    };
+    var data = JSON.stringify({"email":user,"wachtwoord":password});
+    xhr.send(data);
 }

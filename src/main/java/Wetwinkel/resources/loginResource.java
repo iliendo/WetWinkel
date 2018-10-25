@@ -29,7 +29,6 @@ public class loginResource {
 
             return Response.ok(token).build();
         } catch (Exception e){
-            e.printStackTrace();
             return Response.status(Response.Status.FORBIDDEN).build();
         }
     }
