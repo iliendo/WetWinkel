@@ -2,11 +2,9 @@ package Wetwinkel.Service;
 
 import Wetwinkel.Objects.User;
 import Wetwinkel.util.Security;
+import org.hibernate.Session;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.ws.rs.core.Response;
 import java.util.Map;
 
@@ -68,19 +66,11 @@ public class RepositoryService {
 
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        String sql = "SELECT * FROM users WHERE email = ? AND wachtwoord = ?";
-        Query statement = em.createNativeQuery(sql);
+        TypedQuery<User> query = em.createNamedQuery("User.Get", User.class);
+        query.setParameter("email", email);
+        query.setParameter("wachtwoord", password);
 
-        String hashedPassword = Security.getHashedPassword(password, email);
-        statement.setParameter(1, email);
-        statement.setParameter(2, password);
-
-        Object result = statement.getSingleResult();
-        if (result instanceof User) {
-            return (User) result;
-        } else {
-            return null;
-        }
+        return query.getSingleResult();
     }
 
 

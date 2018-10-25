@@ -16,14 +16,11 @@ password.addEventListener("keyup", function(event) {
 });
 
 function login(user, password) {
-    switch (user.value) {
-        case "admin@wetwinkel.nl":
-            if (password.value = "12345") {
-                window.open("Client.html", "_self");
-                break;
-            }
-        default:
-            console.log("email or password is wrong");
-            break;
-    }
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:8080/wetwinkel_war/rest/login", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        "email": user,
+        "password": password
+    }));
 }

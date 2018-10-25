@@ -22,7 +22,6 @@ public class loginResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login (Credentials credentials){
-        System.out.println(credentials);
         try{
             authenticate(credentials.getEmail(), credentials.getWachtwoord());
 
@@ -30,6 +29,7 @@ public class loginResource {
 
             return Response.ok(token).build();
         } catch (Exception e){
+            e.printStackTrace();
             return Response.status(Response.Status.FORBIDDEN).build();
         }
     }
