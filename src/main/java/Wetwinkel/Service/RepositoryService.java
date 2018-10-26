@@ -1,6 +1,7 @@
 package Wetwinkel.Service;
 
 import Wetwinkel.Objects.User;
+import Wetwinkel.Objects.Client;
 import Wetwinkel.util.Security;
 import org.hibernate.Session;
 
@@ -26,6 +27,7 @@ public class RepositoryService {
     }
 
     private Map<Integer, User> elements;
+    private Map<Integer, Client> cElements;
 
     private RepositoryService() {
         entityManagerFactory = Persistence.createEntityManagerFactory("wetwinkelPU");
@@ -36,6 +38,16 @@ public class RepositoryService {
     }
 
 
+    public Client addClient(Client client) {
+        EntityManager em = getEntityManager();
+
+        em.getTransaction().begin();
+        em.persist(client);
+        em.getTransaction().commit();
+
+        em.close();
+        return client;
+    }
 
     public User addUser(User user) {
         EntityManager em = getEntityManager();
@@ -72,6 +84,7 @@ public class RepositoryService {
 
         return query.getSingleResult();
     }
+
 
 
 
