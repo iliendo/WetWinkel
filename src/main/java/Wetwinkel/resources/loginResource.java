@@ -27,7 +27,7 @@ public class loginResource {
 
             String token = issueToken(credentials.getEmail());
 
-            return Response.ok("{ token: " + token + " }").build();
+            return Response.ok().header("token", token).build();
         } catch (Exception e){
             return Response.status(Response.Status.FORBIDDEN).build();
         }

@@ -5,7 +5,7 @@ document.getElementById("login-button").onclick = function () {
     login(email.value, password.value);
 };
 
-password.addEventListener("keyup", function(event) {
+password.addEventListener("keyup", function (event) {
     // Cancel the default action, if needed
     event.preventDefault();
     // Number 13 is the "Enter" key on the keyboard
@@ -16,28 +16,24 @@ password.addEventListener("keyup", function(event) {
 });
 
 function login(email, password) {
-    // xhr = new XMLHttpRequest();
     var url = "http://localhost:8080/wetwinkel_war/rest/login";
-    // xhr.open("POST", url, true);
-    // xhr.setRequestHeader("Content-type", "application/json");
-    // xhr.onreadystatechange = function () {
-    //     if (xhr.readyState === 4 && xhr.status === 200) {
-    //         var json = JSON.parse(xhr.responseText);
-    //         console.log(json);
-    //     } else {
-    //         console.log(xhr.status);
-    //     }
-    // };
-    var data = {'email':email,'wachtwoord':password};
-    // xhr.send(data);
+    var data = {'email': email, 'wachtwoord': password};
 
-    console.log(JSON.stringify(data));
-    fetch(url,  {
+    fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(function (value) { value.json().then(function (value1) { console.log(value1.toString()) })});
+    }).then(function (response) {
+        setCookie("token", response.headers.get("token") , 4)
+    });
+
+    function setCookie(cname, cvalue, exhours) {
+        var date = new Date();
+        date.setTime(date.getTime() + (exhours * 1000 * 60 * 60));
+        var expires = "expires=" + date.toGMTString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+    }
 
 }
