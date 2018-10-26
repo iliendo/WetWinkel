@@ -1,8 +1,6 @@
 package Wetwinkel.Service;
 
 import Wetwinkel.Objects.User;
-import Wetwinkel.util.Security;
-import org.hibernate.Session;
 
 import javax.persistence.*;
 import javax.ws.rs.core.Response;
@@ -66,13 +64,21 @@ public class RepositoryService {
 
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        TypedQuery<User> query = em.createNamedQuery("User.Get", User.class);
+        TypedQuery<User> query = em.createNamedQuery("User.Login", User.class);
         query.setParameter("email", email);
         query.setParameter("wachtwoord", password);
 
         return query.getSingleResult();
     }
 
+    public User getUserFromMail(String email) {
 
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        TypedQuery<User> query = em.createNamedQuery("User.Get", User.class);
+        query.setParameter("email", email);
+
+        return query.getSingleResult();
+    }
 
 }

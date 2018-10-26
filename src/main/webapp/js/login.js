@@ -38,6 +38,6 @@ function login(email, password) {
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(function (value) { console.log(value.headers.values()) });
+    }).then(function (value) { value.json().then(function (value1) { console.log(value1.toString()) })});
 
 }
