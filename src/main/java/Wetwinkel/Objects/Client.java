@@ -6,10 +6,10 @@ import javax.persistence.*;
 @NamedQueries(value = {
         @NamedQuery(name = "Client.Get", query = "SELECT c FROM Client c ")//WHERE tussenvoegsel = :tussenvoegsel AND wachtwoord = :wachtwoord
 })
-@Table(name = "Client")
+@Table(name = "client")
 public class Client {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idClient;
     private String initialen;
     private String tussenvoegsel;
@@ -40,6 +40,14 @@ public class Client {
     }
 
     public Client() {
+    }
+
+    public String getLand() {
+        return land;
+    }
+
+    public void setLand(String land) {
+        this.land = land;
     }
 
     public int getIdClient() {return idClient;}
