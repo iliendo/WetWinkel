@@ -1,12 +1,11 @@
 package Wetwinkel.Service;
 
 import Wetwinkel.Objects.User;
+import Wetwinkel.Objects.Client;
 import Wetwinkel.util.Security;
+import org.hibernate.Session;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.ws.rs.core.Response;
 import java.util.Map;
 
@@ -28,6 +27,7 @@ public class RepositoryService {
     }
 
     private Map<Integer, User> elements;
+    private Map<Integer, Client> cElements;
 
     private RepositoryService() {
         entityManagerFactory = Persistence.createEntityManagerFactory("wetwinkelPU");
@@ -38,6 +38,16 @@ public class RepositoryService {
     }
 
 
+    public Client addClient(Client client) {
+        EntityManager em = getEntityManager();
+
+        em.getTransaction().begin();
+        em.persist(client);
+        em.getTransaction().commit();
+
+        em.close();
+        return client;
+    }
 
     public User addUser(User user) {
         EntityManager em = getEntityManager();
@@ -68,21 +78,21 @@ public class RepositoryService {
 
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        String sql = "SELECT * FROM users WHERE email = ? AND wachtwoord = ?";
-        Query statement = em.createNativeQuery(sql);
+        TypedQuery<User> query = em.createNamedQuery("User.Login", User.class);
+        query.setParameter("email", email);
+        query.setParameter("wachtwoord", password);
 
-        String hashedPassword = Security.getHashedPassword(password, email);
-        statement.setParameter(1, email);
-        statement.setParameter(2, password);
-
-        Object result = statement.getSingleResult();
-        if (result instanceof User) {
-            return (User) result;
-        } else {
-            return null;
-        }
+        return query.getSingleResult();
     }
 
+    public User getUserFromMail(String email) {
 
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        TypedQuery<User> query = em.createNamedQuery("User.Get", User.class);
+        query.setParameter("email", email);
+
+        return query.getSingleResult();
+    }
 
 }

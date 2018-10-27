@@ -22,13 +22,12 @@ public class loginResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login (Credentials credentials){
-        System.out.println(credentials);
         try{
             authenticate(credentials.getEmail(), credentials.getWachtwoord());
 
             String token = issueToken(credentials.getEmail());
 
-            return Response.ok(token).build();
+            return Response.ok().header("token", token).build();
         } catch (Exception e){
             return Response.status(Response.Status.FORBIDDEN).build();
         }

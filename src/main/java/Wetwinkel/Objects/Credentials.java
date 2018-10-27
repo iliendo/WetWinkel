@@ -1,8 +1,6 @@
 package Wetwinkel.Objects;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Credentials {
     private String email;
     private String wachtwoord;
@@ -22,4 +20,5 @@ public class Credentials {
     public void setWachtwoord(String wachtwoord) {
         this.wachtwoord = wachtwoord;
     }
+
 }

@@ -1,13 +1,13 @@
 package Wetwinkel.Objects;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 
 @Entity
+@NamedQueries(value = {
+        @NamedQuery(name = "User.Login", query = "SELECT u FROM User u WHERE email = :email AND wachtwoord = :wachtwoord"),
+        @NamedQuery(name = "User.Get", query= "SELECT u FROM User u WHERE email = :email")
+})
 @Table(name = "users")
 public class User {
     @Id

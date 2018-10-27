@@ -1,11 +1,11 @@
-var user = document.getElementById("email");
+var email = document.getElementById("email");
 var password = document.getElementById("password");
 
 document.getElementById("login-button").onclick = function () {
-    login(user, password);
+    login(email.value, password.value);
 };
 
-password.addEventListener("keyup", function(event) {
+password.addEventListener("keyup", function (event) {
     // Cancel the default action, if needed
     event.preventDefault();
     // Number 13 is the "Enter" key on the keyboard
@@ -15,15 +15,25 @@ password.addEventListener("keyup", function(event) {
     }
 });
 
-function login(user, password) {
-    switch (user.value) {
-        case "admin@wetwinkel.nl":
-            if (password.value = "12345") {
-                window.open("Client.html", "_self");
-                break;
-            }
-        default:
-            console.log("email or password is wrong");
-            break;
+function login(email, password) {
+    var url = "http://localhost:8080/wetwinkel_war/rest/login";
+    var data = {'email': email, 'wachtwoord': password};
+
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(function (response) {
+        setCookie("token", response.headers.get("token") , 4)
+    });
+
+    function setCookie(cname, cvalue, exhours) {
+        var date = new Date();
+        date.setTime(date.getTime() + (exhours * 1000 * 60 * 60));
+        var expires = "expires=" + date.toGMTString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
     }
+
 }
