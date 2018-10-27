@@ -8,7 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Security {
-    private static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public static String getHashedPassword(final String wachtwoord, String email) {
         byte[] salt = email.toLowerCase().getBytes();
