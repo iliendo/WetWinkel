@@ -78,6 +78,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     }
 
     private void checkPermissions(List<Role> allowedRoles, String token) throws Exception {
+        System.out.println("henk is groot, henk is oppermachtig");
         // Check if the user contains one of the allowed roles
         // Throw an Exception if the user has not permission to execute the method
         RepositoryService repositoryService = RepositoryService.getInstance();
@@ -90,6 +91,8 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         } else {
             role = Role.NORMAL_USER;
         }
+
+        System.out.println(allowedRoles);
 
         if (!allowedRoles.contains(role)){
             throw new Exception("You do not have the permissions for this action");

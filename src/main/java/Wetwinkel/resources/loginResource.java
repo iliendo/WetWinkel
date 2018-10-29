@@ -11,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,7 +29,7 @@ public class loginResource {
 
             String token = issueToken(credentials.getEmail());
 
-            return Response.ok().cookie(new NewCookie("token", token)).build();
+            return Response.ok(token).build();
         } catch (Exception e){
             return Response.status(Response.Status.FORBIDDEN).build();
         }
@@ -47,8 +48,7 @@ public class loginResource {
 
         Date expirationDate = cal.getTime();
 
-        String token = Jwts.builder().setSubject(email).signWith(Security.getKey()).setExpiration(expirationDate).compact();
-        return token;
+        return Jwts.builder().setSubject(email).setExpiration(expirationDate).signWith(Security.getKey()).compact();
     }
 }
 

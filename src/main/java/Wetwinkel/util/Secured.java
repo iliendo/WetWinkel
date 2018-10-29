@@ -12,5 +12,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Target({TYPE, METHOD})
 public @interface Secured {
-    Role[] value() default {};
+    Role[] value() default {Role.NORMAL_USER, Role.SUPER_USER};
 }

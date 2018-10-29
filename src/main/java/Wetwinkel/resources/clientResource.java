@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@Secured
+@Secured()
 @Path("/client")
 public class clientResource {
 
@@ -25,6 +25,7 @@ public class clientResource {
 
     @GET
     public Response openClientPage() throws URISyntaxException {
+        System.out.println("trying to go to page");
         URI uri = new URI("http://localhost:8080/wetwinkel_war/client.html");
         return Response.temporaryRedirect(uri).build();
     }

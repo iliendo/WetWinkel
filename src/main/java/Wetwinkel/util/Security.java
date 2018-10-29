@@ -3,12 +3,12 @@ package Wetwinkel.util;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Security {
-    private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private static final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public static String getHashedPassword(final String wachtwoord, String email) {
         byte[] salt = email.toLowerCase().getBytes();
@@ -31,7 +31,7 @@ public class Security {
         return sb.toString();
     }
 
-    public static Key getKey() {
+    public static SecretKey getKey() {
         return key;
     }
 }
