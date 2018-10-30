@@ -25,8 +25,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
 
         // Get the Authorization header from the request
-        String authorizationHeader =
-                requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
+        String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
         // Validate the Authorization header
         if (!isTokenBasedAuthentication(authorizationHeader)) {
@@ -38,12 +37,14 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         String token = authorizationHeader
                 .substring(AUTHENTICATION_SCHEME.length()).trim();
 
+
         try {
 
             // Validate the token
             validateToken(token);
 
         } catch (Exception e) {
+            e.printStackTrace();
             abortWithUnauthorized(requestContext);
         }
     }
@@ -74,7 +75,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
         // Check if the token was issued by the server and if it's not expired
         // Throw an Exception if the token is invalid
-        if(!Jwts.parser().setSigningKey(Security.getKey()).parseClaimsJws(token).getBody().getExpiration().after(now))
+        if (!Jwts.parser().setSigningKey(Security.getKey()).parseClaimsJws(token).getBody().getExpiration().after(now))
             throw new Exception("token invalid");
     }
 }

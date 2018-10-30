@@ -143,3 +143,5 @@ nbdist/
 target/
 
 \.idea/
+
+WetWinkel\.iml

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries(value = {
-        @NamedQuery(name = "Client.Get", query = "SELECT c FROM Client c ")//WHERE tussenvoegsel = :tussenvoegsel AND wachtwoord = :wachtwoord
+        @NamedQuery(name = "Client.Get", query = "SELECT c FROM Client c ")
 })
 @Table(name = "client")
 public class Client {
@@ -29,7 +29,6 @@ public class Client {
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
         this.straatnaam = straatnaam;
-        //setWachtwoord(wachtwoord);
         this.postcode = postcode;
         this.huisnummer = huisnummer;
         this.toevoeging = toevoeging;
@@ -72,8 +71,6 @@ public class Client {
 
     public int getOntdekkingWw() {return ontdekkingWw;}
 
-    //SetStuff
-
     public void setInitialen(String initialen) {this.initialen = initialen;}
 
     public void setTussenvoegsel(String tussenvoegsel) {this.tussenvoegsel = tussenvoegsel;}
@@ -93,27 +90,5 @@ public class Client {
     public void setEmail(String email) {this.email = email;}
 
     public void setOntdekkingWw(int ontdekkingWw) {this.ontdekkingWw = ontdekkingWw;}
-
-
-
-
-//    public void setWachtwoord(String wachtwoord) {
-//        this.wachtwoord = Security.getHashedPassword(wachtwoord, tussenvoegsel);
-//        if (this.wachtwoord == null){
-//            //TODO geef een error hier!
-//        }
-//        this.wachtwoord = wachtwoord;
-//
-//    }
-
-    //public boolean isSuperUser() {
-//        return superUser;
-//    }
-
-//    public void setSuperUser(boolean superUser) {
-//        this.superUser = superUser;
-//    }
-//
-//}
 
 }

@@ -6,18 +6,16 @@ document.getElementById("login-button").onclick = function () {
 };
 
 password.addEventListener("keyup", function (event) {
-    // Cancel the default action, if needed
     event.preventDefault();
-    // Number 13 is the "Enter" key on the keyboard
     if (event.keyCode === 13) {
-        // Trigger the button element with a click
         document.getElementById("login-button").click();
     }
 });
 
 function login(email, password) {
-    var url = "http://localhost:8080/wetwinkel_war/rest/login";
+    var url = "http://localhost:8080/wetwinkel_war/rest/login"; //TODO change this url when the server is online
     var data = {'email': email, 'wachtwoord': password};
+    var url2 = "http://localhost:8080/wetwinkel_war/rest/client"; //TODO change this url when the server is online
 
     fetch(url, {
         method: 'POST',
@@ -26,14 +24,21 @@ function login(email, password) {
             'Content-Type': 'application/json'
         }
     }).then(function (response) {
-        setCookie("token", response.headers.get("token") , 4)
-    });
+        return response.text()
+    }).then(function (value) {
 
-    function setCookie(cname, cvalue, exhours) {
-        var date = new Date();
-        date.setTime(date.getTime() + (exhours * 1000 * 60 * 60));
-        var expires = "expires=" + date.toGMTString();
-        document.cookie = cname + "=" + cvalue + "; " + expires;
-    }
+        sessionStorage.setItem("token", value);
+
+        fetch(url2, {
+            method: 'GET',
+            headers: {
+                'authorization': 'bearer ' + sessionStorage.getItem("token")
+            }
+        }).then(function (value) {
+            if (value.ok) {
+                window.open("client.html", "_SELF")
+            }
+        });
+    });
 
 }

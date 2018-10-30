@@ -1,6 +1,8 @@
 package Wetwinkel.Objects;
 
 
+import Wetwinkel.util.Security;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUser;
     private String naam;
     private String email;
@@ -25,7 +27,7 @@ public class User {
         this.email = email;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
-        setWachtwoord(wachtwoord);
+        this.wachtwoord = wachtwoord;
         this.superUser = superUser;
     }
 
@@ -73,11 +75,10 @@ public class User {
     }
 
     public void setWachtwoord(String wachtwoord) {
-//        this.wachtwoord = Security.getHashedPassword(wachtwoord, email);
-//        if (this.wachtwoord == null){
-//            //TODO geef een error hier!
-//        }
-        this.wachtwoord = wachtwoord;
+        this.wachtwoord = Security.getHashedPassword(email, wachtwoord);
+        if (this.wachtwoord == null){
+            //TODO geef een error hier!
+        }
 
     }
 
