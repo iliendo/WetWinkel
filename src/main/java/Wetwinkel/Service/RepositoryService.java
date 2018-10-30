@@ -77,7 +77,6 @@ public class RepositoryService {
     public User getUser(String email, String password) {
 
         EntityManager em = entityManagerFactory.createEntityManager();
-//        password = Security.getHashedPassword(email, password);
 
         TypedQuery<User> query = em.createNamedQuery("User.Login", User.class);
         query.setParameter("email", email);

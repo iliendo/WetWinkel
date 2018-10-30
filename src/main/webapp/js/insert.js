@@ -1,5 +1,4 @@
 document.getElementById("insert-button").onclick = function () {
-    console.log("hoi ik ben henk");
     myFunction();
 };
 
@@ -19,8 +18,6 @@ function myFunction() {
 
     var url = "http://localhost:8080/wetwinkel_war/rest/client/add"; //TODO change this url when the server is online
     var data = {'initialen': initialen, 'tussenvoegsel': tussenvoegsel, 'achternaam': achternaam, 'straatnaam': straatnaam, 'postcode': postcode, 'huisnummer': huisnummer, 'toevoeging': toevoeging, 'land': land, 'telefoonnummer': telefoonnummer, 'email': email, 'ontdekkingWw': 1};
-
-    console.log(sessionStorage.getItem("token"));
 
     fetch(url, {
         method: 'POST',
