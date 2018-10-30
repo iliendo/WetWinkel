@@ -1,3 +1,8 @@
+document.getElementById("insert-button").onclick = function () {
+    console.log("hoi ik ben henk");
+    myFunction();
+};
+
 function myFunction() {
 
     var initialen = document.getElementById("initialen").value;
@@ -11,23 +16,20 @@ function myFunction() {
     var telefoonnummer = document.getElementById("telefoonnummer").value;
     var email = document.getElementById("email").value;
 
-       document.getElementById("demo").innerHTML = initialen;
 
-       var mysql = require('mysql');
+    var url = "http://localhost:8080/wetwinkel_war/rest/client/add"; //TODO change this url when the server is online
+    var data = {'initialen': initialen, 'tussenvoegsel': tussenvoegsel, 'achternaam': achternaam, 'straatnaam': straatnaam, 'postcode': postcode, 'huisnummer': huisnummer, 'toevoeging': toevoeging, 'land': land, 'telefoonnummer': telefoonnummer, 'email': email, 'ontdekkingWw': 1};
 
-       var con = mysql.createConnection({
-         host: "oege.ie.hva.nl",
-         user: "tourakm0011",
-         password: "FBJFf4sFjV3Wg3",
-         database: "ztourakm0011"
-       });
+    console.log(sessionStorage.getItem("token"));
 
-       con.connect(function(err) {
-         if (err) throw err;
-         var sql = "INSERT INTO client (initialen, tussenvoegsel, achternaam, straatnaam, postcode, huisnummer, toevoeging, land, telefoonnummer, email, ontdekkingWw) VALUES ('a', 'b', 'c', 'd', 'e', 1, 'g', 'h', 2, 'j', 'k')";
-         con.query(sql, function (err, result) {
-           if (err) throw err;
-           console.log("1 record inserted, ID: " + result.insertId);
-         });
-       });
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'authorization': 'bearer ' + sessionStorage.getItem("token"),
+            'Content-Type': 'application/json'
+        }
+    }).then();
+
+    window.open("client.html", "_SELF");
 }

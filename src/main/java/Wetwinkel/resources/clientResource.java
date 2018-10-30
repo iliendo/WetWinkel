@@ -10,7 +10,6 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@Secured()
 @Path("/client")
 public class clientResource {
 
@@ -19,6 +18,7 @@ public class clientResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Client addClient(Client client){
+        System.out.println("adding");
         RepositoryService.getInstance().addClient(client);
         return client;
     }
