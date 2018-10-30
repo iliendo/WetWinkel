@@ -29,8 +29,6 @@ function login(email, password) {
 
         sessionStorage.setItem("token", value);
 
-        console.log(sessionStorage.getItem("token"));
-
         fetch(url2, {
             method: 'GET',
             headers: {

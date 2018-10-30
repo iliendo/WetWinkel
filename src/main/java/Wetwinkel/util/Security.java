@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 public class Security {
     private static final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public static String getHashedPassword(final String wachtwoord, String email) {
+    public static String getHashedPassword(String email, final String wachtwoord) {
         byte[] salt = email.toLowerCase().getBytes();
         try {
             return hashPassword(wachtwoord, salt);
