@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 public class Security {
     private static final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public static String getHashedPassword(final String wachtwoord, String email) {
+    public static String getHashedPassword(String email, final String wachtwoord) {
         byte[] salt = email.toLowerCase().getBytes();
         try {
             return hashPassword(wachtwoord, salt);
@@ -21,6 +21,7 @@ public class Security {
     }
 
     private static String hashPassword(final String wachtwoord, final byte[] salt) throws NoSuchAlgorithmException {
+        System.out.println("hashing password");
         MessageDigest md = MessageDigest.getInstance("SHA-512");
         md.update(salt);
         byte[] bytes = md.digest(wachtwoord.getBytes());
@@ -28,6 +29,7 @@ public class Security {
         for (byte aByte : bytes) {
             sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
         }
+        System.out.println(sb.toString());
         return sb.toString();
     }
 

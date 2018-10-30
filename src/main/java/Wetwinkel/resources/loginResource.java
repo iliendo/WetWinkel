@@ -37,6 +37,7 @@ public class loginResource {
 
     private void authenticate(String email, String password) throws Exception {
         User user;
+        password = Security.getHashedPassword(email, password);
         user = RepositoryService.getInstance().getUser(email, password);
         if (user == null) throw new Exception("login failed");
     }
