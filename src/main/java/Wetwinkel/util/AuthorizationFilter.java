@@ -45,12 +45,18 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         // Extract the roles declared by it
         Method resourceMethod = resourceInfo.getResourceMethod();
         List<Role> methodRoles = extractRoles(resourceMethod);
+        List<Role> allRoles = new ArrayList<>();
+        allRoles.add(Role.NORMAL_USER);
+        allRoles.add(Role.SUPER_USER);
 
         try {
 
             // Check if the user is allowed to execute the method
             // The method annotations override the class annotations
-            if (methodRoles.isEmpty()) {
+            if (classRoles.isEmpty()) {
+                //all users accepted
+                checkPermissions(allRoles, token);
+            } else if (methodRoles.isEmpty()){
                 checkPermissions(classRoles, token);
             } else {
                 checkPermissions(methodRoles, token);
@@ -65,11 +71,11 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     // Extract the roles from the annotated element
     private List<Role> extractRoles(AnnotatedElement annotatedElement) {
         if (annotatedElement == null) {
-            return new ArrayList<Role>();
+            return new ArrayList<>();
         } else {
             Secured secured = annotatedElement.getAnnotation(Secured.class);
             if (secured == null) {
-                return new ArrayList<Role>();
+                return new ArrayList<>();
             } else {
                 Role[] allowedRoles = secured.value();
                 return Arrays.asList(allowedRoles);
