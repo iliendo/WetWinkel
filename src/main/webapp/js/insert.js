@@ -1,5 +1,16 @@
+if (sessionStorage.getItem("token") === null){
+    window.open("index.html", "_SELF");
+}
+
+
+
 document.getElementById("insert-button").onclick = function () {
     myFunction();
+};
+
+document.getElementById("logout-button").onclick = function () {
+  sessionStorage.removeItem("token");
+  window.open("index.html", "_SELF");
 };
 
 function myFunction() {
@@ -16,7 +27,7 @@ function myFunction() {
     var email = document.getElementById("email").value;
 
 
-    var url = "http://localhost:8080/wetwinkel_war/rest/client/add"; //TODO change this url when the server is online
+    var url = "http://localhost:8080/wetwinkel_war/rest/client/"; //TODO change this url when the server is online
     var data = {'initialen': initialen, 'tussenvoegsel': tussenvoegsel, 'achternaam': achternaam, 'straatnaam': straatnaam, 'postcode': postcode, 'huisnummer': huisnummer, 'toevoeging': toevoeging, 'land': land, 'telefoonnummer': telefoonnummer, 'email': email, 'ontdekkingWw': 1};
 
     fetch(url, {
@@ -26,7 +37,11 @@ function myFunction() {
             'authorization': 'bearer ' + sessionStorage.getItem("token"),
             'Content-Type': 'application/json'
         }
-    }).then();
+    }).then(function (response) {
+        if (!response.ok){
+            window.open("index.html", "_SELF")
+        }
+    });
 
     window.open("client.html", "_SELF");
 }

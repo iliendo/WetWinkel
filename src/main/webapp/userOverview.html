@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wetwinkel</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="css/userOverview.css">
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+
+        <div class="mdl-layout__header-row">
+
+            <span class="mdl-layout-title">Wetwinkel</span>
+
+            <div class="mdl-layout-spacer"></div>
+
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link" href="">Home</a>
+                <a class="mdl-navigation__link" href="">Cliënt</a>
+                <a class="mdl-navigation__link" href="index.html">Uitloggen</a>
+            </nav>
+        </div>
+    </header>
+    <div class="demo-layout-transparent mdl-layout main-divje">
+        <div class="wrapper">
+            <div class="side">
+                <div class="head">
+                    <h3>Wetwinkel</h3>
+                </div>
+
+                <ul class="menu">
+                    <li><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+                        <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+                        <span class="mdl-switch__label">Alleen eigen Cliënten</span>
+                    </label>
+                    </li>
+                    <li><h5 class="Catogriën">Catogriën</h5></li>
+                    <li title="Strafrecht"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                  for="checkbox-1">
+                        <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input">
+                        <span class="mdl-checkbox__label">Strafrecht</span>
+                    </label></li>
+                    <li title="Huurrecht"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                 for="checkbox-2">
+                        <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
+                        <span class="mdl-checkbox__label">Huurrecht</span>
+                    </label></li>
+                    <li title="Auto's"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                              for="checkbox-3">
+                        <input type="checkbox" id="checkbox-3" class="mdl-checkbox__input">
+                        <span class="mdl-checkbox__label">Auto's</span>
+                    </label></li>
+                    <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-4">
+                        <input type="checkbox" id="checkbox-4" class="mdl-checkbox__input">
+                        <span class="mdl-checkbox__label">Roof</span>
+                    </label></li>
+                </ul>
+            </div>
+            <div class="main-wrap">
+                <br class="mdl-grid">
+
+                <br>
+                <div class="mdl-cell mdl-cell--2-col">
+                    <input type="text" class="search" placeholder="Search"/>
+                    <a href="Client.html">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"> Cliënt
+                            toevoegen
+                        </button>
+                    </a>
+                </div>
+
+                <div class="mdl-cell mdl-cell--6-col">
+                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp fixed_header">
+
+                        <thead>
+                        <tr class="mdl-data-table__cell--non-numeric " >
+                            <th >Naam</th>
+                            <th> Geboortedatum</th>
+                            <th >Werknemer 1</th>
+                            <th >Werknemer 2</th>
+                            <th >Strafrecht</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td > Edwin Mccaster</td>
+                            <td>22-01-1977</td>
+                            <td>Henk</td>
+                            <td>Ingrid</td>
+                            <td>Roof</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Morris Radford</td>
+                            <td>10-05-1989</td>
+                            <td >Henk</td>
+                            <td >Johan</td>
+                            <td >Roof</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Arleen Nakasone</td>
+                            <td>26-04-1976</td>
+                            <td>Henk</td>
+                            <td>Piet</td>
+                            <td>Huurrecht</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Neely Agosta</td>
+                            <td>18-12-1990</td>
+                            <td>Henk</td>
+                            <td>Marco</td>
+                            <td>Huurrecht</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Neely Agosta</td>
+                            <td>18-12-1990</td>
+                            <td>Henk</td>
+                            <td>Marco</td>
+                            <td>Huurrecht</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Neely Agosta</td>
+                            <td>18-12-1990</td>
+                            <td>Henk</td>
+                            <td>Marco</td>
+                            <td>Huurrecht</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Neely Agosta</td>
+                            <td>18-12-1990</td>
+                            <td>Henk</td>
+                            <td>Marco</td>
+                            <td>Huurrecht</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Neely Agosta</td>
+                            <td>18-12-1990</td>
+                            <td>Henk</td>
+                            <td>Marco</td>
+                            <td>Huurrecht</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Neely Agosta</td>
+                            <td>18-12-1990</td>
+                            <td>Henk</td>
+                            <td>Marco</td>
+                            <td>Huurrecht</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Neely Agosta</td>
+                            <td>18-12-1990</td>
+                            <td>Henk</td>
+                            <td>Marco</td>
+                            <td>Huurrecht</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Neely Agosta</td>
+                            <td>18-12-1990</td>
+                            <td>Henk</td>
+                            <td>Marco</td>
+                            <td>Huurrecht</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Neely Agosta</td>
+                            <td>18-12-1990</td>
+                            <td>Henk</td>
+                            <td>Marco</td>
+                            <td>Huurrecht</td>
+                        </tr>
+                        <tr class="mdl-data-table__cell--non-numeric mdl-checkbox__label ">
+                            <td >Neely Agosta</td>
+                            <td>18-12-1990</td>
+                            <td>Henk</td>
+                            <td>Marco</td>
+                            <td>Huurrecht</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

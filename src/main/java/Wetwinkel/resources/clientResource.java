@@ -15,7 +15,6 @@ import java.net.URISyntaxException;
 public class clientResource {
 
     @POST
-    @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Client addClient(Client client){
