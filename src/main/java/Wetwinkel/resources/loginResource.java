@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
-@Path("/login")
+@Path("/user")
 public class loginResource {
     private final int KEY_LIFETIME_HOURS = 4;
 

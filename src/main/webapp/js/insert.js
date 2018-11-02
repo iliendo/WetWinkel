@@ -16,7 +16,7 @@ function myFunction() {
     var email = document.getElementById("email").value;
 
 
-    var url = "http://localhost:8080/wetwinkel_war/rest/client/add"; //TODO change this url when the server is online
+    var url = "http://localhost:8080/wetwinkel_war/rest/client/"; //TODO change this url when the server is online
     var data = {'initialen': initialen, 'tussenvoegsel': tussenvoegsel, 'achternaam': achternaam, 'straatnaam': straatnaam, 'postcode': postcode, 'huisnummer': huisnummer, 'toevoeging': toevoeging, 'land': land, 'telefoonnummer': telefoonnummer, 'email': email, 'ontdekkingWw': 1};
 
     fetch(url, {
