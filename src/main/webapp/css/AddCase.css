@@ -6,3 +6,27 @@
     min-width: 100%;
     margin-top: 75px;
 }
+
+.mdl-card__title-text {
+    padding: 0px 0px 0px 35px;
+}
+
+.mdl-data-table.mdl-js-data-table td {
+    text-align: center;
+    border: 0;
+}
+
+td#titles {
+    text-align: left;
+    padding: 0px 0px 0px 55px;
+}
+
+.mdl-data-table.mdl-js-data-table td#tekstveld {
+    text-align: left;
+    padding: 0px 0px 0px 55px;
+}
+
+.mdl-textfield textarea.mdl-textfield__input#sample5 {
+    display: block;
+    min-width: 700px;
+}
