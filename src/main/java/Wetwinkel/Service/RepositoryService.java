@@ -4,9 +4,11 @@ import Wetwinkel.Objects.User;
 import Wetwinkel.Objects.Client;
 import Wetwinkel.util.Security;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import javax.persistence.*;
 import javax.ws.rs.core.Response;
+import java.util.List;
 import java.util.Map;
 
 public class RepositoryService {
@@ -94,5 +96,17 @@ public class RepositoryService {
 
         return query.getSingleResult();
     }
+
+    public List<Client> getClients() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+       em.getTransaction().begin();
+       Query sql = em.createNativeQuery("SELECT * FROM ztourakm0011.client c");
+       List<Client> clientList = sql.getResultList();
+
+      
+
+        return clientList;
+    }
+
 
 }
