@@ -103,9 +103,9 @@ nbdist/
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
-# .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
+ .idea/modules.xml
+ .idea/*.iml
+ .idea/modules
 
 # CMake
 
@@ -139,5 +139,14 @@ nbdist/
 
 
 # End of https://www.gitignore.io/api/webstorm,netbeans,intellij
-/mavenproject1/wet/target/
+### Maven ###
 target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
