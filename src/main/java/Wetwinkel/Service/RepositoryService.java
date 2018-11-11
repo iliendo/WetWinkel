@@ -1,5 +1,6 @@
 package Wetwinkel.Service;
 
+import Wetwinkel.Objects.Case;
 import Wetwinkel.Objects.User;
 import Wetwinkel.Objects.Client;
 import Wetwinkel.util.Security;
@@ -30,6 +31,7 @@ public class RepositoryService {
 
     private Map<Integer, User> elements;
     private Map<Integer, Client> cElements;
+    private Map<Integer, Case> caseElements;
 
     private RepositoryService() {
         entityManagerFactory = Persistence.createEntityManagerFactory("wetwinkelPU");
@@ -97,15 +99,13 @@ public class RepositoryService {
         return query.getSingleResult();
     }
 
-    public List<Client> getClients() {
+    public List<Case> getCase() {
         EntityManager em = entityManagerFactory.createEntityManager();
-       em.getTransaction().begin();
-       Query sql = em.createNativeQuery("SELECT * FROM ztourakm0011.client c");
-       List<Client> clientList = sql.getResultList();
 
-      
+        List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();
+        em.close();
 
-        return clientList;
+        return caseList;
     }
 
 
