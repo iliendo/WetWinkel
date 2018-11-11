@@ -102,7 +102,8 @@ public class RepositoryService {
     public List<Case> getCase() {
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();
+       // List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();
+        List<Case> caseList = em.createQuery("SELECT b FROM Case b").getResultList();
         em.close();
 
         return caseList;
