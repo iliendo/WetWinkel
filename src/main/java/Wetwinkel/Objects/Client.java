@@ -5,7 +5,8 @@ import javax.persistence.*;
 @Entity
 @NamedQueries(value = {
         @NamedQuery(name = "Client.Get", query = "SELECT c FROM Client c "),
-        @NamedQuery(name = "Client1.Get", query = "SELECT c FROM Client c  where idClient = :idClient ")
+        @NamedQuery(name = "Client1.Get", query = "SELECT c FROM Client c  where idClient = :idClient "),
+        @NamedQuery(name = "Client2.Get", query = "SELECT c.initialen,c.achternaam ,c.straatnaam,c.huisnummer,c.email FROM Client c")
 })
 @Table(name = "client")
 public class Client {
