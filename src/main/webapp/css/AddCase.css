@@ -19,7 +19,7 @@
     border: 0;
 }
 
-td#titles {
+.mdl-data-table.mdl-js-data-table td.titles{
     text-align: left;
 }
 
