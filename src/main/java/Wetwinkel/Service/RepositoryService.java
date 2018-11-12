@@ -1,11 +1,8 @@
 package Wetwinkel.Service;
 
-import Wetwinkel.Objects.Case;
+import Wetwinkel.Objects.CaseM;
 import Wetwinkel.Objects.User;
 import Wetwinkel.Objects.Client;
-import Wetwinkel.util.Security;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import javax.persistence.*;
 import javax.ws.rs.core.Response;
@@ -31,7 +28,7 @@ public class RepositoryService {
 
     private Map<Integer, User> elements;
     private Map<Integer, Client> cElements;
-    private Map<Integer, Case> caseElements;
+    private Map<Integer, CaseM> caseElements;
 
     private RepositoryService() {
         entityManagerFactory = Persistence.createEntityManagerFactory("wetwinkelPU");
@@ -99,14 +96,14 @@ public class RepositoryService {
         return query.getSingleResult();
     }
 
-    public List<Case> getCase() {
+    public List<CaseM> getCase() {
         EntityManager em = entityManagerFactory.createEntityManager();
 
-       // List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();
-        List<Case> caseList = em.createQuery("SELECT b FROM Case b").getResultList();
+       // List<CaseM> caseMList = em.createNamedQuery("CaseM.Get",CaseM.class).getResultList();
+        List<CaseM> caseMList = em.createQuery("SELECT b FROM CaseM b").getResultList();
         em.close();
 
-        return caseList;
+        return caseMList;
     }
 
 

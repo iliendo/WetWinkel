@@ -2,9 +2,9 @@ var idCase = 0;
 var naam = null;
 var datum = null;
 var laatsteUpdate = 0;
-var rechtsgebied = {
-    rechtstraf: 1,
-    auto: 2
+const rechtsgebied = {
+    rechtstraf: 'rechtstraf',
+    auto: 'auto'
 };
 var status = {
     Open: 1,
@@ -25,7 +25,7 @@ xmlhttp.onreadystatechange = function () {
             idCase = myObj[a].idCase;
             naam = myObj[a].naam;
             datum = myObj[a].datum;
-            rechtsgebied = myObj[a].rechtsgebied;
+            rechtsgebied.valueOf(myObj[a].rechtsgebied);
             status = myObj[a].status;
             feiten = myObj[a].feiten;
             advies = myObj[a].advies;
@@ -55,3 +55,4 @@ xmlhttp.onreadystatechange = function () {
 };
 xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview", true);
 xmlhttp.send();
+

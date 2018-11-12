@@ -8,13 +8,13 @@ import java.util.Date;
 
 @Entity
 @NamedQueries(value = {
-        @NamedQuery(name = "Case.Get", query = "SELECT b FROM Case b"),
+        @NamedQuery(name = "Case.Get", query = "SELECT b FROM CaseM b"),
 
 })
 
 
 @Table(name = "suit")
-public class Case {
+public class CaseM {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCase;
@@ -34,7 +34,7 @@ public class Case {
     private Boolean gearchiveerd;
     private int idClient;
 
-    public Case(String naam, Date datum, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
+    public CaseM(String naam, Date datum, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
         this.naam = naam;
         this.datum = datum;
         this.feiten = feiten;
@@ -44,7 +44,7 @@ public class Case {
         this.idClient = idClient;
     }
 
-    public Case() {
+    public CaseM() {
     }
 
     public int getIdCase() {
