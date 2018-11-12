@@ -49,26 +49,6 @@ public class RepositoryService {
         return object;
     }
 
-//    public Client addClient(Client client) {
-//        EntityManager em = getEntityManager();
-//
-//        em.getTransaction().begin();
-//        em.persist(client);
-//        em.getTransaction().commit();
-//
-//        em.close();
-//        return client;
-//    }
-//
-//    public User addObject(User user) {
-//        EntityManager em = getEntityManager();
-//        em.getTransaction().begin();
-//        em.persist(user);
-//        em.getTransaction().commit();
-//        em.close();
-//        return user;
-//    }
-
     public Response deleteUser(String email) {
         EntityManager em = getEntityManager();
         Response r;
@@ -105,17 +85,6 @@ public class RepositoryService {
 
         return query.getSingleResult();
     }
-
-//    public Case addObject(Case addCase){
-//        EntityManager em = getEntityManager();
-//
-//        em.getTransaction().begin();
-//        em.persist(addObject);
-//        em.getTransaction().commit();
-//
-//        em.close();
-//        return addObject;
-//    }
 
     public List<Case> getCase() {
         EntityManager em = entityManagerFactory.createEntityManager();
