@@ -15,13 +15,13 @@ public class AddCaseResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Case addClient(Case cases){
-        RepositoryService.getInstance().addCase(cases);
+        RepositoryService.getInstance().addObject(cases);
         return cases;
     }
 
     @GET
     public Response openCasePage() throws URISyntaxException {
-        URI uri = new URI("http://localhost:8080/wetwinkel_war/addCase.html");
+        URI uri = new URI("http://localhost:8080/wetwinkel_war/addObject.html"); //TODO change when server goes live
         return Response.temporaryRedirect(uri).build();
     }
 }

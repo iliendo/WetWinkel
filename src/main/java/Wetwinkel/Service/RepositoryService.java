@@ -38,26 +38,36 @@ public class RepositoryService {
         return entityManagerFactory.createEntityManager();
     }
 
-
-    public Client addClient(Client client) {
+    public <T> T addObject (T object){
         EntityManager em = getEntityManager();
 
         em.getTransaction().begin();
-        em.persist(client);
+        em.persist(object);
         em.getTransaction().commit();
 
         em.close();
-        return client;
+        return object;
     }
 
-    public User addUser(User user) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
-        em.close();
-        return user;
-    }
+//    public Client addClient(Client client) {
+//        EntityManager em = getEntityManager();
+//
+//        em.getTransaction().begin();
+//        em.persist(client);
+//        em.getTransaction().commit();
+//
+//        em.close();
+//        return client;
+//    }
+//
+//    public User addObject(User user) {
+//        EntityManager em = getEntityManager();
+//        em.getTransaction().begin();
+//        em.persist(user);
+//        em.getTransaction().commit();
+//        em.close();
+//        return user;
+//    }
 
     public Response deleteUser(String email) {
         EntityManager em = getEntityManager();
@@ -96,16 +106,16 @@ public class RepositoryService {
         return query.getSingleResult();
     }
 
-    public Case addCase(Case addCase){
-        EntityManager em = getEntityManager();
-
-        em.getTransaction().begin();
-        em.persist(addCase);
-        em.getTransaction().commit();
-
-        em.close();
-        return addCase;
-    }
+//    public Case addObject(Case addCase){
+//        EntityManager em = getEntityManager();
+//
+//        em.getTransaction().begin();
+//        em.persist(addObject);
+//        em.getTransaction().commit();
+//
+//        em.close();
+//        return addObject;
+//    }
 
     public List<Case> getCase() {
         EntityManager em = entityManagerFactory.createEntityManager();
@@ -116,6 +126,5 @@ public class RepositoryService {
 
         return caseList;
     }
-
 
 }

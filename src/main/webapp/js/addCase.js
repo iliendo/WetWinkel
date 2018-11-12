@@ -25,10 +25,10 @@ function myFunction() {
             'Content-Type': 'application/json'
         }
     }).then(function (response) {
-        if (!response.ok){
-            window.open("addCase.html", "_SELF")
+        if (response.ok){
+            //TODO show it worked (redirect to all cases page)
+        } else {
+            //TODO show it didnt work and why (add snackbar met frikandel, mexicano)
         }
     });
-
-    window.open("addCase.html", "_SELF");
 }

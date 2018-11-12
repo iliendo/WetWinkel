@@ -18,7 +18,7 @@ public class clientResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Client addClient(Client client){
-        RepositoryService.getInstance().addClient(client);
+        RepositoryService.getInstance().addObject(client);
         return client;
     }
 

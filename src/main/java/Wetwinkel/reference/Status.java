@@ -1,4 +1,7 @@
 package Wetwinkel.reference;
 
-public class Status {
+public enum Status {
+    OPEN,
+    ONGOING,
+    CLOSE
 }
