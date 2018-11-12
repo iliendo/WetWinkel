@@ -1,6 +1,6 @@
 package Wetwinkel.resources;
 
-import Wetwinkel.Objects.CaseM;
+import Wetwinkel.Objects.Case;
 import Wetwinkel.Service.RepositoryService;
 
 import javax.ws.rs.GET;
@@ -14,7 +14,7 @@ public class casesOverviewResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CaseM> getCase() {
+    public List<Case> getCase() {
 
         return RepositoryService.getInstance().getCase();
     }

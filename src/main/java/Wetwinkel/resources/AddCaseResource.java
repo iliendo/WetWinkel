@@ -1,6 +1,6 @@
 package Wetwinkel.resources;
 
-import Wetwinkel.Objects.AddCase;
+import Wetwinkel.Objects.Case;
 import Wetwinkel.Service.RepositoryService;
 
 import javax.ws.rs.*;
@@ -14,14 +14,14 @@ public class AddCaseResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public AddCase addClient(AddCase cases){
+    public Case addClient(Case cases){
         RepositoryService.getInstance().addCase(cases);
         return cases;
     }
 
     @GET
-    public Response openClientPage() throws URISyntaxException {
-        URI uri = new URI("http://localhost:8080/wetwinkel_war/client.html");
+    public Response openCasePage() throws URISyntaxException {
+        URI uri = new URI("http://localhost:8080/wetwinkel_war/addCase.html");
         return Response.temporaryRedirect(uri).build();
     }
 }
