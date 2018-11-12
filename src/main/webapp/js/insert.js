@@ -1,5 +1,14 @@
+if (sessionStorage.getItem("token") === null){
+    window.open("index.html", "_SELF");
+}
+
 document.getElementById("insert-button").onclick = function () {
     myFunction();
+};
+
+document.getElementById("logout-button").onclick = function () {
+  sessionStorage.removeItem("token");
+  window.open("index.html", "_SELF");
 };
 
 function myFunction() {
@@ -26,7 +35,11 @@ function myFunction() {
             'authorization': 'bearer ' + sessionStorage.getItem("token"),
             'Content-Type': 'application/json'
         }
-    }).then();
+    }).then(function (response) {
+        if (!response.ok){
+            window.open("index.html", "_SELF")
+        }
+    });
 
     window.open("client.html", "_SELF");
 }

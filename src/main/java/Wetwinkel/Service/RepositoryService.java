@@ -1,6 +1,7 @@
 package Wetwinkel.Service;
 
 import Wetwinkel.Objects.CaseM;
+import Wetwinkel.Objects.AddCase;
 import Wetwinkel.Objects.User;
 import Wetwinkel.Objects.Client;
 
@@ -28,7 +29,6 @@ public class RepositoryService {
 
     private Map<Integer, User> elements;
     private Map<Integer, Client> cElements;
-    private Map<Integer, CaseM> caseElements;
 
     private RepositoryService() {
         entityManagerFactory = Persistence.createEntityManagerFactory("wetwinkelPU");
@@ -57,6 +57,17 @@ public class RepositoryService {
         em.getTransaction().commit();
         em.close();
         return user;
+    }
+
+    public AddCase addCase(AddCase addCase){
+        EntityManager em = getEntityManager();
+
+        em.getTransaction().begin();
+        em.persist(addCase);
+        em.getTransaction().commit();
+
+        em.close();
+        return addCase;
     }
 
     public Response deleteUser(String email) {
