@@ -1,7 +1,7 @@
 .mdl-grid {
     background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') no-repeat center / cover  fixed;
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
 
 }
 
@@ -14,10 +14,6 @@
     margin-top: 75px;
 }
 
-.mdl-card__title-text {
-    padding: 0px 0px 0px 35px;
-}
-
 .mdl-data-table.mdl-js-data-table td {
     text-align: center;
     border: 0;
@@ -25,7 +21,6 @@
 
 td#titles {
     text-align: left;
-    padding: 0px 0px 0px 55px;
 }
 
 .mdl-data-table.mdl-js-data-table td#tekstveld {
