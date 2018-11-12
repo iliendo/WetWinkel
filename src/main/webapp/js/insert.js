@@ -2,8 +2,6 @@ if (sessionStorage.getItem("token") === null){
     window.open("index.html", "_SELF");
 }
 
-
-
 document.getElementById("insert-button").onclick = function () {
     myFunction();
 };
