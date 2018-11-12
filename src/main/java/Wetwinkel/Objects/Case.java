@@ -1,34 +1,42 @@
 package Wetwinkel.Objects;
 
-import javax.persistence.*;
-import java.sql.Date;
+import org.w3c.dom.Text;
 
-// TODO: Wat doet dit?
+import javax.persistence.*;
+import javax.xml.crypto.Data;
+import java.util.Date;
+
 @Entity
-@Table(name = "case")
-public class AddCase {
-    // Geeft aan welke variabele de primary key is
+@NamedQueries(value = {
+        @NamedQuery(name = "Case.Get", query = "SELECT b FROM Case b"),
+
+})
+
+
+@Table(name = "suit")
+public class Case {
     @Id
-    // Geeft aan dat de variabele AI moet zijn in de database
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCase;
     private String naam;
     @Column(name = "datum", insertable=false)
     private Date datum;
     private enum rechtsgebied {
-        rechtstraf, auto;
+        rechtstraf,
+        auto
     };
     private enum status {
-        open, close;
+        open,
+        close
     };
     private String feiten;
     private String advies;
     @Column(name = "laatsteUpdate", insertable=false)
     private Date laatsteUpdate;
-    private boolean gearchiveerd;
+    private Boolean gearchiveerd;
     private int idClient;
 
-    public AddCase(String naam, Date datum, String feiten, String advies, Date laatsteUpdate, boolean gearchiveerd, int idClient) {
+    public Case(String naam, Date datum, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
         this.naam = naam;
         this.datum = datum;
         this.feiten = feiten;
@@ -38,7 +46,7 @@ public class AddCase {
         this.idClient = idClient;
     }
 
-    public AddCase(){
+    public Case() {
     }
 
     public int getIdCase() {
@@ -89,11 +97,11 @@ public class AddCase {
         this.laatsteUpdate = laatsteUpdate;
     }
 
-    public boolean isGearchiveerd() {
+    public Boolean getGearchiveerd() {
         return gearchiveerd;
     }
 
-    public void setGearchiveerd(boolean gearchiveerd) {
+    public void setGearchiveerd(Boolean gearchiveerd) {
         this.gearchiveerd = gearchiveerd;
     }
 

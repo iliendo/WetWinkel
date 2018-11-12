@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>addClient</title>
+    <title>addCase</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <link rel="stylesheet" href="css/AddCase.css">
+
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -27,7 +28,6 @@
     </header>
 </div>
 
-<div class="pagga">
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--2-col"></div>
     <div class="mdl-cell mdl-cell--8-col">
@@ -35,122 +35,104 @@
             <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">Case toevoegen</h2>
             </div>
-            <table class="mdl-data-table mdl-js-data-table">
-                <tr>
-                    <td colspan="2" id="titles">
-                        <h5>Werknemers</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                            <input type="text" value="" class="mdl-textfield__input" id="werknemer1" readonly>
-                            <input type="hidden" value="" name="sample3">
-                            <label for="werknemer1" class="mdl-textfield__label">Werknemer 1</label>
-                            <ul for="sample1" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                                <li class="mdl-menu__item" data-val="WER">Henk</li>
-                                <li class="mdl-menu__item" data-val="ADM">Jan</li>
-                                <li class="mdl-menu__item" data-val="HUU">John</li>
-                            </ul>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                            <input type="text" value="" class="mdl-textfield__input" id="werknemer2" readonly>
-                            <input type="hidden" value="" name="werknemer2">
-                            <label for="werknemer2" class="mdl-textfield__label">Werknemer 2</label>
-                            <ul for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                                <li class="mdl-menu__item" data-val="WER">Henk</li>
-                                <li class="mdl-menu__item" data-val="ADM">Jan</li>
-                                <li class="mdl-menu__item" data-val="HUU">John</li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" id="titles">
-                        <h5>Algemene informatie</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                            <input type="text" value="" class="mdl-textfield__input" id="client" readonly>
-                            <input type="hidden" value="" name="client">
-                            <label for="client" class="mdl-textfield__label">Client</label>
-                            <ul for="sample0" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                                <li class="mdl-menu__item" data-val="WER">Henk</li>
-                                <li class="mdl-menu__item" data-val="ADM">Jan</li>
-                                <li class="mdl-menu__item" data-val="HUU">John</li>
-                            </ul>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                            <input type="text" value="" class="mdl-textfield__input" id="jurisdictie" readonly>
-                            <input type="hidden" value="" name="juristictie">
-                            <label for="jurisdictie" class="mdl-textfield__label">Jurisdictie</label>
-                            <ul for="sample3" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                                <li class="mdl-menu__item" data-val="WER">Werk</li>
-                                <li class="mdl-menu__item" data-val="ADM">Administratief</li>
-                                <li class="mdl-menu__item" data-val="HUU">Huur</li>
-                                <li class="mdl-menu__item" data-val="CRI">Crimineel</li>
-                                <li class="mdl-menu__item" data-val="PFL">PFL</li>
-                                <li class="mdl-menu__item" data-val="SIL">Sociale verzekering</li>
-                                <li class="mdl-menu__item" data-val="ALG">Anders: algemeen</li>
-                                <li class="mdl-menu__item" data-val="CIV">Anders: civiel</li>
-                                <li class="mdl-menu__item" data-val="IMM">Immigratie</li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" id="titles">
-                        <h5>Feiten</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" >
-                        <form action="#">
-                            <div class="mdl-textfield mdl-js-textfield">
+            <form id=" addCase" method="post" autocomplete="off">
+                <table class="mdl-data-table mdl-js-data-table">
+                    <tr>
+                        <td colspan="2" class="titles">
+                            <h5>Werknemers</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+                                <textarea class="mdl-textfield__input" type="text"
+                                          id="werknemer1"></textarea>
+
+                                <label for="werknemer1" class="mdl-textfield__label">Werknemer 1</label>
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+                                 <textarea class="mdl-textfield__input" type="text"
+                                           id="werknemer2"></textarea>
+
+                                <label for="werknemer2" class="mdl-textfield__label">Werknemer 2</label>
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="titles" >
+                            <h5>Algemene informatie</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+                                <textarea class="mdl-textfield__input" type="text"
+                                          id="client"></textarea>
+
+                                <label for="client" class="mdl-textfield__label">Client</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                 <textarea class="mdl-textfield__input" type="text"
+                                           id="jurisdictie"></textarea>
+
+                                <label for="jurisdictie" class="mdl-textfield__label">Jurisdictie</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="titles">
+                            <h5>Feiten</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+
+                                <div class="mdl-textfield mdl-js-textfield">
                                     <textarea class="mdl-textfield__input" type="text" rows="20"
                                               id="feiten"></textarea>
-                            </div>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" id="titles">
-                        <h5>Advies</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <form action="#">
-                            <div class="mdl-textfield mdl-js-textfield">
+                                </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="titles">
+                            <h5>Advies</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+
+                                <div class="mdl-textfield mdl-js-textfield">
                                     <textarea class="mdl-textfield__input" type="text" rows="20"
                                               id="advies"></textarea>
-                            </div>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                            Annuleren
-                        </button>
-                    </td>
-                    <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                            Toevoegen
-                        </button>
-                    </td>
-                </tr>
-            </table>
+                                </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id="cancel_button" >
+                                Annuleren
+                            </button>
+                        </td>
+                        <td>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="add_button" onclick="myFunction()">
+                                Toevoegen
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </div>
     </div>
     <div class="mdl-cell mdl-cell--2-col"></div>
 </div>
-</div>
+<script src="js/addCase.js"></script>
 </body>
 </html>
