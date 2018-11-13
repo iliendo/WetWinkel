@@ -5,6 +5,7 @@ import org.w3c.dom.Text;
 import javax.persistence.*;
 import javax.xml.crypto.Data;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NamedQueries(value = {
@@ -35,6 +36,9 @@ public class Case {
     private Date laatsteUpdate;
     private Boolean gearchiveerd;
     private int idClient;
+
+    @ManyToMany
+    private List<User> users;
 
     public Case(String naam, Date datum, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
         this.naam = naam;

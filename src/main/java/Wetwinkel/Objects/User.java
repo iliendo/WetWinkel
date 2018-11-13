@@ -4,6 +4,7 @@ package Wetwinkel.Objects;
 import Wetwinkel.util.Security;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NamedQueries(value = {
@@ -21,6 +22,9 @@ public class User {
     private String achternaam;
     private String wachtwoord;
     private boolean superUser;
+
+    @ManyToMany
+    private List<Case> cases;
 
     public User(String naam, String email, String tussenvoegsel, String achternaam, String wachtwoord, boolean superUser) {
         this.naam = naam;
