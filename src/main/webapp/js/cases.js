@@ -20,8 +20,8 @@ var buttonName;
 
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-        var myObj = JSON.parse(this.responseText);
+    if (this.readyState === 4 && this.status === 200) {
+        const myObj = JSON.parse(this.responseText);
         for (a = 0; a < myObj.length; a++) {
 
             idCase = myObj[a].idCase;
@@ -57,8 +57,7 @@ xmlhttp.onreadystatechange = function () {
         document.getElementById("data").innerHTML = html;
     }
 
-}
-myFunction(buttonName);
+};
 
 xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview", true);
 xmlhttp.send();
@@ -66,9 +65,26 @@ xmlhttp.send();
 
 
 function myFunction(idCase) {
-
+   userid = getUserID();
    alert(idCase);
 
+
+
+}
+
+function getUserID(){
+    let url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/user";
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'authorization': 'bearer ' + sessionStorage.getItem("token")
+        }
+    }).then(function (response) {
+        return response.text()
+    }).then(function (value) {
+        console.log(value);
+        return value;
+    });
 }
 
 
