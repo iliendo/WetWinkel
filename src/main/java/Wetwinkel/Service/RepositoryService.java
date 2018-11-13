@@ -38,7 +38,7 @@ public class RepositoryService {
         return entityManagerFactory.createEntityManager();
     }
 
-    public <T> T addObject (T object){
+    public <T> T addObject(T object){
         EntityManager em = getEntityManager();
 
         em.getTransaction().begin();
@@ -47,6 +47,18 @@ public class RepositoryService {
 
         em.close();
         return object;
+    }
+
+    public List<Client> getClients(){
+        EntityManager em = getEntityManager();
+
+        List<Client> clients = em.createQuery("SELECT f FROM Client f").getResultList();
+        //Query query = em.createNativeQuery("SELECT * FROM client");
+        em.close();
+
+        return clients;
+        //noinspection unchecked
+        //return query.getResultList();
     }
 
     public Response deleteUser(String email) {
