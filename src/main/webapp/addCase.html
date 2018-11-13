@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <link rel="stylesheet" href="css/AddCase.css">
-
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -63,25 +62,25 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="titles" >
+                        <td colspan="2" class="titles">
                             <h5>Algemene informatie</h5>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                                <textarea class="mdl-textfield__input" type="text"
-                                          id="client"></textarea>
-
-                                <label for="client" class="mdl-textfield__label">Client</label>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <select class="mdl-textfield__input" id="client" name="client">
+                                    <option></option>
+                                </select>
+                                <label class="mdl-textfield__label" for="client">Client</label>
                             </div>
                         </td>
                         <td>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                 <textarea class="mdl-textfield__input" type="text"
-                                           id="jurisdictie"></textarea>
-
-                                <label for="jurisdictie" class="mdl-textfield__label">Jurisdictie</label>
+                                <select class="mdl-textfield__input" id="jurisdictie" name="jurisdictie">
+                                    <option></option>
+                                </select>
+                                <label class="mdl-textfield__label" for="jurisdictie">Jurisdictie</label>
                             </div>
                         </td>
                     </tr>
@@ -93,36 +92,37 @@
                     <tr>
                         <td colspan="2">
 
-                                <div class="mdl-textfield mdl-js-textfield">
+                            <div class="mdl-textfield mdl-js-textfield">
                                     <textarea class="mdl-textfield__input" type="text" rows="20"
                                               id="feiten"></textarea>
-                                </div>
-
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" id="titles">
+                        <td colspan="2" class="titles">
                             <h5>Advies</h5>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
 
-                                <div class="mdl-textfield mdl-js-textfield">
+                            <div class="mdl-textfield mdl-js-textfield">
                                     <textarea class="mdl-textfield__input" type="text" rows="20"
                                               id="advies"></textarea>
-                                </div>
+                            </div>
 
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id="cancel_button" >
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent "
+                                    id="cancel_button">
                                 Annuleren
                             </button>
                         </td>
                         <td>
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="add_button" onclick="myFunction()">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                                    id="add_button" onclick="myFunction()">
                                 Toevoegen
                             </button>
                         </td>

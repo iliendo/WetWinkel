@@ -9,7 +9,8 @@ import java.util.List;
 @Entity
 @NamedQueries(value = {
         @NamedQuery(name = "User.Login", query = "SELECT u FROM User u WHERE email = :email AND wachtwoord = :wachtwoord"),
-        @NamedQuery(name = "User.Get", query= "SELECT u FROM User u WHERE email = :email")
+        @NamedQuery(name = "User.Get", query= "SELECT u FROM User u WHERE email = :email"),
+        @NamedQuery(name = "UserList.Get", query= "SELECT u FROM User u")
 })
 @Table(name = "users")
 public class User {

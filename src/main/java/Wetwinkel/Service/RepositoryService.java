@@ -38,26 +38,34 @@ public class RepositoryService {
         return entityManagerFactory.createEntityManager();
     }
 
-
-    public Client addClient(Client client) {
+    public <T> void addObject(T object){
         EntityManager em = getEntityManager();
 
         em.getTransaction().begin();
-        em.persist(client);
+        em.persist(object);
         em.getTransaction().commit();
 
         em.close();
-        return client;
     }
 
-    public User addUser(User user) {
+    public List<Client> getListOfCllients(){
         EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
+
+        List<Client> clients = em.createNamedQuery("Client.Get", Client.class).getResultList();
         em.close();
-        return user;
+
+        return clients;
     }
+
+//    public List<User> getListOfUsers(){
+//        EntityManager em = getEntityManager();
+//
+//        List<User> users = em.createNamedQuery("Client.Get", Client.class).getResultList();
+//
+//        em.close();
+//
+//        return users;
+//    }
 
     public Response deleteUser(String email) {
         EntityManager em = getEntityManager();
@@ -82,8 +90,10 @@ public class RepositoryService {
         TypedQuery<User> query = em.createNamedQuery("User.Login", User.class);
         query.setParameter("email", email);
         query.setParameter("wachtwoord", password);
+        User result = query.getSingleResult();
+        em.close();
 
-        return query.getSingleResult();
+        return result;
     }
 
     public User getUserFromMail(String email) {
@@ -94,17 +104,6 @@ public class RepositoryService {
         query.setParameter("email", email);
 
         return query.getSingleResult();
-    }
-
-    public Case addCase(Case addCase){
-        EntityManager em = getEntityManager();
-
-        em.getTransaction().begin();
-        em.persist(addCase);
-        em.getTransaction().commit();
-
-        em.close();
-        return addCase;
     }
 
     public List<Case> getCase() {

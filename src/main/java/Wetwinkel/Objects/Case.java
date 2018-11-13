@@ -1,9 +1,8 @@
 package Wetwinkel.Objects;
 
-import org.w3c.dom.Text;
+import Wetwinkel.reference.*;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 
@@ -22,32 +21,31 @@ public class Case {
     private String naam;
     @Column(name = "datum", insertable=false)
     private Date datum;
-    private enum rechtsgebied {
-        rechtstraf,
-        auto
-    };
-    private enum status {
-        open,
-        close
-    };
+    private Rechtsgebied rechtsgebied;
+    private Status status;
     private String feiten;
     private String advies;
     @Column(name = "laatsteUpdate", insertable=false)
     private Date laatsteUpdate;
     private Boolean gearchiveerd;
     private int idClient;
+//    @ManyToOne
+//    private Client client;
 
     @ManyToMany
     private List<User> users;
 
-    public Case(String naam, Date datum, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
+    public Case(String naam, Date datum, Rechtsgebied rechtsgebied, Status status, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
         this.naam = naam;
         this.datum = datum;
+        this.rechtsgebied = rechtsgebied;
+        this.status = status;
         this.feiten = feiten;
         this.advies = advies;
         this.laatsteUpdate = laatsteUpdate;
         this.gearchiveerd = gearchiveerd;
         this.idClient = idClient;
+//        this.client = client;
     }
 
     public Case() {
@@ -109,11 +107,36 @@ public class Case {
         this.gearchiveerd = gearchiveerd;
     }
 
+//    public Client getClient() {
+//        return client;
+//    }
+//
+//    public void setClient(Client client) {
+//        this.client = client;
+//    }
+
+
     public int getIdClient() {
         return idClient;
     }
 
     public void setIdClient(int idClient) {
         this.idClient = idClient;
+    }
+
+    public Rechtsgebied getRechtsgebied() {
+        return rechtsgebied;
+    }
+
+    public void setRechtsgebied(Rechtsgebied rechtsgebied) {
+        this.rechtsgebied = rechtsgebied;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
