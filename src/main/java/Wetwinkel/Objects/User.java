@@ -24,16 +24,17 @@ public class User {
     private String wachtwoord;
     private boolean superUser;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
     private List<Case> cases;
 
-    public User(String naam, String email, String tussenvoegsel, String achternaam, String wachtwoord, boolean superUser) {
+    public User(String naam, String email, String tussenvoegsel, String achternaam, String wachtwoord, boolean superUser, List<Case> cases) {
         this.naam = naam;
         this.email = email;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
         this.wachtwoord = wachtwoord;
         this.superUser = superUser;
+        this.cases = cases;
     }
 
     public User() {
@@ -85,6 +86,14 @@ public class User {
             //TODO geef een error hier!
         }
 
+    }
+
+    public List<Case> getCases() {
+        return cases;
+    }
+
+    public void setCases(List<Case> cases) {
+        this.cases = cases;
     }
 
     public boolean isSuperUser() {

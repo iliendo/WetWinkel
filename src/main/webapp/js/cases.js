@@ -19,8 +19,10 @@ var a;
 var buttonName;
 
 var xmlhttp = new XMLHttpRequest();
+
 xmlhttp.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
+        console.log(this.responseText);
         const myObj = JSON.parse(this.responseText);
         for (a = 0; a < myObj.length; a++) {
 
@@ -60,6 +62,7 @@ xmlhttp.onreadystatechange = function () {
 };
 
 xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview", true);
+xmlhttp.setRequestHeader('authorization', 'bearer ' + sessionStorage.getItem("token"));
 xmlhttp.send();
 
 

@@ -44,6 +44,7 @@ public class casesOverviewResource {
         User user = RepositoryService.getInstance().getUserFromMail(email);
 
         if (user != null) {
+            System.out.println(user.getCases());
             return Response.ok(user.getIdUser()).build();
         } else {
             return Response.noContent().build();

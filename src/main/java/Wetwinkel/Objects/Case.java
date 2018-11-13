@@ -21,7 +21,11 @@ public class Case {
     private String naam;
     @Column(name = "datum", insertable=false)
     private Date datum;
+
+    @Enumerated (EnumType.STRING)
     private Rechtsgebied rechtsgebied;
+
+    @Enumerated (EnumType.STRING)
     private Status status;
     private String feiten;
     private String advies;
@@ -32,7 +36,12 @@ public class Case {
 //    @ManyToOne
 //    private Client client;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_suit",
+            joinColumns = { @JoinColumn(name = "idCase") },
+            inverseJoinColumns = { @JoinColumn(name = "idUser") }
+    )
     private List<User> users;
 
     public Case(String naam, Date datum, Rechtsgebied rechtsgebied, Status status, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
@@ -138,5 +147,13 @@ public class Case {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

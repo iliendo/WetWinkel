@@ -102,16 +102,17 @@ public class RepositoryService {
 
         TypedQuery<User> query = em.createNamedQuery("User.Get", User.class);
         query.setParameter("email", email);
+        User user = query.getSingleResult();
+        em.close();
 
-        return query.getSingleResult();
+        return user;
     }
 
     public List<Case> getCase() {
         EntityManager em = entityManagerFactory.createEntityManager();
 
-       // List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();
-        List<Case> caseList = em.createQuery("SELECT b FROM Case b").getResultList();
-        em.close();
+       List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();
+       em.close();
 
         return caseList;
     }
