@@ -149,4 +149,48 @@ label {
 .mdl-button--colored{
     color: mediumblue;
 }
+.demo-layout-transparent {
+    background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
+}
+body {
+    background: rgba(0, 0, 0, 0.0392156862745098) linear-gradient(-45deg, rgba(16, 0, 78, 0.3686274509803922), rgba(20, 4, 81, 0));
+}
 
+.mdl-data-table.mdl-js-data-table{
+    width: 100%;
+}
+
+.demo-card-wide.mdl-card {
+    min-width: 100%;
+   max-height: 150%;
+
+}
+
+.mdl-data-table.mdl-js-data-table td {
+    text-align: center;
+    border: 0;
+}
+
+td#titles {
+    text-align: left;
+}
+
+.mdl-data-table.mdl-js-data-table td#tekstveld {
+    text-align: left;
+    padding: 0px 55px 0px 55px;
+    max-width: 100%;
+}
+
+.mdl-textfield{
+    width: 100%;
+}
+
+.mdl-textfield textarea.mdl-textfield__input#sample5 {
+    display: block;
+    min-width: 700px;
+}
+.cards{
+    max-height: 90%;
+    width: 120%;
+    overflow: scroll;
+}

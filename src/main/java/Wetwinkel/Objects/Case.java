@@ -8,7 +8,8 @@ import java.util.Date;
 
 @Entity
 @NamedQueries(value = {
-        @NamedQuery(name = "Case.Get", query = "SELECT b FROM Case b"),
+        @NamedQuery(name = "Cases.Get", query = "SELECT b FROM Case b"),
+        @NamedQuery(name = "Case.Get", query = "SELECT b FROM Case b where idCase = :idCase"),
 
 })
 

@@ -107,14 +107,23 @@ public class RepositoryService {
         return addCase;
     }
 
-    public List<Case> getCase() {
+    public List<Case> getCases() {
         EntityManager em = entityManagerFactory.createEntityManager();
 
-       // List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();
-        List<Case> caseList = em.createQuery("SELECT b FROM Case b").getResultList();
+        List<Case> caseList = em.createNamedQuery("Cases.Get",Case.class).getResultList();
+
         em.close();
 
         return caseList;
+    }
+    public Case getCase(int idCase) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        TypedQuery<Case> query = em.createNamedQuery("Case.Get", Case.class);
+        query.setParameter("idCase", idCase);
+
+
+        return query.getSingleResult();
     }
 
 

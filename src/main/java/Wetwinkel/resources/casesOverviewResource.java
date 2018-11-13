@@ -5,6 +5,7 @@ import Wetwinkel.Service.RepositoryService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -13,10 +14,18 @@ import java.util.List;
 public class casesOverviewResource {
 
     @GET
+    @Path("/cases")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Case> getCase() {
+    public List<Case> getCases() {
 
-        return RepositoryService.getInstance().getCase();
+        return RepositoryService.getInstance().getCases();
+    }
+    @GET
+    @Path("case/{idCase}")
+    @Produces(MediaType.APPLICATION_JSON )
+    public Case getCase(@PathParam("idCase") int idCase) {
+
+        return RepositoryService.getInstance().getCase(idCase);
     }
 
 }
