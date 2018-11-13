@@ -10,7 +10,7 @@ function myFunction() {
     var feiten = document.getElementById("feiten").value;
     var advies = document.getElementById("advies").value;
     var gearchiveerd = false;
-    var idClient = 6;
+    var idClient = 10;
 
 
 

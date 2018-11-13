@@ -18,10 +18,4 @@ public class AddCaseResource {
         RepositoryService.getInstance().addCase(cases);
         return cases;
     }
-
-    @GET
-    public Response openCasePage() throws URISyntaxException {
-        URI uri = new URI("http://localhost:8080/wetwinkel_war/addCase.html");
-        return Response.temporaryRedirect(uri).build();
-    }
 }
