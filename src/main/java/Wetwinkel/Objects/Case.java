@@ -28,6 +28,8 @@ public class Case {
     private Date laatsteUpdate;
     private Boolean gearchiveerd;
     private int idClient;
+//    @ManyToOne
+//    private Client client;
 
     public Case(String naam, Date datum, Rechtsgebied rechtsgebied, Status status, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
         this.naam = naam;
@@ -39,6 +41,7 @@ public class Case {
         this.laatsteUpdate = laatsteUpdate;
         this.gearchiveerd = gearchiveerd;
         this.idClient = idClient;
+//        this.client = client;
     }
 
     public Case() {
@@ -99,6 +102,15 @@ public class Case {
     public void setGearchiveerd(Boolean gearchiveerd) {
         this.gearchiveerd = gearchiveerd;
     }
+
+//    public Client getClient() {
+//        return client;
+//    }
+//
+//    public void setClient(Client client) {
+//        this.client = client;
+//    }
+
 
     public int getIdClient() {
         return idClient;

@@ -1,6 +1,7 @@
 package Wetwinkel.Objects;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NamedQueries(value = {
@@ -24,6 +25,9 @@ public class Client {
     private int telefoonnummer;
     private String email;
     private int ontdekkingWw;
+
+    @OneToMany
+    private List<Case> cases;
 
     public Client(String initialen, String tussenvoegsel, String achternaam, String straatnaam, String postcode, int huisnummer,
     String toevoeging, String land, int telefoonnummer, String email, int ontdekkingWw) {

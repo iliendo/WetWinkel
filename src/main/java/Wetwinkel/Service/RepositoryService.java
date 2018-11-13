@@ -49,17 +49,25 @@ public class RepositoryService {
         return object;
     }
 
-    public List<Client> getClients(){
+    public List<Client> getListOfCllients(){
         EntityManager em = getEntityManager();
 
-        List<Client> clients = em.createQuery("SELECT f FROM Client f").getResultList();
-        //Query query = em.createNativeQuery("SELECT * FROM client");
+        List<Client> clients = em.createNamedQuery("Client.Get", Client.class).getResultList();
+
         em.close();
 
         return clients;
-        //noinspection unchecked
-        //return query.getResultList();
     }
+
+//    public List<User> getListOfUsers(){
+//        EntityManager em = getEntityManager();
+//
+//        List<User> users = em.createNamedQuery("Client.Get", Client.class).getResultList();
+//
+//        em.close();
+//
+//        return users;
+//    }
 
     public Response deleteUser(String email) {
         EntityManager em = getEntityManager();

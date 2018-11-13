@@ -4,7 +4,6 @@ import Wetwinkel.Objects.Case;
 import Wetwinkel.Objects.Client;
 import Wetwinkel.Service.RepositoryService;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,7 +21,6 @@ public class AddCaseResource {
         return cases;
     }
 
-    // TODO Get definieeren  met lijst van gegevens
     @GET
     public Response openCasePage() throws URISyntaxException {
         URI uri = new URI("http://localhost:8080/wetwinkel_war/addObject.html"); //TODO change when server goes live
@@ -33,7 +31,7 @@ public class AddCaseResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/clients")
     public Response getClients(){
-        List<Client> clients = RepositoryService.getInstance().getClients();
+        List<Client> clients = RepositoryService.getInstance().getListOfCllients();
 
         if (!clients.isEmpty()){
             return Response.ok(clients).build();
@@ -41,4 +39,17 @@ public class AddCaseResource {
             return Response.noContent().build();
         }
     }
+
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("/users")
+//    public Response getUsers(){
+//        List<Client> clients = RepositoryService.getInstance().getListOfUsers();
+//
+//        if (!clients.isEmpty()){
+//            return Response.ok(clients).build();
+//        } else {
+//            return Response.noContent().build();
+//        }
+//    }
 }
