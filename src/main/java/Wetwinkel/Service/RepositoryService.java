@@ -117,5 +117,14 @@ public class RepositoryService {
         return caseList;
     }
 
+    public Case getCaseById(int idCase) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        TypedQuery<Case> query = em.createNamedQuery("Case.idGet", Case.class);
+        query.setParameter("idCase", idCase);
+
+        return query.getSingleResult();
+    }
+
 
 }

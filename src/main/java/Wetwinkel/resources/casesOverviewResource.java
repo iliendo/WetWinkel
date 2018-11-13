@@ -2,7 +2,9 @@ package Wetwinkel.resources;
 
 import Wetwinkel.Objects.Case;
 import Wetwinkel.Service.RepositoryService;
+import org.jboss.logging.Param;
 
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -17,6 +19,11 @@ public class casesOverviewResource {
     public List<Case> getCase() {
 
         return RepositoryService.getInstance().getCase();
+    }
+
+    @GET
+    public Case getCaseById(int idCase) {
+        return RepositoryService.getInstance().getCaseById(idCase);
     }
 
 }
