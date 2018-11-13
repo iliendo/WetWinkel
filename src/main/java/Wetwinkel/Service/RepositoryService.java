@@ -38,7 +38,7 @@ public class RepositoryService {
         return entityManagerFactory.createEntityManager();
     }
 
-    public <T> T addObject(T object){
+    public <T> void addObject(T object){
         EntityManager em = getEntityManager();
 
         em.getTransaction().begin();
@@ -46,14 +46,12 @@ public class RepositoryService {
         em.getTransaction().commit();
 
         em.close();
-        return object;
     }
 
     public List<Client> getListOfCllients(){
         EntityManager em = getEntityManager();
 
         List<Client> clients = em.createNamedQuery("Client.Get", Client.class).getResultList();
-
         em.close();
 
         return clients;
@@ -92,8 +90,10 @@ public class RepositoryService {
         TypedQuery<User> query = em.createNamedQuery("User.Login", User.class);
         query.setParameter("email", email);
         query.setParameter("wachtwoord", password);
+        User result = query.getSingleResult();
+        em.close();
 
-        return query.getSingleResult();
+        return result;
     }
 
     public User getUserFromMail(String email) {
