@@ -4,6 +4,8 @@ package Wetwinkel.Objects;
 import Wetwinkel.util.Security;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NamedQueries(value = {
@@ -33,6 +35,9 @@ public class User {
 
     public User() {
     }
+
+    @ManyToMany(mappedBy = "userOnTheCase")
+    public List<Case> caseToWorkOn = new ArrayList<>();
 
     public int getIdUser() {
         return idUser;

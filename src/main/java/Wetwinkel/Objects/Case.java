@@ -4,13 +4,15 @@ import org.w3c.dom.Text;
 
 import javax.persistence.*;
 import javax.xml.crypto.Data;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NamedQueries(value = {
         @NamedQuery(name = "Cases.Get", query = "SELECT b FROM Case b"),
         @NamedQuery(name = "Case.Get", query = "SELECT b FROM Case b where idCase = :idCase"),
-
+        @NamedQuery(name = "userCase.get", query = "SELECT g FROM Case g where  " )
 })
 
 
@@ -50,6 +52,12 @@ public class Case {
     public Case() {
     }
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "users_suit",
+            joinColumns = @JoinColumn(name = "idCase"),
+            inverseJoinColumns = @JoinColumn(name = "idUser")
+    )
+    public List<User> userOnTheCase = new ArrayList<>();
     public int getIdCase() {
         return idCase;
     }

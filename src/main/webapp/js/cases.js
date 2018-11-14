@@ -133,17 +133,6 @@ function myFunction(idCase) {
         }
 
     };
-
-
     xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/"+idCase, true);
     xmlhttp.send();
-
-
 }
-
-
-
-
-
-
-

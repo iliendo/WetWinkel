@@ -126,5 +126,11 @@ public class RepositoryService {
         return query.getSingleResult();
     }
 
+    public void check() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        User user1 = new User();
+        Case case1 = entityManagerFactory
+    }
+
 
 }
