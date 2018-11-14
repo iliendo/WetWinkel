@@ -1,4 +1,7 @@
-clientDDL(); //fill comboboxes when page is loaded
+// Fill comboboxes when page is loaded
+clientDDL();
+werknemerDDL();
+jurisdictieDDL();
 
 document.getElementById("add_button").onclick = function () {
     myFunction();
@@ -18,11 +21,83 @@ function clientDDL() {
     }).then(function (value) {
         console.log(value);
         for (let i = 0; i < value.length; i++) {
+
+            let client = value[i].initialen + " " + value[i].achternaam + " (" + value[i].postcode
+                + ", " + value[i].huisnummer + ")";
+
+
             let option = document.createElement("OPTION");
-            let txt = document.createTextNode(value[i].achternaam + " " + value[i].postcode);
+            let txt = document.createTextNode(client);
             option.appendChild(txt);
             option.value = value[i].idClient;
-            clientDDL.insertBefore(option, clientDDL.lastChild);
+            clientDDL.add(option);
+        }
+    });
+}
+
+function werknemerDDL() {
+    var werknemerDDL = document.getElementsByClassName("werknemer");
+    var url = "http://localhost:8080/wetwinkel_war/rest/case/users";
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'authorization': 'bearer ' + sessionStorage.getItem("token")
+        }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (value) {
+        console.log(value);
+        for (let i = 0; i < value.length; i++) {
+            let employee;
+
+            if (value[i].tussenvoegsel === undefined) {
+                employee = value[i].naam + " " + value[i].achternaam;
+            } else {
+                employee = value[i].naam + " " + value[i].tussenvoegsel + " " + value[i].achternaam;
+            }
+
+
+            console.log(werknemerDDL[0]);
+            console.log(werknemerDDL[1]);
+
+
+            for (let j = 0; j < werknemerDDL.length; j++) {
+                let option = document.createElement("OPTION");
+                let txt = document.createTextNode(employee);
+                option.appendChild(txt);
+                option.value = value[i].idUser;
+
+                werknemerDDL[j].add(option);
+            }
+        }
+    });
+}
+
+function jurisdictieDDL() {
+    var jurisdictieDLL = document.getElementById("client");
+    var url = "http://localhost:8080/wetwinkel_war/rest/case/clients";
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'authorization': 'bearer ' + sessionStorage.getItem("token")
+        }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (value) {
+        console.log(value);
+        for (let i = 0; i < value.length; i++) {
+
+            let client = value[i].initialen + " " + value[i].achternaam + " (" + value[i].postcode
+                + ", " + value[i].huisnummer + ")";
+
+
+            let option = document.createElement("OPTION");
+            let txt = document.createTextNode(client);
+            option.appendChild(txt);
+            option.value = value[i].idClient;
+            jurisdictieDLL.insertBefore(option, jurisdictieDLL.lastChild);
         }
     });
 }

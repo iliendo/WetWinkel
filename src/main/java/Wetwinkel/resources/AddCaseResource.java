@@ -2,6 +2,7 @@ package Wetwinkel.resources;
 
 import Wetwinkel.Objects.Case;
 import Wetwinkel.Objects.Client;
+import Wetwinkel.Objects.User;
 import Wetwinkel.Service.RepositoryService;
 
 import javax.ws.rs.*;
@@ -40,16 +41,16 @@ public class AddCaseResource {
         }
     }
 
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("/users")
-//    public Response getUsers(){
-//        List<Client> clients = RepositoryService.getInstance().getListOfUsers();
-//
-//        if (!clients.isEmpty()){
-//            return Response.ok(clients).build();
-//        } else {
-//            return Response.noContent().build();
-//        }
-//    }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/users")
+    public Response getUsers(){
+        List<User> users = RepositoryService.getInstance().getListOfUsers();
+
+        if (!users.isEmpty()){
+            return Response.ok(users).build();
+        } else {
+            return Response.noContent().build();
+        }
+    }
 }
