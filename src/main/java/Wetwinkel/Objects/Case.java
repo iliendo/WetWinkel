@@ -36,7 +36,7 @@ public class Case {
 //    @ManyToOne
 //    private Client client;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_suit",
             joinColumns = { @JoinColumn(name = "idCase") },
