@@ -30,6 +30,7 @@ public class RepositoryService {
     private Map<Integer, Client> cElements;
     private Map<Integer, Case> elementsCase;
 
+
     private RepositoryService() {
         entityManagerFactory = Persistence.createEntityManagerFactory("wetwinkelPU");
     }
@@ -75,6 +76,8 @@ public class RepositoryService {
         return r;
     }
 
+    String emailA;
+
     public User getUser(String email, String password) {
 
         EntityManager em = entityManagerFactory.createEntityManager();
@@ -82,6 +85,16 @@ public class RepositoryService {
         TypedQuery<User> query = em.createNamedQuery("User.Login", User.class);
         query.setParameter("email", email);
         query.setParameter("wachtwoord", password);
+        emailA = email;
+        return query.getSingleResult();
+    }
+
+    public User getUserVoorCase() {
+
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        TypedQuery<User> query = em.createNamedQuery("UserCase.Get", User.class);
+        query.setParameter("email", emailA);
 
         return query.getSingleResult();
     }
@@ -96,7 +109,7 @@ public class RepositoryService {
         return query.getSingleResult();
     }
 
-    public Case addCase(Case addCase){
+    public Case addCase(Case addCase) {
         EntityManager em = getEntityManager();
 
         em.getTransaction().begin();
@@ -110,12 +123,13 @@ public class RepositoryService {
     public List<Case> getCases() {
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        List<Case> caseList = em.createNamedQuery("Cases.Get",Case.class).getResultList();
+        List<Case> caseList = em.createNamedQuery("Cases.Get", Case.class).getResultList();
 
         em.close();
 
         return caseList;
     }
+
     public Case getCase(int idCase) {
         EntityManager em = entityManagerFactory.createEntityManager();
 
@@ -131,6 +145,8 @@ public class RepositoryService {
         User user1 = new User();
         Case case1 = entityManagerFactory
     }
+
+
 
 
 }

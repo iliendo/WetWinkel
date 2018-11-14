@@ -1,6 +1,7 @@
 package Wetwinkel.resources;
 
 import Wetwinkel.Objects.Case;
+import Wetwinkel.Objects.User;
 import Wetwinkel.Service.RepositoryService;
 
 import javax.ws.rs.GET;
@@ -27,5 +28,14 @@ public class casesOverviewResource {
 
         return RepositoryService.getInstance().getCase(idCase);
     }
+    @GET
+    @Path("/user")
+    @Produces(MediaType.APPLICATION_JSON )
+    public User getUser() {
+
+        return RepositoryService.getInstance().getUserVoorCase();
+    }
+
+
 
 }

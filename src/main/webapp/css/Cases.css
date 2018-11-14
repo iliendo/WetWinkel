@@ -190,7 +190,7 @@ td#titles {
     min-width: 700px;
 }
 .cards{
-    max-height: 90%;
-    width: 120%;
-    overflow: scroll;
+    height: 90%;
+    width: 98%;
+    overflow: auto;
 }
