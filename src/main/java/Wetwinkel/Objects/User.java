@@ -4,12 +4,13 @@ package Wetwinkel.Objects;
 import Wetwinkel.util.Security;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NamedQueries(value = {
         @NamedQuery(name = "User.Login", query = "SELECT u FROM User u WHERE email = :email AND wachtwoord = :wachtwoord"),
-        @NamedQuery(name = "User.Get", query= "SELECT u FROM User u WHERE email = :email"),
+        @NamedQuery(name = "User.Get", query= "SELECT u FROM User u JOIN FETCH u.cases WHERE u.email = :email"),
         @NamedQuery(name = "UserList.Get", query= "SELECT u FROM User u")
 })
 @Table(name = "users")
@@ -25,9 +26,9 @@ public class User {
     private boolean superUser;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
-    private List<Case> cases;
+    private Set<Case> cases = new HashSet<>();
 
-    public User(String naam, String email, String tussenvoegsel, String achternaam, String wachtwoord, boolean superUser, List<Case> cases) {
+    public User(String naam, String email, String tussenvoegsel, String achternaam, String wachtwoord, boolean superUser, Set<Case> cases) {
         this.naam = naam;
         this.email = email;
         this.tussenvoegsel = tussenvoegsel;
@@ -88,11 +89,11 @@ public class User {
 
     }
 
-    public List<Case> getCases() {
+    public Set<Case> getCases() {
         return cases;
     }
 
-    public void setCases(List<Case> cases) {
+    public void setCases(Set<Case> cases) {
         this.cases = cases;
     }
 

@@ -4,7 +4,8 @@ import Wetwinkel.reference.*;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NamedQueries(value = {
@@ -42,7 +43,7 @@ public class Case {
             joinColumns = { @JoinColumn(name = "idCase") },
             inverseJoinColumns = { @JoinColumn(name = "idUser") }
     )
-    private List<User> users;
+    private Set<User> users = new HashSet<>();
 
     public Case(String naam, Date datum, Rechtsgebied rechtsgebied, Status status, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
         this.naam = naam;
@@ -149,11 +150,11 @@ public class Case {
         this.status = status;
     }
 
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 }

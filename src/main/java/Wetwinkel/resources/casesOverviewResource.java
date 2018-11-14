@@ -30,6 +30,7 @@ public class casesOverviewResource {
     }
 
     @GET
+    @Path("/henkIsGroot")
     public Case getCaseById(int idCase) {
         return RepositoryService.getInstance().getCaseById(idCase);
     }
@@ -45,9 +46,9 @@ public class casesOverviewResource {
 
         if (user != null) {
             System.out.println(user.getCases());
-            return Response.ok(user.getIdUser()).build();
+            return Response.ok(user.getCases()).build();
         } else {
-            return Response.noContent().build();
+            return Response.ok(email).build();
         }
     }
 

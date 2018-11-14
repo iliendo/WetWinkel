@@ -40,13 +40,13 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
 
         String token = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION).substring(AUTHENTICATION_SCHEME.length()).trim();
+        final String email = Jwts.parser().setSigningKey(Security.getKey()).parseClaimsJws(token).getBody().getSubject();
 
 
         requestContext.setSecurityContext(new SecurityContext() {
 
             @Override
             public Principal getUserPrincipal() {
-                String email = Jwts.parser().setSigningKey(Security.getKey()).parseClaimsJws(token).getBody().getSubject();
                 return () -> email;
             }
 
@@ -68,7 +68,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
         // Get the resource class which matches with the requested URL
         // Extract the roles declared by it
-        Class<?> resourceClass = resourceInfo.getResourceClass();
+        Class resourceClass = resourceInfo.getResourceClass();
         List<Role> classRoles = extractRoles(resourceClass);
 
         // Get the resource method which matches with the requested URL
