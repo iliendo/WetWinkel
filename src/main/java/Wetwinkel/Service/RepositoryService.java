@@ -140,13 +140,16 @@ public class RepositoryService {
         return query.getSingleResult();
     }
 
-    public void check() {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        User user1 = new User();
-        Case case1 = entityManagerFactory
-    }
 
 
+   public List<Case> getUserOfCase(int idCase) {
+       EntityManager em = entityManagerFactory.createEntityManager();
+
+       List<Case> caseL = em.createQuery("select u.id ,l.id from User u join u.caseToWorkOn l where l.id = "+idCase).getResultList();
+
+
+       return caseL;
+   }
 
 
 }

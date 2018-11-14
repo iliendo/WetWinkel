@@ -21,6 +21,7 @@ public class casesOverviewResource {
 
         return RepositoryService.getInstance().getCases();
     }
+
     @GET
     @Path("case/{idCase}")
     @Produces(MediaType.APPLICATION_JSON )
@@ -36,6 +37,15 @@ public class casesOverviewResource {
         return RepositoryService.getInstance().getUserVoorCase();
     }
 
+
+
+    @GET
+    @Path("userOfCase/{idCase}")
+    @Produces(MediaType.APPLICATION_JSON )
+    public List<Case> getUserOfCase(@PathParam("idCase") int idCase) {
+
+        return RepositoryService.getInstance().getUserOfCase(idCase);
+    }
 
 
 }

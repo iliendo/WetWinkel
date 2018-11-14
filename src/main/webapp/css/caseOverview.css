@@ -1,0 +1,37 @@
+.demo-layout-transparent {
+    background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
+}
+
+.mdl-data-table.mdl-js-data-table {
+    width: 100%;
+}
+
+.demo-card-wide.mdl-card {
+    min-width: 100%;
+    max-height: 150%;
+    overflow: auto;
+}
+
+.mdl-data-table.mdl-js-data-table td {
+    text-align: center;
+    border: 0;
+}
+
+td#titles {
+    text-align: left;
+}
+
+.mdl-data-table.mdl-js-data-table td#tekstveld {
+    text-align: left;
+    padding: 0px 55px 0px 55px;
+    max-width: 100%;
+}
+
+.mdl-textfield {
+    width: 100%;
+}
+
+.mdl-textfield textarea.mdl-textfield__input#sample5 {
+    display: block;
+    min-width: 700px;
+}

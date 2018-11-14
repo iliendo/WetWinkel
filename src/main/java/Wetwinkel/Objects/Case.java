@@ -11,8 +11,8 @@ import java.util.List;
 @Entity
 @NamedQueries(value = {
         @NamedQuery(name = "Cases.Get", query = "SELECT b FROM Case b"),
-        @NamedQuery(name = "Case.Get", query = "SELECT b FROM Case b where idCase = :idCase"),
-        @NamedQuery(name = "userCase.get", query = "SELECT g FROM Case g where  " )
+        @NamedQuery(name = "Case.Get", query = "SELECT b FROM Case b where idCase = :idCase")
+
 })
 
 
@@ -57,13 +57,26 @@ public class Case {
             joinColumns = @JoinColumn(name = "idCase"),
             inverseJoinColumns = @JoinColumn(name = "idUser")
     )
-    public List<User> userOnTheCase = new ArrayList<>();
+    public List<User> userOnTheCase;
+
+    {
+        userOnTheCase = new ArrayList<>();
+    }
+
     public int getIdCase() {
         return idCase;
     }
 
     public void setIdCase(int idCase) {
         this.idCase = idCase;
+    }
+
+    public List<User> getUserOnTheCase() {
+        return userOnTheCase;
+    }
+
+    public void setUserOnTheCase(List<User> userOnTheCase) {
+        this.userOnTheCase = userOnTheCase;
     }
 
     public String getNaam() {

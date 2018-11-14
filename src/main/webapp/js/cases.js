@@ -15,24 +15,28 @@ var feiten = null;
 var advies = null;
 var gearchiveerd = false;
 var idClient = 0;
-var html= "";
+var html = "";
 var a;
 var buttonName;
 
 // variables of the second GET
 var html1 = "";
 
-// variables of the therd GET
-var idUser =0;
+// variables of the third GET
+var idUser = 0;
 
-var naamUser= null;
-var tussenvoegsel= null;
-var achternaam= null;
-var emailUser= null;
-var wachtwoord= null;
-var superUser=false;
+var naamUser = null;
+var tussenvoegsel = null;
+var achternaam = null;
+var emailUser = null;
+var wachtwoord = null;
+var superUser = false;
 
+// variables of the fourth GET
+var idUserOfTheCase = 0;
+var idCaseOfTheCase = 0;
 
+// show all cases
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -61,7 +65,7 @@ xmlhttp.onreadystatechange = function () {
                 "\n" +
                 "    </div>\n" +
                 "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                "        <a class=\"mdl-button--colored mdl-js-button\" id="+buttonName +" onclick=myFunction("+buttonName+") >\n" +
+                "        <a class=\"mdl-button--colored mdl-js-button\" id=" + buttonName + " onclick=myFunction(" + buttonName + ") >\n" +
                 "            Open \n" +
                 "        </a>\n" +
                 "    </div>\n" +
@@ -79,14 +83,12 @@ xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/case
 xmlhttp.send();
 
 
-
-
+//get the right case to show
 function getCase(idCase) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var myObj = JSON.parse(this.responseText);
-
 
             idCase = myObj.idCase;
             naam = myObj.naam;
@@ -98,7 +100,6 @@ function getCase(idCase) {
             laatsteUpdate = myObj.laatsteUpdate;
             gearchiveerd = myObj.gearchiveerd;
             idClient = myObj.idClient;
-
 
 
             html1 += "<br>\n" +
@@ -113,27 +114,27 @@ function getCase(idCase) {
                 "            <div class=\"demo-card-wide mdl-card mdl-shadow--2dp mdl-grid \">\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label \">Client naam:</label>\n" +
-                "                    <h6 id=\"clientNaam\">"+naam+"</h6>\n" +
+                "                    <h6 id=\"clientNaam\">" + naam + "</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Aanmaak datum van de zaak:</label>\n" +
-                "                    <h6 id=\"datum\">"+datum+"</h6>\n" +
+                "                    <h6 id=\"datum\">" + datum + "</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label \">Status van de zaak:</label>\n" +
-                "                    <h6 id=\"status\">"+status+"</h6>\n" +
+                "                    <h6 id=\"status\">" + status + "</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Rechtsgebied:</label>\n" +
-                "                    <h6 id=\"rechtsgebied\">"+rechtsgebied+"</h6>\n" +
+                "                    <h6 id=\"rechtsgebied\">" + rechtsgebied + "</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Feiten:</label>\n" +
-                "                    <h6 id=\"feiten\">"+feiten+"</h6>\n" +
+                "                    <h6 id=\"feiten\">" + feiten + "</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Advies:</label>\n" +
-                "                    <h6 id=\"advise\">"+advies+"</h6>\n" +
+                "                    <h6 id=\"advise\">" + advies + "</h6>\n" +
                 "                </div>\n" +
                 "            </div>\n" +
                 "        </div>\n" +
@@ -142,15 +143,15 @@ function getCase(idCase) {
                 "</div>";
 
 
-
             document.getElementById("da").innerHTML = html1;
         }
 
     };
-    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/"+idCase, true);
+    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/" + idCase, true);
     xmlhttp.send();
 }
 
+// get the current user
 function getUser() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -159,12 +160,11 @@ function getUser() {
 
             idUser = myObj.idUser;
             naamUser = myObj.naam;
-            tussenvoegsel=myObj.tussenvoegsel;
+            tussenvoegsel = myObj.tussenvoegsel;
             achternaam = myObj.achternaam;
-            emailUser=myObj.emailUser;
+            emailUser = myObj.emailUser;
             wachtwoord = myObj.wachtwoord;
-            superUser=myObj.superUser;
-
+            superUser = myObj.superUser;
 
 
         }
@@ -175,11 +175,30 @@ function getUser() {
 
 }
 
-function myFunction(idCase) {
-    if(superUser = true){
-        getCase(idCase);
-    }
+// get the users of the case
+function getUsersOfCase(idCase) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var myObj = JSON.parse(this.responseText);
+            for (var i = 0; i < myObj.length; i++) {
+                idUserOfTheCase = myObj[i].id;
+                idCaseOfTheCase = myObj[i].id;
 
+            }
+            alert(idUserOfTheCase);
+            alert(idCaseOfTheCase);
+
+        }
+
+    };
+    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/userOfCase/" + idCase, true);
+    xmlhttp.send();
+}
+
+function myFunction(idCase) {
+
+    getUsersOfCase(idCase);
 
 }
 
