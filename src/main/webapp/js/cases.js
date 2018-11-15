@@ -1,78 +1,49 @@
-var idCase = 0;
-var naam = null;
-var datum = null;
-var laatsteUpdate = 0;
-var rechtsgebied = {
+let idCase = 0;
+let naam = null;
+let datum = null;
+let laatsteUpdate = 0;
+let rechtsgebied = {
     rechtstraf: 'rechtstraf',
     auto: 'auto'
 };
-var status = {
+let status = {
     Open: 1,
     Close: 2
 };
-var feiten = null;
-var advies = null;
-var gearchiveerd = false;
-var idClient = 0;
-var html;
-var a;
-var buttonName;
+let feiten = null;
+let advies = null;
+let gearchiveerd = false;
+let idClient = 0;
+let html;
+let a;
+let buttonName;
+let casesOfUser = [];
 
-var xmlhttp = new XMLHttpRequest();
+console.log("1");
+getCasesOfUser();
+console.log("2");
+for (let i = 0; i < casesOfUser.length; i++) {
+    console.log(casesOfUser[i]);
+}
+showCases();
 
-xmlhttp.onreadystatechange = function () {
-    if (this.readyState === 4 && this.status === 200) {
-        console.log(this.responseText);
-        const myObj = JSON.parse(this.responseText);
-        for (a = 0; a < myObj.length; a++) {
-
-            idCase = myObj[a].idCase;
-            naam = myObj[a].naam;
-            datum = myObj[a].datum;
-            rechtsgebied = myObj[a].rechtsgebied;
-            status = myObj[a].status;
-            feiten = myObj[a].feiten;
-            advies = myObj[a].advies;
-            laatsteUpdate = myObj[a].laatsteUpdate;
-            gearchiveerd = myObj[a].gearchiveerd;
-            idClient = myObj[a].idClient;
-            buttonName = idCase;
-
-
-            html += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                "    </div>\n" +
-                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n" + rechtsgebied +
-                "       " + status +
-                "\n" +
-                "    </div>\n" +
-                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                "        <a class=\"mdl-button--colored mdl-js-button\" id="+buttonName +" onclick=myFunction("+buttonName+") >\n" +
-                "            View\n" +
-                "        </a>\n" +
-                "    </div>\n" +
-                "</div>";
-
-
+function getCasesOfUser() {
+    const url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/openablecases"; //TODO change this
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem("token")
         }
-        document.getElementById("data").innerHTML = html;
-    }
-
-};
-
-xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview", true);
-xmlhttp.setRequestHeader('authorization', 'bearer ' + sessionStorage.getItem("token"));
-xmlhttp.send();
-
-
-
-function myFunction(idCase) {
-   userid = getUserID();
-   alert(idCase);
-
-
-
+    }).then(function (response) {
+        // console.log(response);
+        return response.json();
+    }).then(function (cases) {
+        // console.log("cases: "+cases);
+        for (let suit in cases) {
+            console.log(suit.idCase);
+            casesOfUser.push(suit.idCase);
+        }
+    })
 }
 
 function getUserID(){
@@ -80,7 +51,7 @@ function getUserID(){
     fetch(url, {
         method: 'GET',
         headers: {
-            'authorization': 'bearer ' + sessionStorage.getItem("token")
+            'authorization': 'bearer ' + localStorage.getItem("token")
         }
     }).then(function (response) {
         return response.text()
@@ -90,8 +61,69 @@ function getUserID(){
     });
 }
 
+function showCases(){
+    let xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            // console.log(this.responseText);
+            const myObj = JSON.parse(this.responseText);
+            for (a = 0; a < myObj.length; a++) {
+
+                idCase = myObj[a].idCase;
+                naam = myObj[a].naam;
+                datum = myObj[a].datum;
+                rechtsgebied = myObj[a].rechtsgebied;
+                status = myObj[a].status;
+                feiten = myObj[a].feiten;
+                advies = myObj[a].advies;
+                laatsteUpdate = myObj[a].laatsteUpdate;
+                gearchiveerd = myObj[a].gearchiveerd;
+                idClient = myObj[a].idClient;
+                buttonName = idCase;
 
 
+
+                console.log(idCase);
+                if (casesOfUser.indexOf(idCase) != -1) {
+                    html += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
+                        "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
+                        "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
+                        "    </div>\n" +
+                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n" + rechtsgebied +
+                        "       " + status +
+                        "\n" +
+                        "    </div>\n" +
+                        "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
+                        "        <a class=\"mdl-button--colored mdl-js-button\" id=" + buttonName + " onclick=myFunction(" + buttonName + ") >\n" +
+                        "            View\n" +
+                        "        </a>\n" +
+                        "    </div>\n" +
+                        "</div>";
+                    console.log("added with button");
+                } else {
+                    html += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
+                        "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
+                        "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
+                        "    </div>\n" +
+                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n" + rechtsgebied +
+                        "       " + status +
+                        "\n" +
+                        "    </div>\n" +
+                        "</div>";
+                    console.log("added without button");
+                }
+
+            }
+            document.getElementById("data").innerHTML = html;
+        }
+
+    };
+
+    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview", true);
+    xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
+    xmlhttp.send();
+}
 
 
 

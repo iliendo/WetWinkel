@@ -29,26 +29,23 @@ public class casesOverviewResource {
         return RepositoryService.getInstance().getCase();
     }
 
-    @GET
-    @Path("/henkIsGroot")
-    public Case getCaseById(int idCase) {
-        return RepositoryService.getInstance().getCaseById(idCase);
-    }
+//    @GET
+//    @Path("/henkIsGroot")
+//    public Case getCaseById(int idCase) {
+//        return RepositoryService.getInstance().getCaseById(idCase);
+//    }
 
     @GET
-    @Path("/user")
+    @Path("/openablecases")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserID() {
-
+    public Response getOpenableCases() {
         String email = securityContext.getUserPrincipal().getName();
-
         User user = RepositoryService.getInstance().getUserFromMail(email);
 
         if (user != null) {
-            System.out.println(user.getCases());
             return Response.ok(user.getCases()).build();
         } else {
-            return Response.ok(email).build();
+            return Response.noContent().build();
         }
     }
 

@@ -9,9 +9,7 @@ import io.jsonwebtoken.Jwts;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,7 +36,7 @@ public class loginResource {
     private void authenticate(String email, String password) throws Exception {
         User user;
         password = Security.getHashedPassword(email, password);
-        user = RepositoryService.getInstance().getUser(email, password);
+        user = RepositoryService.getInstance().login(email, password);
         if (user == null) throw new Exception("login failed");
     }
 

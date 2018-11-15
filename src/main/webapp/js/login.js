@@ -27,12 +27,12 @@ function login(email, password) {
         return response.text()
     }).then(function (value) {
 
-        sessionStorage.setItem("token", value);
+        localStorage.setItem("token", value);
 
         fetch(url2, {
             method: 'GET',
             headers: {
-                'authorization': 'bearer ' + sessionStorage.getItem("token")
+                'authorization': 'bearer ' + localStorage.getItem("token")
             }
         }).then(function (value) {
             if (value.ok) {

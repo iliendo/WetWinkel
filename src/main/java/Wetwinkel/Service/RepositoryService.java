@@ -12,7 +12,6 @@ import java.util.Map;
 public class RepositoryService {
 
     private EntityManagerFactory entityManagerFactory;
-
     // A singleton reference
     private static RepositoryService instance;
 
@@ -83,7 +82,7 @@ public class RepositoryService {
         return r;
     }
 
-    public User getUser(String email, String password) {
+    public User login(String email, String password) {
 
         EntityManager em = entityManagerFactory.createEntityManager();
 
@@ -92,7 +91,6 @@ public class RepositoryService {
         query.setParameter("wachtwoord", password);
         User result = query.getSingleResult();
         em.close();
-
         return result;
     }
 
@@ -125,6 +123,4 @@ public class RepositoryService {
 
         return query.getSingleResult();
     }
-
-
 }

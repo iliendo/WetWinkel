@@ -10,8 +10,8 @@ import java.util.Set;
 @Entity
 @NamedQueries(value = {
         @NamedQuery(name = "User.Login", query = "SELECT u FROM User u WHERE email = :email AND wachtwoord = :wachtwoord"),
-        @NamedQuery(name = "User.Get", query= "SELECT u FROM User u JOIN FETCH u.cases WHERE u.email = :email"),
-        @NamedQuery(name = "UserList.Get", query= "SELECT u FROM User u")
+        @NamedQuery(name = "User.Get", query = "SELECT u FROM User u WHERE u.email = :email"),
+        @NamedQuery(name = "UserList.Get", query = "SELECT u FROM User u")
 })
 @Table(name = "users")
 public class User {
@@ -25,17 +25,24 @@ public class User {
     private String wachtwoord;
     private boolean superUser;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
+    //    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_suit",
+            joinColumns = {@JoinColumn(name = "idUser")},
+            inverseJoinColumns = {@JoinColumn(name = "idCase")}
+    )
     private Set<Case> cases = new HashSet<>();
 
-    public User(String naam, String email, String tussenvoegsel, String achternaam, String wachtwoord, boolean superUser, Set<Case> cases) {
+    public User(String naam, String email, String tussenvoegsel, String achternaam, String wachtwoord, boolean superUser) {
         this.naam = naam;
         this.email = email;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
         this.wachtwoord = wachtwoord;
         this.superUser = superUser;
-        this.cases = cases;
+//        this.cases = cases;
     }
 
     public User() {
@@ -83,11 +90,12 @@ public class User {
 
     public void setWachtwoord(String wachtwoord) {
         this.wachtwoord = Security.getHashedPassword(email, wachtwoord);
-        if (this.wachtwoord == null){
+        if (this.wachtwoord == null) {
             //TODO geef een error hier!
         }
 
     }
+
 
     public Set<Case> getCases() {
         return cases;

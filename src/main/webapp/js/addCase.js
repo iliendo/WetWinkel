@@ -11,7 +11,7 @@ function clientDDL() {
     fetch(url, {
         method: 'GET',
         headers: {
-            'authorization': 'bearer ' + sessionStorage.getItem("token")
+            'authorization': 'bearer ' + localStorage.getItem("token")
         }
     }).then(function (response) {
         return response.json();
@@ -34,12 +34,11 @@ function clientDDL() {
     fetch(url, {
         method: 'GET',
         headers: {
-            'authorization': 'bearer ' + sessionStorage.getItem("token")
+            'authorization': 'bearer ' + localStorage.getItem("token")
         }
     }).then(function (response) {
         return response.json();
     }).then(function (value) {
-        console.log(value);
         for (let i = 0; i < value.length; i++) {
             let option = document.createElement("OPTION");
             let id = document.createElement("ID");
@@ -75,7 +74,7 @@ function myFunction() {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-            'authorization': 'bearer ' + sessionStorage.getItem("token"),
+            'authorization': 'bearer ' + localStorage.getItem("token"),
             'Content-Type': 'application/json'
         }
     }).then(function (response) {

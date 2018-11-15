@@ -37,13 +37,13 @@ public class Case {
 //    @ManyToOne
 //    private Client client;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_suit",
-            joinColumns = { @JoinColumn(name = "idCase") },
-            inverseJoinColumns = { @JoinColumn(name = "idUser") }
-    )
-    private Set<User> users = new HashSet<>();
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "users_suit",
+//            joinColumns = { @JoinColumn(name = "idCase") },
+//            inverseJoinColumns = { @JoinColumn(name = "idUser") }
+//    )
+//    private Set<User> users = new HashSet<>();
 
     public Case(String naam, Date datum, Rechtsgebied rechtsgebied, Status status, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
         this.naam = naam;
@@ -150,11 +150,11 @@ public class Case {
         this.status = status;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 }
