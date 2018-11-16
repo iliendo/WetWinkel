@@ -105,6 +105,15 @@ public class RepositoryService {
 
         return user;
     }
+    public Case getCase(int idCase) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        TypedQuery<Case> query = em.createNamedQuery("Case.Get", Case.class);
+        query.setParameter("idCase", idCase);
+
+
+        return query.getSingleResult();
+    }
 
     public List<Case> getCase() {
         EntityManager em = entityManagerFactory.createEntityManager();
