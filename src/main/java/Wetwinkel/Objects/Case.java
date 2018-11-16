@@ -11,7 +11,6 @@ import java.util.Set;
 @NamedQueries(value = {
         @NamedQuery(name = "Case.Get", query = "SELECT b FROM Case b"),
         @NamedQuery(name = "Case.idGet", query = "SELECT b From Case b WHERE idCase = :idCase"),
-        @NamedQuery(name = "Case.Get", query = "SELECT b FROM Case b where idCase = :idCase"),
 })
 
 

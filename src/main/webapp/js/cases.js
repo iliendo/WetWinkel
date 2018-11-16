@@ -14,8 +14,8 @@ let feiten = null;
 let advies = null;
 let gearchiveerd = false;
 let idClient = 0;
-let html;
-let html1;
+let html = '';
+let html1 = '';
 let a;
 let buttonName;
 let casesOfUser = [];
@@ -76,23 +76,23 @@ function showCases() {
         if (this.readyState === 4 && this.status === 200) {
             // console.log(this.responseText);
             const myObj = JSON.parse(this.responseText);
-            for (a = 0; a < myObj.length; a++) {
+            for (let a in myObj) {
+                let suit = myObj[a];
 
-                idCase = myObj[a].idCase;
-                naam = myObj[a].naam;
-                datum = myObj[a].datum;
-                rechtsgebied = myObj[a].rechtsgebied;
-                status = myObj[a].status;
-                feiten = myObj[a].feiten;
-                advies = myObj[a].advies;
-                laatsteUpdate = myObj[a].laatsteUpdate;
-                gearchiveerd = myObj[a].gearchiveerd;
-                idClient = myObj[a].idClient;
+                idCase = suit.idCase;
+                naam = suit.naam;
+                datum = suit.datum;
+                rechtsgebied = suit.rechtsgebied;
+                status = suit.status;
+                feiten = suit.feiten;
+                advies = suit.advies;
+                laatsteUpdate = suit.laatsteUpdate;
+                gearchiveerd = suit.gearchiveerd;
+                idClient = suit.idClient;
                 buttonName = idCase;
 
 
                 console.log(idCase);
-
                 if (casesOfUser.indexOf(idCase) !== -1) {
                     html += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
                         "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
@@ -103,7 +103,7 @@ function showCases() {
                         "\n" +
                         "    </div>\n" +
                         "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                        "        <a class=\"mdl-button--colored mdl-js-button\" id=" + buttonName + " onclick=myFunction(" + buttonName + ") >\n" +
+                        "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
                         "            View\n" +
                         "        </a>\n" +
                         "    </div>\n" +
@@ -195,13 +195,14 @@ function getCase(idCase) {
 
 
 
-            document.getElementById("da").innerHTML = html1;
+            document.getElementById("data").innerHTML = html1;
         }
 
     };
 
 
     xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/"+idCase, true);
+    xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
     xmlhttp.send();
 }
 

@@ -50,11 +50,11 @@ public class casesOverviewResource {
         }
     }
     @GET
-    @Path("case/{idCase}")
+    @Path("/case/{idCase}")
     @Produces(MediaType.APPLICATION_JSON )
     public Case getCase(@PathParam("idCase") int idCase) {
 
-        return RepositoryService.getInstance().getCase(idCase);
+        return RepositoryService.getInstance().getCaseById(idCase);
     }
 
 }
