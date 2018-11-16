@@ -19,13 +19,8 @@ let a;
 let buttonName;
 let casesOfUser = [];
 
-console.log("1");
+// console.log("1");
 getCasesOfUser();
-console.log("2");
-for (let i = 0; i < casesOfUser.length; i++) {
-    console.log(casesOfUser[i]);
-}
-showCases();
 
 function getCasesOfUser() {
     const url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/openablecases"; //TODO change this
@@ -35,18 +30,30 @@ function getCasesOfUser() {
             'authorization': 'bearer ' + localStorage.getItem("token")
         }
     }).then(function (response) {
-        // console.log(response);
+        console.log("Henk");
+        // response.json.then(function (value) {
+        //     //console.log(suit.idCase);
+        //     const myObj = JSON.parse(value);
+        //     for (let i = 0; i < myObj.length; i++) {
+        //         console.log(myObj[i].idCase);
+        //     }
+        //
+        // });
         return response.json();
     }).then(function (cases) {
-        // console.log("cases: "+cases);
+        console.log("cases: "+cases);
+        // for (let i = 0; i < cases ; i++) {
+        //
+        // }
         for (let suit in cases) {
-            console.log(suit.idCase);
-            casesOfUser.push(suit.idCase);
+            console.log(cases[suit]['idCase']);
+            casesOfUser.push(cases[suit]['idCase']);
         }
+        showCases();
     })
 }
 
-function getUserID(){
+function getUserID() {
     let url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/user";
     fetch(url, {
         method: 'GET',
@@ -61,7 +68,7 @@ function getUserID(){
     });
 }
 
-function showCases(){
+function showCases() {
     let xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function () {
@@ -83,9 +90,9 @@ function showCases(){
                 buttonName = idCase;
 
 
-
                 console.log(idCase);
-                if (casesOfUser.indexOf(idCase) != -1) {
+
+                if (casesOfUser.indexOf(idCase) !== -1) {
                     html += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
                         "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
                         "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +

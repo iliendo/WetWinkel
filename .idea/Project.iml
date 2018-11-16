@@ -15,7 +15,7 @@
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <setting name="provider-name" value="" />
+        <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="Entities" />
           <factory-entry name="wetwinkelPU" value="f039d2be-9375-42b0-be13-6838b4a41016" />

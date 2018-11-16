@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="WetWinkel:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="wetwinkel_war.war">
-      <element id="artifact" artifact-name="WetWinkel:war exploded" />
-    </root>
-  </artifact>
-</component>
