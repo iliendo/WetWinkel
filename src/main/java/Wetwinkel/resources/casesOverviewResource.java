@@ -8,6 +8,7 @@ import Wetwinkel.util.Secured;
 import javax.print.attribute.standard.Media;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -47,6 +48,13 @@ public class casesOverviewResource {
         } else {
             return Response.noContent().build();
         }
+    }
+    @GET
+    @Path("case/{idCase}")
+    @Produces(MediaType.APPLICATION_JSON )
+    public Case getCase(@PathParam("idCase") int idCase) {
+
+        return RepositoryService.getInstance().getCase(idCase);
     }
 
 }
