@@ -5,7 +5,6 @@ import Wetwinkel.Objects.User;
 import Wetwinkel.Service.RepositoryService;
 import Wetwinkel.util.Secured;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -24,18 +23,11 @@ public class casesOverviewResource {
     SecurityContext securityContext;
 
     @GET
-    @Path("/cases")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Case> getCases() {
 
         return RepositoryService.getInstance().getCases();
     }
-
-//    @GET
-//    @Path("/henkIsGroot")
-//    public Case getCaseById(int idCase) {
-//        return RepositoryService.getInstance().getCaseById(idCase);
-//    }
 
     @GET
     @Path("/openablecases")

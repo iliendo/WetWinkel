@@ -107,7 +107,7 @@ public class RepositoryService {
         return user;
     }
 
-    public List<Case> getCase() {
+    public List<Case> getCases() {
         EntityManager em = entityManagerFactory.createEntityManager();
 
        List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();

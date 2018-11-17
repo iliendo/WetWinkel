@@ -34,16 +34,6 @@ public class Case {
     private Date laatsteUpdate;
     private Boolean gearchiveerd;
     private int idClient;
-//    @ManyToOne
-//    private Client client;
-
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "users_suit",
-//            joinColumns = { @JoinColumn(name = "idCase") },
-//            inverseJoinColumns = { @JoinColumn(name = "idUser") }
-//    )
-//    private Set<User> users = new HashSet<>();
 
     public Case(String naam, Date datum, Rechtsgebied rechtsgebied, Status status, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
         this.naam = naam;
@@ -55,22 +45,11 @@ public class Case {
         this.laatsteUpdate = laatsteUpdate;
         this.gearchiveerd = gearchiveerd;
         this.idClient = idClient;
-//        this.client = client;
     }
 
     public Case() {
     }
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "users_suit",
-            joinColumns = @JoinColumn(name = "idCase"),
-            inverseJoinColumns = @JoinColumn(name = "idUser")
-    )
-    public List<User> userOnTheCase;
-
-    {
-        userOnTheCase = new ArrayList<>();
-    }
 
     public int getIdCase() {
         return idCase;
@@ -78,14 +57,6 @@ public class Case {
 
     public void setIdCase(int idCase) {
         this.idCase = idCase;
-    }
-
-    public List<User> getUserOnTheCase() {
-        return userOnTheCase;
-    }
-
-    public void setUserOnTheCase(List<User> userOnTheCase) {
-        this.userOnTheCase = userOnTheCase;
     }
 
     public String getNaam() {
@@ -136,15 +107,6 @@ public class Case {
         this.gearchiveerd = gearchiveerd;
     }
 
-//    public Client getClient() {
-//        return client;
-//    }
-//
-//    public void setClient(Client client) {
-//        this.client = client;
-//    }
-
-
     public int getIdClient() {
         return idClient;
     }
@@ -168,12 +130,4 @@ public class Case {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-//    public Set<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
 }

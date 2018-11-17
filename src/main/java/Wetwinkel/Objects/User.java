@@ -25,8 +25,6 @@ public class User {
     private String wachtwoord;
     private boolean superUser;
 
-    //    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_suit",
@@ -48,19 +46,8 @@ public class User {
     public User() {
     }
 
-    @ManyToMany(mappedBy = "userOnTheCase")
-    public List<Case> caseToWorkOn = new ArrayList<>();
-
     public void setIdUser(int idUser) {
         this.idUser = idUser;
-    }
-
-    public List<Case> getCaseToWorkOn() {
-        return caseToWorkOn;
-    }
-
-    public void setCaseToWorkOn(List<Case> caseToWorkOn) {
-        this.caseToWorkOn = caseToWorkOn;
     }
 
     public int getIdUser() {
