@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <link rel="stylesheet" href="css/Cases.css">
+    <link rel="stylesheet" href="css/caseOverview.css">
+
 </head>
-<body>
+<body class="demo-layout-transparent">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
-
         <div class="mdl-layout__header-row">
 
             <span class="mdl-layout-title">Wetwinkel</span>
@@ -20,106 +20,52 @@
 
             <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href="">Home</a>
-                <a class="mdl-navigation__link" href="">Cliënt</a>
-                <a class="mdl-navigation__link" href="index.html">Uitloggen</a>
+                <a class="mdl-navigation__link" href="client.html">Cliënt</a>
+
+                <a class="mdl-navigation__link" id="logout-button">Uitloggen</a>
             </nav>
         </div>
     </header>
-    <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--2-col"></div>
-        <div class="mdl-cell mdl-cell--8-col">
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text">Case toevoegen</h2>
-                </div>
-                <form id=" addCase" method="post" autocomplete="off">
-                    <table class="mdl-data-table mdl-js-data-table">
-                        <tr>
-                            <td colspan="2" class="titles">
-                                <h5>Werknemers</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                                <textarea class="mdl-textfield__input" type="text"
-                                          id="werknemer1"></textarea>
-
-                                    <label for="werknemer1" class="mdl-textfield__label">Werknemer 1</label>
-
-                                </div>
-                            </td>
-                            <td>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                                 <textarea class="mdl-textfield__input" type="text"
-                                           id="werknemer2"></textarea>
-
-                                    <label for="werknemer2" class="mdl-textfield__label">Werknemer 2</label>
-
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="titles">
-                                <h5>Algemene informatie</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                                <textarea class="mdl-textfield__input" type="text"
-                                          id="client"></textarea>
-
-                                    <label for="client" class="mdl-textfield__label">Client</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                 <textarea class="mdl-textfield__input" type="text"
-                                           id="jurisdictie"></textarea>
-
-                                    <label for="jurisdictie" class="mdl-textfield__label">Jurisdictie</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="titles">
-                                <h5>Feiten</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-
-                                <div class="mdl-textfield mdl-js-textfield">
-                                    <textarea class="mdl-textfield__input" type="text" rows="20"
-                                              id="feiten"></textarea>
-                                </div>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" id="titles">
-                                <h5>Advies</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-
-                                <div class="mdl-textfield mdl-js-textfield">
-                                    <textarea class="mdl-textfield__input" type="text" rows="20"
-                                              id="advies"></textarea>
-                                </div>
-
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-        </div>
-
-    </div>
-    <div class="mdl-cell mdl-cell--2-col"></div>
 </div>
 
+<br>
+<br>
+<br>
+<br>
+<div>
+    <div class="mdl-grid">
+
+        <div class="mdl-cell mdl-cell--2-col"></div>
+        <div class="mdl-cell mdl-cell--7-col">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-grid ">
+                <div class="mdl-cell mdl-cell--6-col">
+                    <label class="label ">Client naam:</label>
+                    <h6 id="clientNaam">Text</h6>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col">
+                    <label class="label">Aanmaak datum van de zaak:</label>
+                    <h6 id="datum">Text</h6>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col">
+                    <label class="label ">Status van de zaak:</label>
+                    <h6 id="status">Text</h6>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col">
+                    <label class="label">Rechtsgebied:</label>
+                    <h6 id="rechtsgebied">Text</h6>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col">
+                    <label class="label">Feiten:</label>
+                    <h6 id="feiten">Text</h6>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col">
+                    <label class="label">Advies:</label>
+                    <h6 id="advise">Text</h6>
+                </div>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col"></div>
+    </div>
+</div>
 </body>
 </html>

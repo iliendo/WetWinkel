@@ -193,6 +193,13 @@ function getCase(idCase) {
                 "    </div>\n" +
                 "</div>";
 
+            idUser = myObj.idUser;
+            naamUser = myObj.naam;
+            tussenvoegsel = myObj.tussenvoegsel;
+            achternaam = myObj.achternaam;
+            emailUser = myObj.emailUser;
+            wachtwoord = myObj.wachtwoord;
+            superUser = myObj.superUser;
 
 
             document.getElementById("data").innerHTML = html1;
@@ -200,6 +207,7 @@ function getCase(idCase) {
 
     };
 
+}
 
     xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/"+idCase, true);
     xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));

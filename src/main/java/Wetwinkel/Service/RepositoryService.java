@@ -29,6 +29,7 @@ public class RepositoryService {
     private Map<Integer, Client> cElements;
     private Map<Integer, Case> elementsCase;
 
+
     private RepositoryService() {
         entityManagerFactory = Persistence.createEntityManagerFactory("wetwinkelPU");
     }

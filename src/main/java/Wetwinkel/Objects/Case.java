@@ -61,12 +61,31 @@ public class Case {
     public Case() {
     }
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "users_suit",
+            joinColumns = @JoinColumn(name = "idCase"),
+            inverseJoinColumns = @JoinColumn(name = "idUser")
+    )
+    public List<User> userOnTheCase;
+
+    {
+        userOnTheCase = new ArrayList<>();
+    }
+
     public int getIdCase() {
         return idCase;
     }
 
     public void setIdCase(int idCase) {
         this.idCase = idCase;
+    }
+
+    public List<User> getUserOnTheCase() {
+        return userOnTheCase;
+    }
+
+    public void setUserOnTheCase(List<User> userOnTheCase) {
+        this.userOnTheCase = userOnTheCase;
     }
 
     public String getNaam() {

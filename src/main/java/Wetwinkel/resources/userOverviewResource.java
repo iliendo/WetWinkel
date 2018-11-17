@@ -15,7 +15,7 @@ public class userOverviewResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Case> getCase() {
 
-        return RepositoryService.getInstance().getCase();
+        return RepositoryService.getInstance().getCases();
     }
 
 

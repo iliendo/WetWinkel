@@ -48,6 +48,21 @@ public class User {
     public User() {
     }
 
+    @ManyToMany(mappedBy = "userOnTheCase")
+    public List<Case> caseToWorkOn = new ArrayList<>();
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public List<Case> getCaseToWorkOn() {
+        return caseToWorkOn;
+    }
+
+    public void setCaseToWorkOn(List<Case> caseToWorkOn) {
+        this.caseToWorkOn = caseToWorkOn;
+    }
+
     public int getIdUser() {
         return idUser;
     }

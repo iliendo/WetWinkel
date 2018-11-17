@@ -24,10 +24,11 @@ public class casesOverviewResource {
     SecurityContext securityContext;
 
     @GET
+    @Path("/cases")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Case> getCase() {
+    public List<Case> getCases() {
 
-        return RepositoryService.getInstance().getCase();
+        return RepositoryService.getInstance().getCases();
     }
 
 //    @GET
