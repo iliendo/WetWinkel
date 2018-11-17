@@ -8,8 +8,8 @@ document.getElementById("add_button").onclick = function () {
 };
 
 function clientDDL() {
-    var clientDDL = document.getElementById("client");
-    var url = "http://localhost:8080/wetwinkel_war/rest/case/clients";
+    let clientDDL = document.getElementById("client");
+    let url = "http://localhost:8080/wetwinkel_war/rest/case/clients";
 
     fetch(url, {
         method: 'GET',
@@ -36,8 +36,8 @@ function clientDDL() {
 }
 
 function werknemerDDL() {
-    var werknemerDDL = document.getElementsByClassName("werknemer");
-    var url = "http://localhost:8080/wetwinkel_war/rest/case/users";
+    let werknemerDDL = document.getElementsByClassName("werknemer");
+    let url = "http://localhost:8080/wetwinkel_war/rest/case/users";
 
     fetch(url, {
         method: 'GET',
@@ -75,8 +75,8 @@ function werknemerDDL() {
 }
 
 function jurisdictieDDL() {
-    var jurisdictieDLL = document.getElementById("client");
-    var url = "http://localhost:8080/wetwinkel_war/rest/case/clients";
+    let jurisdictieDLL = document.getElementById("client");
+    let url = "http://localhost:8080/wetwinkel_war/rest/case/clients";
 
     fetch(url, {
         method: 'GET',
@@ -103,16 +103,16 @@ function jurisdictieDDL() {
 
 function myFunction() {
 
-    var naam = document.getElementById("client").value;
-    var rechtsgebied = null;
-    var status = null;
-    var feiten = document.getElementById("feiten").value;
-    var advies = document.getElementById("advies").value;
-    var gearchiveerd = false;
-    var idClient = document.getElementById("client");
+    let naam = document.getElementById("client").value;
+    let rechtsgebied = null;
+    let status = null;
+    let feiten = document.getElementById("feiten").value;
+    let advies = document.getElementById("advies").value;
+    let gearchiveerd = false;
+    let idClient = document.getElementById("client");
 
-    var url = "http://localhost:8080/wetwinkel_war/rest/case/"; //TODO change this url when the server is online
-    var data = {
+    let url = "http://localhost:8080/wetwinkel_war/rest/case/"; //TODO change this url when the server is online
+    let data = {
         'naam': naam,
         'rechtsgebied': rechtsgebied,
         'status': status,
