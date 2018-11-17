@@ -1,10 +1,13 @@
 package Wetwinkel.Objects;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NamedQueries(value = {
-        @NamedQuery(name = "Client.Get", query = "SELECT c FROM Client c ")
+        @NamedQuery(name = "Client.Get", query = "SELECT c FROM Client c "),
+        @NamedQuery(name = "Client1.Get", query = "SELECT c FROM Client c  where idClient = :idClient "),
+        @NamedQuery(name = "Client2.Get", query = "SELECT c.initialen,c.achternaam ,c.straatnaam,c.huisnummer,c.email FROM Client c")
 })
 @Table(name = "client")
 public class Client {
@@ -22,6 +25,9 @@ public class Client {
     private int telefoonnummer;
     private String email;
     private int ontdekkingWw;
+
+    @OneToMany
+    private List<Case> cases;
 
     public Client(String initialen, String tussenvoegsel, String achternaam, String straatnaam, String postcode, int huisnummer,
     String toevoeging, String land, int telefoonnummer, String email, int ontdekkingWw) {

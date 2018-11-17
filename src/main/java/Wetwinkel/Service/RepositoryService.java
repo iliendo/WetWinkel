@@ -1,18 +1,17 @@
 package Wetwinkel.Service;
 
+import Wetwinkel.Objects.Case;
 import Wetwinkel.Objects.User;
 import Wetwinkel.Objects.Client;
-import Wetwinkel.util.Security;
-import org.hibernate.Session;
 
 import javax.persistence.*;
 import javax.ws.rs.core.Response;
+import java.util.List;
 import java.util.Map;
 
 public class RepositoryService {
 
     private EntityManagerFactory entityManagerFactory;
-
     // A singleton reference
     private static RepositoryService instance;
 
@@ -28,6 +27,8 @@ public class RepositoryService {
 
     private Map<Integer, User> elements;
     private Map<Integer, Client> cElements;
+    private Map<Integer, Case> elementsCase;
+
 
     private RepositoryService() {
         entityManagerFactory = Persistence.createEntityManagerFactory("wetwinkelPU");
@@ -37,25 +38,33 @@ public class RepositoryService {
         return entityManagerFactory.createEntityManager();
     }
 
-
-    public Client addClient(Client client) {
+    public <T> void addObject(T object){
         EntityManager em = getEntityManager();
 
         em.getTransaction().begin();
-        em.persist(client);
+        em.persist(object);
         em.getTransaction().commit();
 
         em.close();
-        return client;
     }
 
-    public User addUser(User user) {
+    public List<Client> getListOfCllients(){
         EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
+
+        List<Client> clients = em.createNamedQuery("Client.Get", Client.class).getResultList();
         em.close();
-        return user;
+
+        return clients;
+    }
+
+    public List<User> getListOfUsers(){
+        EntityManager em = getEntityManager();
+
+        List<User> users = em.createNamedQuery("UserList.Get", User.class).getResultList();
+
+        em.close();
+
+        return users;
     }
 
     public Response deleteUser(String email) {
@@ -74,15 +83,16 @@ public class RepositoryService {
         return r;
     }
 
-    public User getUser(String email, String password) {
+    public User login(String email, String password) {
 
         EntityManager em = entityManagerFactory.createEntityManager();
 
         TypedQuery<User> query = em.createNamedQuery("User.Login", User.class);
         query.setParameter("email", email);
         query.setParameter("wachtwoord", password);
-
-        return query.getSingleResult();
+        User result = query.getSingleResult();
+        em.close();
+        return result;
     }
 
     public User getUserFromMail(String email) {
@@ -91,8 +101,27 @@ public class RepositoryService {
 
         TypedQuery<User> query = em.createNamedQuery("User.Get", User.class);
         query.setParameter("email", email);
+        User user = query.getSingleResult();
+        em.close();
+
+        return user;
+    }
+
+    public List<Case> getCases() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+       List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();
+       em.close();
+
+        return caseList;
+    }
+
+    public Case getCaseById(int idCase) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        TypedQuery<Case> query = em.createNamedQuery("Case.idGet", Case.class);
+        query.setParameter("idCase", idCase);
 
         return query.getSingleResult();
     }
-
 }

@@ -14,9 +14,11 @@ import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,11 +36,39 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
 
+        final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
+
+
         String token = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION).substring(AUTHENTICATION_SCHEME.length()).trim();
+        final String email = Jwts.parser().setSigningKey(Security.getKey()).parseClaimsJws(token).getBody().getSubject();
+
+
+        requestContext.setSecurityContext(new SecurityContext() {
+
+            @Override
+            public Principal getUserPrincipal() {
+                return () -> email;
+            }
+
+            @Override
+            public boolean isUserInRole(String role) {
+                return true;
+            }
+
+            @Override
+            public boolean isSecure() {
+                return currentSecurityContext.isSecure();
+            }
+
+            @Override
+            public String getAuthenticationScheme() {
+                return AUTHENTICATION_SCHEME;
+            }
+        });
 
         // Get the resource class which matches with the requested URL
         // Extract the roles declared by it
-        Class<?> resourceClass = resourceInfo.getResourceClass();
+        Class resourceClass = resourceInfo.getResourceClass();
         List<Role> classRoles = extractRoles(resourceClass);
 
         // Get the resource method which matches with the requested URL

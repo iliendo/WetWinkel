@@ -1,40 +1,38 @@
-if (sessionStorage.getItem("token") === null){
+if (localStorage.getItem("token") === null){
     window.open("index.html", "_SELF");
 }
-
-
 
 document.getElementById("insert-button").onclick = function () {
     myFunction();
 };
 
 document.getElementById("logout-button").onclick = function () {
-  sessionStorage.removeItem("token");
+  localStorage.removeItem("token");
   window.open("index.html", "_SELF");
 };
 
 function myFunction() {
 
-    var initialen = document.getElementById("initialen").value;
-    var tussenvoegsel = document.getElementById("tussenvoegsel").value;
-    var achternaam = document.getElementById("achternaam").value;
-    var straatnaam = document.getElementById("straatnaam").value;
-    var postcode = document.getElementById("postcode").value;
-    var huisnummer = document.getElementById("huisnummer").value;
-    var toevoeging = document.getElementById("toevoeging").value;
-    var land = document.getElementById("land").value;
-    var telefoonnummer = document.getElementById("telefoonnummer").value;
-    var email = document.getElementById("email").value;
+    const initialen = document.getElementById("initialen").value;
+    const tussenvoegsel = document.getElementById("tussenvoegsel").value;
+    const achternaam = document.getElementById("achternaam").value;
+    const straatnaam = document.getElementById("straatnaam").value;
+    const postcode = document.getElementById("postcode").value;
+    const huisnummer = document.getElementById("huisnummer").value;
+    const toevoeging = document.getElementById("toevoeging").value;
+    const land = document.getElementById("land").value;
+    const telefoonnummer = document.getElementById("telefoonnummer").value;
+    const email = document.getElementById("email").value;
 
 
-    var url = "http://localhost:8080/wetwinkel_war/rest/client/"; //TODO change this url when the server is online
-    var data = {'initialen': initialen, 'tussenvoegsel': tussenvoegsel, 'achternaam': achternaam, 'straatnaam': straatnaam, 'postcode': postcode, 'huisnummer': huisnummer, 'toevoeging': toevoeging, 'land': land, 'telefoonnummer': telefoonnummer, 'email': email, 'ontdekkingWw': 1};
+    const url = "http://localhost:8080/wetwinkel_war/rest/client/"; //TODO change this url when the server is online
+    const data = {'initialen': initialen, 'tussenvoegsel': tussenvoegsel, 'achternaam': achternaam, 'straatnaam': straatnaam, 'postcode': postcode, 'huisnummer': huisnummer, 'toevoeging': toevoeging, 'land': land, 'telefoonnummer': telefoonnummer, 'email': email, 'ontdekkingWw': 1};
 
     fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-            'authorization': 'bearer ' + sessionStorage.getItem("token"),
+            'authorization': 'bearer ' + localStorage.getItem("token"),
             'Content-Type': 'application/json'
         }
     }).then(function (response) {
