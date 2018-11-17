@@ -7,8 +7,11 @@ document.getElementById("add_button").onclick = function () {
     myFunction();
 };
 
+/**
+ * Fills the client dropdownlist with the client of the database
+ */
 function clientDDL() {
-    let clientDDL = document.getElementById("client");
+    let client = document.getElementById("client");
     let url = "http://localhost:8080/wetwinkel_war/rest/case/clients";
 
     fetch(url, {
@@ -27,16 +30,14 @@ function clientDDL() {
 
 
             let option = document.createElement("OPTION");
-            let txt = document.createTextNode(client);
-            option.appendChild(txt);
             option.value = value[i].idClient;
-            clientDDL.add(option);
+            client.add(option);
         }
     });
 }
 
 function werknemerDDL() {
-    let werknemerDDL = document.getElementsByClassName("werknemer");
+    let werknemer = document.getElementsByClassName("werknemer");
     let url = "http://localhost:8080/wetwinkel_war/rest/case/users";
 
     fetch(url, {
@@ -58,24 +59,24 @@ function werknemerDDL() {
             }
 
 
-            console.log(werknemerDDL[0]);
-            console.log(werknemerDDL[1]);
+            console.log(werknemer[0]);
+            console.log(werknemer[1]);
 
 
-            for (let j = 0; j < werknemerDDL.length; j++) {
+            for (let j = 0; j < werknemer.length; j++) {
                 let option = document.createElement("OPTION");
                 let txt = document.createTextNode(employee);
                 option.appendChild(txt);
                 option.value = value[i].idUser;
 
-                werknemerDDL[j].add(option);
+                werknemer[j].add(option);
             }
         }
     });
 }
 
 function jurisdictieDDL() {
-    let jurisdictieDLL = document.getElementById("client");
+    let jurisdictie = document.getElementById("client");
     let url = "http://localhost:8080/wetwinkel_war/rest/case/clients";
 
     fetch(url, {
@@ -96,7 +97,7 @@ function jurisdictieDDL() {
             let txt = document.createTextNode(client);
             option.appendChild(txt);
             option.value = value[i].idClient;
-            jurisdictieDLL.insertBefore(option, jurisdictieDLL.lastChild);
+            jurisdictie.insertBefore(option, jurisdictie.lastChild);
         }
     });
 }
