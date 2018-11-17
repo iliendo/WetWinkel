@@ -1,6 +1,7 @@
 // Fill comboboxes when page is loaded
 werknemerDDL();
 clientDDL();
+jurisdictieDDL();
 
 document.getElementById("add_button").onclick = function () {
     myFunction();
@@ -18,7 +19,6 @@ function werknemerDDL() {
     }).then(function (response) {
         return response.json();
     }).then(function (value) {
-        console.log(value);
         for (let i = 0; i < value.length; i++) {
             let employee;
 
@@ -78,35 +78,32 @@ function clientDDL() {
 /**
  * Fills the client dropdown list with the client of the database
  */
-// function jusrisdcitieDDL() {
-//     let jurisdictie = document.getElementById("jurisdictie");
-//     let url = "http://localhost:8080/wetwinkel_war/rest/case/jurisdictie";
-//
-//     fetch(url, {
-//         method: 'GET'
-//     }).then(function (response) {
-//         return response.json();
-//     }).then(function (value) {
-//         for (let i = 0; i < value.length; i++) {
-//
-//             let client = value[i].initialen + " " + value[i].achternaam + " (" + value[i].postcode
-//                 + ", " + value[i].huisnummer + ")";
-//
-//
-//             let option = document.createElement("OPTION");
-//             let txt = document.createTextNode(client);
-//             option.appendChild(txt);
-//             option.value = value[i].idClient;
-//             client.insertBefore(option, client.lastChild);
-//         }
-//     });
-// }
+function jurisdictieDDL() {
+    let jurisdictie = document.getElementById("jurisdictie");
+    let url = "http://localhost:8080/wetwinkel_war/rest/case/jurisdictie";
+
+    fetch(url, {
+        method: 'GET'
+    }).then(function (response) {
+        return response.json();
+    }).then(function (value) {
+        for (let i = 0; i < value.length; i++) {
+
+            let rechtsgebied = value[i];
+
+            let option = document.createElement("OPTION");
+            let txt = document.createTextNode(rechtsgebied);
+            option.appendChild(txt);
+            jurisdictie.add(option);
+        }
+    });
+}
 
 function myFunction() {
 
     let naam = document.getElementById("client").value;
-    let rechtsgebied = null;
-    let status = null;
+    let rechtsgebied = document.getElementById("jurisdictie").value;
+    let status = "open";
     let feiten = document.getElementById("feiten").value;
     let advies = document.getElementById("advies").value;
     let gearchiveerd = false;
