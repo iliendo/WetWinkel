@@ -56,15 +56,15 @@ public class RepositoryService {
         return clients;
     }
 
-//    public List<User> getListOfUsers(){
-//        EntityManager em = getEntityManager();
-//
-//        List<User> users = em.createNamedQuery("Client.Get", Client.class).getResultList();
-//
-//        em.close();
-//
-//        return users;
-//    }
+    public List<User> getListOfUsers(){
+        EntityManager em = getEntityManager();
+
+        List<User> users = em.createNamedQuery("UserList.Get", User.class).getResultList();
+
+        em.close();
+
+        return users;
+    }
 
     public Response deleteUser(String email) {
         EntityManager em = getEntityManager();
