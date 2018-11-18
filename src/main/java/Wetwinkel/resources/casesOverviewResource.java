@@ -48,10 +48,10 @@ public class casesOverviewResource {
     }
 
     @POST
-    @Path("/updatecase/{idCase}{feiten}{advies}")
-    public Case updateCase(@PathParam("idCase") int idCase,@PathParam("feiten") String feiten,@PathParam("advies") String advies) {
+    @Path("/updatecase/{idCase}")
+    public void updateCase(@PathParam("idCase") int idCase) {
 
-        return RepositoryService.getInstance().updateCaseById(idCase, feiten, advies);
+         RepositoryService.getInstance().updateCaseById(idCase);
     }
 
 

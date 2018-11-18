@@ -266,11 +266,11 @@ function editCase(idCase) {
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Feiten:</label>\n" +
-                "                    <textarea class =\"mdl-textfield__input\" id=\"feiten\">"+feiten+"</textarea>\n" +
+                "                    <textarea class =\"mdl-textfield__input\" id=\"feitenChange\">"+feiten+"</textarea>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Advies:</label>\n" +
-                "                    <textarea class =\"mdl-textfield__input\" id=\"advise\">"+advies+"</textarea>\n" +
+                "                    <textarea class =\"mdl-textfield__input\" id=\"adviseChange\">"+advies+"</textarea>\n" +
                 "                </div>\n" +
                 "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
                 "        <a class=\"mdl-button--colored mdl-js-button\" onclick=mergeCase(toUseIdCase) >\n" + //
@@ -303,23 +303,34 @@ function editCase(idCase) {
 }
 
 function mergeCase(idCase) {
-    let passA = document.getElementById("advise").value;
-    let passF = document.getElementById("feiten").value;
-    alert("summin " + idCase + passA + passF);
+    let passA = document.getElementById("adviseChange").value;
+    let passF = document.getElementById("feitenChange").value;
 
-    // var xmlhttp = new XMLHttpRequest();
-    // xmlhttp.onreadystatechange = function () {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         passIdCase = idCase;
-    //         //passAdvies = ;
-    //         //passFeiten = ;
-    //         alert("Case" + idCase + " is succesvol bewerkt.");
-    //     }
-    // }
-    xmlhttp.open("POST", "http://localhost:8080/wetwinkel_war/rest/casesOverview/updatecase/"+idCase+passF+passA, true);
-    xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-    xmlhttp.send();
+
+    var url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/updatecase/"+idCase; //TODO change this url when the server is online
+    var data = {
+
+        'feiten': passF,
+        'advies': passA,
+
+    };
+
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+        }})
 }
+
+
+
+
+
+
+
+
 
 
 

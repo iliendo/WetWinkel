@@ -38,7 +38,7 @@ public class RepositoryService {
         return entityManagerFactory.createEntityManager();
     }
 
-    public <T> void addObject(T object){
+    public <T> void addObject(T object) {
         EntityManager em = getEntityManager();
 
         em.getTransaction().begin();
@@ -48,7 +48,7 @@ public class RepositoryService {
         em.close();
     }
 
-    public List<Client> getListOfCllients(){
+    public List<Client> getListOfCllients() {
         EntityManager em = getEntityManager();
 
         List<Client> clients = em.createNamedQuery("Client.Get", Client.class).getResultList();
@@ -57,7 +57,7 @@ public class RepositoryService {
         return clients;
     }
 
-    public List<User> getListOfUsers(){
+    public List<User> getListOfUsers() {
         EntityManager em = getEntityManager();
 
         List<User> users = em.createNamedQuery("UserList.Get", User.class).getResultList();
@@ -110,8 +110,8 @@ public class RepositoryService {
     public List<Case> getCases() {
         EntityManager em = entityManagerFactory.createEntityManager();
 
-       List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();
-       em.close();
+        List<Case> caseList = em.createNamedQuery("Case.Get", Case.class).getResultList();
+        em.close();
 
         return caseList;
     }
@@ -125,24 +125,20 @@ public class RepositoryService {
         return query.getSingleResult();
     }
 
-    public Case updateCaseById(int idCase, String feiten, String advies) {
+
+
+    public void updateCaseById(int idCase) {
         EntityManager em = entityManagerFactory.createEntityManager();
 
         em.getTransaction().begin();
 
         Case cs = em.find(Case.class, idCase);
-        em.clear();
+        cs.setFeiten("hgkfds");
+        cs.setAdvies("hgkfds");
 
-        cs.setFeiten(feiten);
-        cs.setAdvies(advies);
-        cs = em.merge(cs);
-        em.merge(cs);
         em.getTransaction().commit();
-        em.close();
 
 
-        //post.setTitle("High-Performance Java Persistence");
-
-        return cs;
     }
+
 }
