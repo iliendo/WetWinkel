@@ -150,3 +150,8 @@ label {
     color: mediumblue;
 }
 
+.cards{
+    height: 90%;
+    width: 98%;
+    overflow: auto;
+}
