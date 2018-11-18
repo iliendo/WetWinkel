@@ -81,8 +81,9 @@ ul.menu li {
 
 label {
 
-    color: #444444;
+    color: #999999;
     cursor: pointer;
+
 }
 
 
@@ -91,6 +92,15 @@ label {
     border-collapse: collapse;
     top: 90px;
     height: 380px;
+}
+
+.mdl-grid{
+    width: 750px;
+    height: 530px;
+    margin: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+
 }
 
 .mdl-button{

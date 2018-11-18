@@ -124,4 +124,25 @@ public class RepositoryService {
 
         return query.getSingleResult();
     }
+
+    public Case updateCaseById(int idCase, String feiten, String advies) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Case cs = em.find(Case.class, idCase);
+        em.clear();
+
+        cs.setFeiten(feiten);
+        cs.setAdvies(advies);
+        cs = em.merge(cs);
+        em.merge(cs);
+        em.getTransaction().commit();
+        em.close();
+
+
+        //post.setTitle("High-Performance Java Persistence");
+
+        return cs;
+    }
 }
