@@ -25,8 +25,6 @@ public class User {
     private String wachtwoord;
     private boolean superUser;
 
-    //    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_suit",
@@ -46,6 +44,10 @@ public class User {
     }
 
     public User() {
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public int getIdUser() {

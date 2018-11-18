@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <link rel="stylesheet" href="css/AddCase.css">
+
 </head>
-<body>
+<body onload="fillIn()">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
@@ -18,10 +19,10 @@
             <div class="mdl-layout-spacer"></div>
 
             <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="">Home</a>
+                <a class="mdl-navigation__link" href="cases.html">Home</a>
                 <a class="mdl-navigation__link" href="client.html">Cliënt</a>
-                <a><b>Case Toevoegen</b></a>
-                <a class="mdl-navigation__link" id="logout-button">Uitloggen</a>
+                <a class="mdl-navigation__link" href="addCase.html"> Case Toevoegen</a>
+                <a class="mdl-navigation__link" id="logout-button" href="index.html">Uitloggen</a>
             </nav>
         </div>
     </header>
@@ -133,6 +134,47 @@
     </div>
     <div class="mdl-cell mdl-cell--2-col"></div>
 </div>
-<script src="js/addCase.js"></script>
+<script src="js/cases.js"></script>
+
+<script>
+    var nuts;
+
+    function fillIn() {
+        const url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/"+idCase; //TODO change this
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'authorization': 'bearer ' + localStorage.getItem("token")
+            }
+        }).then(function (response) {
+            console.log("Henk");
+            // response.json.then(function (value) {
+            //     //console.log(suit.idCase);
+            //     const myObj = JSON.parse(value);
+            //     for (let i = 0; i < myObj.length; i++) {
+            //         console.log(myObj[i].idCase);
+            //     }
+            //
+            // });
+            return response.json();
+        }).then(function (cases) {
+            console.log("cases: "+cases);
+            // for (let i = 0; i < cases ; i++) {
+            //
+            // }
+            for (let suit in cases) {
+                console.log(cases[suit]['idCase']);
+
+            }
+            showCases();
+        })
+
+        document.getElementById("werknemer1").value = name;
+        console.log(name);
+        console.log(idClient);
+        console.log(advies);
+    }
+
+</script>
 </body>
 </html>

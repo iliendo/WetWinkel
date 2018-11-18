@@ -29,6 +29,7 @@ public class RepositoryService {
     private Map<Integer, Client> cElements;
     private Map<Integer, Case> elementsCase;
 
+
     private RepositoryService() {
         entityManagerFactory = Persistence.createEntityManagerFactory("wetwinkelPU");
     }
@@ -56,15 +57,15 @@ public class RepositoryService {
         return clients;
     }
 
-//    public List<User> getListOfUsers(){
-//        EntityManager em = getEntityManager();
-//
-//        List<User> users = em.createNamedQuery("Client.Get", Client.class).getResultList();
-//
-//        em.close();
-//
-//        return users;
-//    }
+    public List<User> getListOfUsers(){
+        EntityManager em = getEntityManager();
+
+        List<User> users = em.createNamedQuery("UserList.Get", User.class).getResultList();
+
+        em.close();
+
+        return users;
+    }
 
     public Response deleteUser(String email) {
         EntityManager em = getEntityManager();
@@ -106,7 +107,7 @@ public class RepositoryService {
         return user;
     }
 
-    public List<Case> getCase() {
+    public List<Case> getCases() {
         EntityManager em = entityManagerFactory.createEntityManager();
 
        List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();
@@ -122,5 +123,26 @@ public class RepositoryService {
         query.setParameter("idCase", idCase);
 
         return query.getSingleResult();
+    }
+
+    public Case updateCaseById(int idCase, String feiten, String advies) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Case cs = em.find(Case.class, idCase);
+        em.clear();
+
+        cs.setFeiten(feiten);
+        cs.setAdvies(advies);
+        cs = em.merge(cs);
+        em.merge(cs);
+        em.getTransaction().commit();
+        em.close();
+
+
+        //post.setTitle("High-Performance Java Persistence");
+
+        return cs;
     }
 }

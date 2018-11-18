@@ -5,11 +5,7 @@ import Wetwinkel.Objects.User;
 import Wetwinkel.Service.RepositoryService;
 import Wetwinkel.util.Secured;
 
-import javax.print.attribute.standard.Media;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,16 +21,10 @@ public class casesOverviewResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Case> getCase() {
+    public List<Case> getCases() {
 
-        return RepositoryService.getInstance().getCase();
+        return RepositoryService.getInstance().getCases();
     }
-
-//    @GET
-//    @Path("/henkIsGroot")
-//    public Case getCaseById(int idCase) {
-//        return RepositoryService.getInstance().getCaseById(idCase);
-//    }
 
     @GET
     @Path("/openablecases")
@@ -56,5 +46,14 @@ public class casesOverviewResource {
 
         return RepositoryService.getInstance().getCaseById(idCase);
     }
+
+    @POST
+    @Path("/updatecase/{idCase}{feiten}{advies}")
+    public Case updateCase(@PathParam("idCase") int idCase,@PathParam("feiten") String feiten,@PathParam("advies") String advies) {
+
+        return RepositoryService.getInstance().updateCaseById(idCase, feiten, advies);
+    }
+
+
 
 }
