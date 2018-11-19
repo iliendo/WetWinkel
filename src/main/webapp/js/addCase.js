@@ -108,8 +108,11 @@ function myFunction() {
     let advies = document.getElementById("advies").value;
     let gearchiveerd = false;
     let idClient = document.getElementById("client");
+    let user1 = document.getElementById("werknemer1").value;
+    let user2 = document.getElementById("werknemer2").value;
 
-    let url = "http://localhost:8080/wetwinkel_war/rest/case/"; //TODO change this url when the server is online
+    let url = "http://localhost:8080/wetwinkel_war/rest/case?userIds=" + user1 + "&userIds=" + user2; //TODO change this url when the server is online
+
     let data = {
         'naam': naam,
         'rechtsgebied': rechtsgebied,

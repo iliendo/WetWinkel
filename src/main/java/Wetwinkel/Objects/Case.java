@@ -20,7 +20,7 @@ public class Case {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCase;
     private String naam;
-    @Column(name = "datum", insertable=false)
+    @Transient
     private Date datum;
 
     @Enumerated (EnumType.STRING)
@@ -30,7 +30,7 @@ public class Case {
     private Status status;
     private String feiten;
     private String advies;
-    @Column(name = "laatsteUpdate", insertable=false)
+    @Transient
     private Date laatsteUpdate;
     private Boolean gearchiveerd;
     private int idClient;

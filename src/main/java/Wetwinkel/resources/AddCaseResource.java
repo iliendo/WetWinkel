@@ -5,11 +5,15 @@ import Wetwinkel.Objects.Client;
 import Wetwinkel.Objects.User;
 import Wetwinkel.Service.RepositoryService;
 import Wetwinkel.reference.Rechtsgebied;
+import Wetwinkel.util.Security;
 import com.google.gson.Gson;
 
+import javax.faces.annotation.RequestParameterMap;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -17,12 +21,19 @@ import java.util.List;
 
 @Path("/case")
 public class AddCaseResource {
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Case addClient(Case cases) {
-        RepositoryService.getInstance().addObject(cases);
-        return cases;
+    public Case addCase(Case suit, @QueryParam("userIds") List<Integer> userIds) {
+        RepositoryService repInstance = RepositoryService.getInstance();
+        repInstance.addObject(suit);
+        for (int userId: userIds) {
+            User user = repInstance.getUserFromID(userId);
+            user.addCase(suit);
+            repInstance.editObject(user);
+        }
+        return suit;
     }
 
     @GET
