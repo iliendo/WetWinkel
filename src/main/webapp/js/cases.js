@@ -31,23 +31,9 @@ function getCasesOfUser() {
             'authorization': 'bearer ' + localStorage.getItem("token")
         }
     }).then(function (response) {
-        console.log("Henk");
-        // response.json.then(function (value) {
-        //     //console.log(suit.idCase);
-        //     const myObj = JSON.parse(value);
-        //     for (let i = 0; i < myObj.length; i++) {
-        //         console.log(myObj[i].idCase);
-        //     }
-        //
-        // });
         return response.json();
     }).then(function (cases) {
-        console.log("cases: "+cases);
-        // for (let i = 0; i < cases ; i++) {
-        //
-        // }
         for (let suit in cases) {
-            console.log(cases[suit]['idCase']);
             casesOfUser.push(cases[suit]['idCase']);
         }
         showCases();
@@ -74,14 +60,13 @@ function showCases() {
 
     xmlhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            // console.log(this.responseText);
             const myObj = JSON.parse(this.responseText);
             for (let a in myObj) {
                 let suit = myObj[a];
 
                 idCase = suit.idCase;
                 naam = suit.naam;
-                datum = suit.datum;
+                datum = suit.datum.toString().substr(0,10);
                 rechtsgebied = suit.rechtsgebied;
                 status = suit.status;
                 feiten = suit.feiten;
@@ -197,15 +182,6 @@ function getCase(idCase) {
                 "    </div>\n" +
                 "</div>";
 
-            // idUser = myObj.idUser;
-            // naamUser = myObj.naam;
-            // tussenvoegsel = myObj.tussenvoegsel;
-            // achternaam = myObj.achternaam;
-            // emailUser = myObj.emailUser;
-            // wachtwoord = myObj.wachtwoord;
-            // superUser = myObj.superUser;
-
-
             document.getElementById("data").innerHTML = html1;
         }
 
@@ -226,7 +202,7 @@ function editCase(idCase) {
 
             toUseIdCase = idCase;
             naam = myObj.naam;
-            datum = myObj.datum;
+            datum = myObj.datum.toString().substr(0,10);
             rechtsgebied = myObj.rechtsgebied;
             status = myObj.status;
             feiten = myObj.feiten;
@@ -234,10 +210,6 @@ function editCase(idCase) {
             laatsteUpdate = myObj.laatsteUpdate;
             gearchiveerd = myObj.gearchiveerd;
             idClient = myObj.idClient;
-
-            // let toUseA = document.getElementById("advies").value;
-            // let toUseF = document.getElementById("feiten").value;
-            // alert("ADvies : " +toUseA + " Feiten : " +toUseF);
 
             html1 = "<br>\n" +
                 "<br>\n" +
@@ -286,14 +258,6 @@ function editCase(idCase) {
                 "    </div>\n" +
                 "</div>";
 
-            // idUser = myObj.idUser;
-            // naamUser = myObj.naam;
-            // tussenvoegsel = myObj.tussenvoegsel;
-            // achternaam = myObj.achternaam;
-            // emailUser = myObj.emailUser;
-            // wachtwoord = myObj.wachtwoord;
-            // superUser = myObj.superUser;
-
 
             document.getElementById("data").innerHTML = html1;
         }
@@ -306,25 +270,13 @@ function editCase(idCase) {
 }
 
 function mergeCase(idCase) {
-    // let passNaam = document.getElementById("naamChange").value;
-    // let passRechtsgebied = document.getElementById("rechtsgebiedChange").value;
-    // let passStatus = document.getElementById("statusChange").value;
     let passFeiten = document.getElementById("feitenChange").value;
     let passAdvies = document.getElementById("adviesChange").value;
-    // let passGearchiveerd = null;
-    // let passIdClient = idClient;
-
 
     var url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/updatecase/"+idCase; //TODO change this url when the server is online
     var data = {
-
-        // 'naam': passNaam,
-        // 'rechtsgebied': passRechtsgebied,
-        // 'status': passStatus,
         'feiten': passFeiten,
-        'advies': passAdvies,
-        // 'gearchiveerd': passGearchiveerd,
-        // 'idClient': passIdClient
+        'advies': passAdvies
     };
 
     fetch(url, {
@@ -341,13 +293,6 @@ function mergeCase(idCase) {
             console.log("It's fucked")
         }
     });
-    // swal(
-    //
-    //     'Good job!',
-    //     'You clicked the button!',
-    //     'success'
-    //
-    // )
     alert("SHiiieeet");
 
 }
