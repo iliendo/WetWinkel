@@ -59,11 +59,9 @@ function clientDDL() {
             let client;
 
             if (value[i].tussenvoegsel === undefined) {
-                client = value[i].initialen + " " + value[i].achternaam + " (" + value[i].postcode + ", "
-                    + value[i].huisnummer + ")";
+                client = value[i].initialen + " " + value[i].achternaam;
             } else {
-                client = value[i].initialen + " " + value[i].tussenvoegsel + " " + value[i].achternaam + " ("
-                    + value[i].postcode + ", " + value[i].huisnummer + ")";
+                client = value[i].initialen + " " + value[i].tussenvoegsel + " " + value[i].achternaam;
             }
 
             let option = document.createElement("OPTION");
@@ -114,7 +112,7 @@ function myFunction() {
     let url = "http://localhost:8080/wetwinkel_war/rest/case?userIds=" + user1 + "&userIds=" + user2; //TODO change this url when the server is online
 
     let data = {
-        'naam': naam,
+        'naam': idClient.options[idClient.selectedIndex].text,
         'rechtsgebied': rechtsgebied,
         'status': status,
         'feiten': feiten,
@@ -136,7 +134,7 @@ function myFunction() {
             console.log("its all good man");
         } else {
             //TODO show it didnt work and why (add snackbar)
-            console.log("Shiiiit")
+            console.log("didn't work")
         }
     });
 }
