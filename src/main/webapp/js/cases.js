@@ -98,9 +98,8 @@ function showCases() {
                         "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
                         "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
                         "    </div>\n" +
-                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n" + rechtsgebied +
-                        "       " + status +
-                        "\n" +
+                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
+                        " <br>      Status:  " + status +
                         "    </div>\n" +
                         "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
                         "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
@@ -114,8 +113,8 @@ function showCases() {
                         "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
                         "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
                         "    </div>\n" +
-                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n" + rechtsgebied +
-                        "       " + status +
+                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
+                        "     <br>    Status: " + status +
                         "\n" +
                         "    </div>\n" +
                         "</div>";
@@ -319,13 +318,13 @@ function mergeCase(idCase) {
     var data = {
 
         // 'naam': passNaam,
-        // 'rechtsgebied': passRechtsgebied,
-        // 'status': passStatus,
-        'feiten': passFeiten,
+    // 'rechtsgebied': passRechtsgebied,
+    // 'status': passStatus,
+    'feiten': passFeiten,
         'advies': passAdvies,
-        // 'gearchiveerd': passGearchiveerd,
-        // 'idClient': passIdClient
-    };
+    // 'gearchiveerd': passGearchiveerd,
+    // 'idClient': passIdClient
+};
 
     fetch(url, {
         method: 'PUT',
@@ -341,13 +340,7 @@ function mergeCase(idCase) {
             console.log("It's fucked")
         }
     });
-    // swal(
-    //
-    //     'Good job!',
-    //     'You clicked the button!',
-    //     'success'
-    //
-    // )
+
     alert("SHiiieeet");
 
 }
