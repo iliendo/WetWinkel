@@ -335,13 +335,13 @@ function mergeCase(idCase) {
         }
     }).then(function (response) {
         if (response.ok) {
-            console.log("It worked!");
+            alert("De bewerking is succesvol opgeslagen!");
+            fresh();
         } else {
-            console.log("It's fucked")
+            alert("Iets lijkt mis te zijn gegaan.");
         }
     });
 
-    alert("SHiiieeet");
 
 }
 
