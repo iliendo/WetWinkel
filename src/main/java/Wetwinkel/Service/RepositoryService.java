@@ -38,11 +38,21 @@ public class RepositoryService {
         return entityManagerFactory.createEntityManager();
     }
 
-    public <T> void addObject(T object){
+    public <T> void addObject(T object) {
         EntityManager em = getEntityManager();
 
         em.getTransaction().begin();
         em.persist(object);
+        em.getTransaction().commit();
+
+        em.close();
+    }
+
+    public <T> void editObject(T object){
+        EntityManager em = getEntityManager();
+
+        em.getTransaction().begin();
+        em.merge(object);
         em.getTransaction().commit();
 
         em.close();
@@ -57,7 +67,7 @@ public class RepositoryService {
         return clients;
     }
 
-    public List<User> getListOfUsers(){
+    public List<User> getListOfUsers() {
         EntityManager em = getEntityManager();
 
         List<User> users = em.createNamedQuery("UserList.Get", User.class).getResultList();
@@ -107,11 +117,22 @@ public class RepositoryService {
         return user;
     }
 
+    public User getUserFromID(int ID){
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        TypedQuery<User> query = em.createNamedQuery("User.Id", User.class);
+        query.setParameter("id", ID);
+        User user = query.getSingleResult();
+        em.close();
+
+        return user;
+    }
+
     public List<Case> getCases() {
         EntityManager em = entityManagerFactory.createEntityManager();
 
-       List<Case> caseList = em.createNamedQuery("Case.Get",Case.class).getResultList();
-       em.close();
+        List<Case> caseList = em.createNamedQuery("Case.Get", Case.class).getResultList();
+        em.close();
 
         return caseList;
     }
@@ -124,4 +145,5 @@ public class RepositoryService {
 
         return query.getSingleResult();
     }
+
 }

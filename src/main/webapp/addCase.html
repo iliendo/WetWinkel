@@ -18,10 +18,10 @@
             <div class="mdl-layout-spacer"></div>
 
             <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="">Home</a>
-                <a class="mdl-navigation__link" href="client.html">Cliënt</a>
-                <a><b>Case Toevoegen</b></a>
-                <a class="mdl-navigation__link" id="logout-button">Uitloggen</a>
+                <a class="mdl-navigation__link" href="cases.html">Home</a>
+                <a class="mdl-navigation__link" href="client.html">Cliënt Toevoegen</a>
+                <a class="mdl-navigation__link" href="addCase.html"> Case Toevoegen</a>
+                <a class="mdl-navigation__link" id="logout-button" href="index.html">Uitloggen</a>
             </nav>
         </div>
     </header>
@@ -66,16 +66,16 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" required>
-                                <select class="mdl-textfield__input" id="client" name="client">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <select class="mdl-textfield__input" id="client" name="client" required>
                                     <option></option>
                                 </select>
                                 <label class="mdl-textfield__label" for="client">Client</label>
                             </div>
                         </td>
                         <td>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" required>
-                                <select class="mdl-textfield__input" id="jurisdictie" name="jurisdictie">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <select class="mdl-textfield__input" id="jurisdictie" name="jurisdictie" required>
                                     <option></option>
                                 </select>
                                 <label class="mdl-textfield__label" for="jurisdictie">Jurisdictie</label>
@@ -91,8 +91,7 @@
                         <td colspan="2">
 
                             <div class="mdl-textfield mdl-js-textfield">
-                                    <textarea class="mdl-textfield__input" type="text" rows="20"
-                                              id="feiten"></textarea>
+                                    <textarea class="mdl-textfield__input" type="text" rows="20" id="feiten" required></textarea>
                             </div>
                         </td>
                     </tr>
@@ -105,8 +104,7 @@
                         <td colspan="2">
 
                             <div class="mdl-textfield mdl-js-textfield">
-                                    <textarea class="mdl-textfield__input" type="text" rows="20"
-                                              id="advies"></textarea>
+                                    <textarea class="mdl-textfield__input" type="text" rows="20" id="advies" required></textarea>
                             </div>
 
                         </td>
@@ -119,7 +117,7 @@
                             </button>
                         </td>
                         <td>
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                                     id="add_button" onclick="myFunction()">
                                 Toevoegen
                             </button>

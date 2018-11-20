@@ -1,6 +1,8 @@
 package Wetwinkel.Objects;
 
 import Wetwinkel.reference.*;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,7 +22,8 @@ public class Case {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCase;
     private String naam;
-    @Column(name = "datum", insertable=false)
+    @Generated(GenerationTime.ALWAYS)
+    @Column(name="datum", insertable=false,updatable=false)
     private Date datum;
 
     @Enumerated (EnumType.STRING)
@@ -30,7 +33,8 @@ public class Case {
     private Status status;
     private String feiten;
     private String advies;
-    @Column(name = "laatsteUpdate", insertable=false)
+    @Generated(GenerationTime.INSERT)
+    @Column(name="laatsteUpdate", insertable=false)
     private Date laatsteUpdate;
     private Boolean gearchiveerd;
     private int idClient;

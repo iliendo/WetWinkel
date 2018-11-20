@@ -11,7 +11,8 @@ import java.util.Set;
 @NamedQueries(value = {
         @NamedQuery(name = "User.Login", query = "SELECT u FROM User u WHERE email = :email AND wachtwoord = :wachtwoord"),
         @NamedQuery(name = "User.Get", query = "SELECT u FROM User u WHERE u.email = :email"),
-        @NamedQuery(name = "UserList.Get", query = "SELECT u FROM User u")
+        @NamedQuery(name = "UserList.Get", query = "SELECT u FROM User u"),
+        @NamedQuery(name = "User.Id", query = "SELECT u FROM User u WHERE idUser = :id")
 })
 @Table(name = "users")
 public class User {
@@ -105,6 +106,10 @@ public class User {
 
     public void setCases(Set<Case> cases) {
         this.cases = cases;
+    }
+
+    public void addCase(Case suit){
+        cases.add(suit);
     }
 
     public boolean isSuperUser() {

@@ -5,14 +5,12 @@ import Wetwinkel.Objects.User;
 import Wetwinkel.Service.RepositoryService;
 import Wetwinkel.util.Secured;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.Date;
 import java.util.List;
 
 @Path("/casesOverview")
@@ -37,7 +35,11 @@ public class casesOverviewResource {
         User user = RepositoryService.getInstance().getUserFromMail(email);
 
         if (user != null) {
-            return Response.ok(user.getCases()).build();
+            if (user.isSuperUser()){
+                return Response.ok(RepositoryService.getInstance().getCases()).build();
+            } else {
+                return Response.ok(user.getCases()).build();
+            }
         } else {
             return Response.noContent().build();
         }
@@ -49,5 +51,22 @@ public class casesOverviewResource {
 
         return RepositoryService.getInstance().getCaseById(idCase);
     }
+
+    @PUT
+    @Path("/updatecase/{idCase}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateCase(@PathParam("idCase") int idCase, Case suit) {
+
+        Date date = new Date();
+
+        Case updateSuit = RepositoryService.getInstance().getCaseById(idCase);
+        updateSuit.setFeiten(suit.getFeiten());
+        updateSuit.setAdvies(suit.getAdvies());
+        updateSuit.setLaatsteUpdate(date);
+
+        RepositoryService.getInstance().editObject(updateSuit);
+    }
+
+
 
 }

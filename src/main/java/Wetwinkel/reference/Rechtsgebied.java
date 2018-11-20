@@ -1,6 +1,13 @@
 package Wetwinkel.reference;
 
 public enum Rechtsgebied {
-    rechtstraf,
-    auto
+    Employment,
+    Administratieve,
+    Rental,
+    Criminal,
+    PFL,
+    Social_Insurance_Law,
+    Other_General,
+    Other_Civil,
+    Immigration
 }
