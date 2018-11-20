@@ -142,7 +142,7 @@ function getCase(idCase) {
 
             idCase = myObj.idCase;
             naam = myObj.naam;
-            datum = myObj.datum;
+            datum = myObj.datum.toString().substr(0,10);
             rechtsgebied = myObj.rechtsgebied;
             status = myObj.status;
             feiten = myObj.feiten;

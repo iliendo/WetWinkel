@@ -10,6 +10,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.Date;
 import java.util.List;
 
 @Path("/casesOverview")
@@ -56,7 +57,14 @@ public class casesOverviewResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateCase(@PathParam("idCase") int idCase, Case suit) {
 
-         RepositoryService.getInstance().updateCaseById(idCase, suit);
+        Date date = new Date();
+
+        Case updateSuit = RepositoryService.getInstance().getCaseById(idCase);
+        updateSuit.setFeiten(suit.getFeiten());
+        updateSuit.setAdvies(suit.getAdvies());
+        updateSuit.setLaatsteUpdate(date);
+
+        RepositoryService.getInstance().editObject(updateSuit);
     }
 
 
