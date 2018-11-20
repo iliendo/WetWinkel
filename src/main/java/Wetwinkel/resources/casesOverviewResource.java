@@ -34,7 +34,11 @@ public class casesOverviewResource {
         User user = RepositoryService.getInstance().getUserFromMail(email);
 
         if (user != null) {
-            return Response.ok(user.getCases()).build();
+            if (user.isSuperUser()){
+                return Response.ok(RepositoryService.getInstance().getCases()).build();
+            } else {
+                return Response.ok(user.getCases()).build();
+            }
         } else {
             return Response.noContent().build();
         }
