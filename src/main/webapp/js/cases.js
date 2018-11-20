@@ -83,9 +83,8 @@ function showCases() {
                         "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
                         "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
                         "    </div>\n" +
-                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n" + rechtsgebied +
-                        "       " + status +
-                        "\n" +
+                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
+                        " <br>      Status:  " + status +
                         "    </div>\n" +
                         "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
                         "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
@@ -99,8 +98,8 @@ function showCases() {
                         "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
                         "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
                         "    </div>\n" +
-                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n" + rechtsgebied +
-                        "       " + status +
+                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
+                        "     <br>    Status: " + status +
                         "\n" +
                         "    </div>\n" +
                         "</div>";
@@ -288,12 +287,13 @@ function mergeCase(idCase) {
         }
     }).then(function (response) {
         if (response.ok) {
-            console.log("It worked!");
+            alert("De bewerking is succesvol opgeslagen!");
+            fresh();
         } else {
-            console.log("It's fucked")
+            alert("Iets lijkt mis te zijn gegaan.");
         }
     });
-    alert("SHiiieeet");
+
 
 }
 
