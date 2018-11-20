@@ -36,7 +36,7 @@ function login(email, password) {
             }
         }).then(function (value) {
             if (value.ok) {
-                window.open("client.html", "_SELF")
+                window.open("cases.html", "_SELF")
             }
         });
     });

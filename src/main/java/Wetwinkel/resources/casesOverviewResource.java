@@ -47,11 +47,12 @@ public class casesOverviewResource {
         return RepositoryService.getInstance().getCaseById(idCase);
     }
 
-    @POST
+    @PUT
     @Path("/updatecase/{idCase}")
-    public void updateCase(@PathParam("idCase") int idCase) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateCase(@PathParam("idCase") int idCase, Case suit) {
 
-         RepositoryService.getInstance().updateCaseById(idCase);
+         RepositoryService.getInstance().updateCaseById(idCase, suit);
     }
 
 

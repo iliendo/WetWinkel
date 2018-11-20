@@ -127,14 +127,15 @@ public class RepositoryService {
 
 
 
-    public void updateCaseById(int idCase) {
+    public void updateCaseById(int idCase, Case suit) {
         EntityManager em = entityManagerFactory.createEntityManager();
 
         em.getTransaction().begin();
-
-        Case cs = em.find(Case.class, idCase);
-        cs.setFeiten("hgkfds");
-        cs.setAdvies("hgkfds");
+        Case meegegevenSuit = suit;
+        Case updateSuit = em.find(Case.class, idCase);
+        updateSuit.setFeiten(meegegevenSuit.getFeiten());
+        updateSuit.setAdvies(meegegevenSuit.getAdvies());
+        updateSuit.setLaatsteUpdate(meegegevenSuit.getDatum());
 
         em.getTransaction().commit();
 

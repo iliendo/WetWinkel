@@ -160,7 +160,6 @@ function getCase(idCase) {
                 "<div>\n" +
                 "    <div class=\"mdl-grid\">\n" +
                 "\n" +
-                "        <div class=\"mdl-cell mdl-cell--7-col\">\n" +
                 "            <div class=\"demo-card-wide mdl-card mdl-shadow--2dp mdl-grid \">\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label \">Client naam:</label>\n" +
@@ -190,10 +189,11 @@ function getCase(idCase) {
                 "        <a class=\"mdl-button--colored mdl-js-button\" onclick=editCase(" + idCase + ") >\n" +
                 "            Bewerken\n" +
                 "        </a>\n" +
+                "        <a class=\"mdl-button--colored mdl-js-button\" id=\"goback\" onClick=fresh() >\n" +
+                "            Terug\n" +
+                "        </a>\n" +
                 "    </div>\n" +
                 "            </div>\n" +
-                "        </div>\n" +
-                "        <div class=\"mdl-cell mdl-cell--2-col\"></div>\n" +
                 "    </div>\n" +
                 "</div>";
 
@@ -250,19 +250,19 @@ function editCase(idCase) {
                 "            <div class=\"demo-card-wide mdl-card mdl-shadow--2dp mdl-grid \">\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label \">Client naam:</label>\n" +
-                "                    <h6 id=\"naam\">"+naam+"</h6>\n" +
+                "                    <h6 id=\"naamChange\">"+naam+"</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Aanmaak datum van de zaak:</label>\n" +
-                "                    <h6 id=\"datum\">"+datum+"</h6>\n" +
+                "                    <h6 id=\"datumChange\">"+datum+"</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label \">Status van de zaak:</label>\n" +
-                "                    <h6 id=\"status\">"+status+"</h6>\n" +
+                "                    <h6 id=\"statusChange\">"+status+"</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Rechtsgebied:</label>\n" +
-                "                    <h6 id=\"rechtsgebied\">"+rechtsgebied+"</h6>\n" +
+                "                    <h6 id=\"rechtsgebiedChange\">"+rechtsgebied+"</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Feiten:</label>\n" +
@@ -270,11 +270,14 @@ function editCase(idCase) {
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Advies:</label>\n" +
-                "                    <textarea class =\"mdl-textfield__input\" id=\"adviseChange\">"+advies+"</textarea>\n" +
+                "                    <textarea class =\"mdl-textfield__input\" id=\"adviesChange\">"+advies+"</textarea>\n" +
                 "                </div>\n" +
                 "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
                 "        <a class=\"mdl-button--colored mdl-js-button\" onclick=mergeCase(toUseIdCase) >\n" + //
                 "            Opslaan\n" +
+                "        </a>\n" +
+                "        <a class=\"mdl-button--colored mdl-js-button\" id=\"goback\" onClick=fresh() >\n" +
+                "            Terug\n" +
                 "        </a>\n" +
                 "    </div>\n" +
                 "            </div>\n" +
@@ -303,36 +306,54 @@ function editCase(idCase) {
 }
 
 function mergeCase(idCase) {
-    let passA = document.getElementById("adviseChange").value;
-    let passF = document.getElementById("feitenChange").value;
+    // let passNaam = document.getElementById("naamChange").value;
+    // let passRechtsgebied = document.getElementById("rechtsgebiedChange").value;
+    // let passStatus = document.getElementById("statusChange").value;
+    let passFeiten = document.getElementById("feitenChange").value;
+    let passAdvies = document.getElementById("adviesChange").value;
+    // let passGearchiveerd = null;
+    // let passIdClient = idClient;
 
 
     var url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/updatecase/"+idCase; //TODO change this url when the server is online
     var data = {
 
-        'feiten': passF,
-        'advies': passA,
-
+        // 'naam': passNaam,
+        // 'rechtsgebied': passRechtsgebied,
+        // 'status': passStatus,
+        'feiten': passFeiten,
+        'advies': passAdvies,
+        // 'gearchiveerd': passGearchiveerd,
+        // 'idClient': passIdClient
     };
 
     fetch(url, {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(data),
         headers: {
             'authorization': 'bearer ' + localStorage.getItem("token"),
             'Content-Type': 'application/json'
-        }})
+        }
+    }).then(function (response) {
+        if (response.ok) {
+            console.log("It worked!");
+        } else {
+            console.log("It's fucked")
+        }
+    });
+    // swal(
+    //
+    //     'Good job!',
+    //     'You clicked the button!',
+    //     'success'
+    //
+    // )
+    alert("SHiiieeet");
+
 }
 
+function fresh() {
+    window.location.reload();
 
-
-
-
-
-
-
-
-
-
-
+}
 
