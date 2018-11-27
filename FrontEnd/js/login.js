@@ -15,7 +15,7 @@ password.addEventListener("keyup", function (event) {
 function login(email, password) {
     var url = "http://localhost:8080/wetwinkel_war/rest/user"; //TODO change this url when the server is online
     var data = {'email': email, 'wachtwoord': password};
-    var url2 = "http://localhost:8080/wetwinkel_war/rest/client"; //TODO change this url when the server is online
+    var url2 = "http://localhost:8080/wetwinkel_war/rest/casesOverview"; //TODO change this url when the server is online
 
     fetch(url, {
         method: 'POST',
@@ -36,7 +36,10 @@ function login(email, password) {
             }
         }).then(function (value) {
             if (value.ok) {
-                window.open("cases.html", "_SELF")
+                value.text().then(function (url) {
+                    url = url.substring(1, url.length - 1);
+                    window.open(url, '_self')
+                });
             }
         });
     });

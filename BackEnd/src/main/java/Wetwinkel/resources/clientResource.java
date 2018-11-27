@@ -24,7 +24,7 @@ public class clientResource {
 
     @GET
     public Response openClientPage() throws URISyntaxException {
-        URI uri = new URI("http://localhost:8080/wetwinkel_war/client.html");
-        return Response.temporaryRedirect(uri).build();
+        URI uri = new URI("client.html");
+        return Response.ok(uri).build();
     }
 }

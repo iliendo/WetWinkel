@@ -10,6 +10,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +23,13 @@ public class casesOverviewResource {
     SecurityContext securityContext;
 
     @GET
+    public Response openClientPage() throws URISyntaxException {
+        URI uri = new URI("cases.html");
+        return Response.ok(uri).build();
+    }
+
+    @GET
+    @Path("/allcases")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Case> getCases() {
 

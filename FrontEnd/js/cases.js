@@ -112,7 +112,7 @@ function showCases() {
 
     };
 
-    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview", true);
+    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
     xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
     xmlhttp.send();
 }
