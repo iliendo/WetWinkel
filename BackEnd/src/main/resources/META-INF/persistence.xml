@@ -5,11 +5,14 @@
 
     <persistence-unit name="wetwinkelPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <non-jta-data-source>java:comp/env/jdbc/wetwinkelDb</non-jta-data-source>
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="none"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
             <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://145.92.203.241:3306/ztourakm0011?serverTimezone=CET"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+            <property name="hibernate.connection.username" value="tourakm0011" />
+            <property name="hibernate.connection.password" value="FBJFf4sFjV3Wg3" />
         </properties>
     </persistence-unit>
 </persistence>

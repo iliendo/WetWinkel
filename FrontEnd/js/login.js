@@ -2,7 +2,10 @@ var email = document.getElementById("email");
 var password = document.getElementById("password");
 
 document.getElementById("login-button").onclick = function () {
+    document.getElementById("lock-icon").hidden = true;
+    document.getElementById("spinner").hidden = false;
     login(email.value, password.value);
+
 };
 
 password.addEventListener("keyup", function (event) {
@@ -28,8 +31,7 @@ function login(email, password) {
     }).then(function (value) {
 
         localStorage.setItem("token", value);
-
-        fetch(url2, {
+        return fetch(url2, {
             method: 'GET',
             headers: {
                 'authorization': 'bearer ' + localStorage.getItem("token")
@@ -40,8 +42,13 @@ function login(email, password) {
                     url = url.substring(1, url.length - 1);
                     window.open(url, '_self')
                 });
+            } else {
+                throw new Error();
             }
         });
+    }).catch(function () {
+        document.getElementById("lock-icon").hidden = false;
+        document.getElementById("spinner").hidden = true;
     });
 
 }
