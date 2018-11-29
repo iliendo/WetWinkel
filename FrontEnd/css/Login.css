@@ -73,3 +73,11 @@ body {
 #forgotpassword {
     float: right;
 }
+
+.mdl-snackbar {
+    background-color: #dd0003;
+}
+
+.mdl-snackbar__text {
+    color: white;
+}
