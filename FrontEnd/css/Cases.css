@@ -154,7 +154,7 @@ label {
 
     color: #fff;
     background:
-           brown;
+            mediumblue;
 }
 .mdl-card__title mdl-card--expand{
     color: mediumblue;
@@ -212,6 +212,6 @@ td#titles {
 }
 .cards{
     height: 90%;
-    width: 98%;
+    width: 99%;
     overflow: auto;
 }
