@@ -25,6 +25,7 @@ public class User {
     private String achternaam;
     private String wachtwoord;
     private boolean superUser;
+    private boolean nieuw;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -41,7 +42,6 @@ public class User {
         this.achternaam = achternaam;
         this.wachtwoord = wachtwoord;
         this.superUser = superUser;
-//        this.cases = cases;
     }
 
     public User() {
@@ -120,4 +120,11 @@ public class User {
         this.superUser = superUser;
     }
 
+    public boolean isNieuw() {
+        return nieuw;
+    }
+
+    public void setNieuw(boolean nieuw) {
+        this.nieuw = nieuw;
+    }
 }

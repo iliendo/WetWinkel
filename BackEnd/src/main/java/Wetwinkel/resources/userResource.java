@@ -3,6 +3,7 @@ package Wetwinkel.resources;
 import Wetwinkel.Objects.Credentials;
 import Wetwinkel.Objects.User;
 import Wetwinkel.Service.RepositoryService;
+import Wetwinkel.util.Secured;
 import Wetwinkel.util.Security;
 import io.jsonwebtoken.Jwts;
 
@@ -14,11 +15,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Path("/user")
-public class loginResource {
+public class userResource {
     private final int KEY_LIFETIME_HOURS = 4;
 
 
     @POST
+    @Path("/cred")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login (Credentials credentials){
@@ -48,6 +50,22 @@ public class loginResource {
         Date expirationDate = cal.getTime();
 
         return Jwts.builder().setSubject(email).setExpiration(expirationDate).signWith(Security.getKey()).compact();
+    }
+
+
+    @POST
+    @Secured
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addUser(User user){
+        try {
+            user.setWachtwoord(Security.getHashedPassword(user.getEmail(), user.getWachtwoord()));
+            RepositoryService repInstance = RepositoryService.getInstance();
+            repInstance.addObject(user);
+            return Response.ok().build();
+        } catch (Exception e){
+            return Response.serverError().build();
+        }
     }
 }
 

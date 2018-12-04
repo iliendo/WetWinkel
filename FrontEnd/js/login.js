@@ -16,7 +16,7 @@ password.addEventListener("keyup", function (event) {
 });
 
 function login(email, password) {
-    const url = "http://localhost:8080/wetwinkel_war/rest/user"; //TODO change this url when the server is online
+    const url = "http://localhost:8080/wetwinkel_war/rest/user/cred"; //TODO change this url when the server is online
     const data = {'email': email, 'wachtwoord': password};
     const url2 = "http://localhost:8080/wetwinkel_war/rest/casesOverview"; //TODO change this url when the server is online
 
