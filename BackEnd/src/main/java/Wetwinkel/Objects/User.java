@@ -2,6 +2,8 @@ package Wetwinkel.Objects;
 
 
 import Wetwinkel.util.Security;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,6 +27,8 @@ public class User {
     private String achternaam;
     private String wachtwoord;
     private boolean superUser;
+    @Generated(GenerationTime.INSERT)
+    @Column(name="nieuw", insertable=false)
     private boolean nieuw;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

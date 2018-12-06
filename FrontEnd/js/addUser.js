@@ -34,7 +34,6 @@ function addUser() {
         }
     }).then(function (response) {
         if (response.ok) {
-
             //TODO show it worked (redirect to all cases page)
             console.log("its all good man");
         } else {
