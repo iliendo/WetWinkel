@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Zaak toevoegen</title>
+    <title>Gebruiker toevoegen</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <link rel="stylesheet" href="css/addCase.css">
+    <link rel="stylesheet" href="css/addUser.css">
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -28,97 +28,79 @@
 </div>
 
 <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--2-col"></div>
+    <div class="mdl-cell mdl-cell--3-col"></div>
     <div class="mdl-cell mdl-cell--8-col">
         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
             <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">Case toevoegen</h2>
+                <h2 class="mdl-card__title-text">Gebruiker toevoegen</h2>
             </div>
-            <form id=" addCase" method="post" autocomplete="off">
+            <form id="addUser" method="post" autocomplete="off">
                 <table class="mdl-data-table mdl-js-data-table">
                     <tr>
-                        <td colspan="2" class="titles">
-                            <h5>Werknemers</h5>
+                        <td colspan="3" class="titles">
+                            <h5>Persoonsgegevens</h5>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <select class="werknemer mdl-textfield__input" id="werknemer1" name="werknemer1" required>
-                                    <option></option>
-                                </select>
-                                <label class="mdl-textfield__label" for="werknemer1">Werknemer 1</label>
+                                <input class="mdl-textfield__input" type="text" id="voornaam" required tabindex="1">
+                                <label class="mdl-textfield__label"
+                                       for="voornaam">Voornaam</label>
                             </div>
                         </td>
                         <td>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <select class="werknemer mdl-textfield__input" id="werknemer2" name="werknemer2" required>
-                                    <option></option>
-                                </select>
-                                <label class="mdl-textfield__label" for="werknemer2">Werknemer 2</label>
+                                <input class="mdl-textfield__input" type="email" id="email" required tabindex="4">
+                                <label class="mdl-textfield__label"
+                                       for="email">Email</label>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="titles">
-                            <h5>Algemene informatie</h5>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <select class="mdl-textfield__input" id="client" name="client" required>
-                                    <option></option>
-                                </select>
-                                <label class="mdl-textfield__label" for="client">Client</label>
+                                <input class="mdl-textfield__input" type="text" id="tussenvoegsel" tabindex="2">
+                                <label class="mdl-textfield__label"
+                                       for="tussenvoegsel">Tussenvoegsel</label>
                             </div>
                         </td>
                         <td>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <select class="mdl-textfield__input" id="jurisdictie" name="jurisdictie" required>
-                                    <option></option>
+                                <input class="mdl-textfield__input" type="date" id="geboortedatum" value="2018-01-01" required tabindex="5">
+                                <label class="mdl-textfield__label" for="geboortedatum">Geboortedatum</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="achternaam" required tabindex="3">
+                                <label class="mdl-textfield__label"
+                                       for="achternaam">Achternaam</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <select class="mdl-textfield__input" id="superuser" name="superuser" required tabindex="6">
+                                    <option>nee</option>
+                                    <option>ja</option>
                                 </select>
-                                <label class="mdl-textfield__label" for="jurisdictie">Jurisdictie</label>
+                                <label class="mdl-textfield__label" for="superuser">Superuser?</label>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="titles">
-                            <h5>Feiten</h5>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-
-                            <div class="mdl-textfield mdl-js-textfield">
-                                    <textarea class="mdl-textfield__input" type="text" rows="20" id="feiten" required></textarea>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="titles">
-                            <h5>Advies</h5>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-
-                            <div class="mdl-textfield mdl-js-textfield">
-                                    <textarea class="mdl-textfield__input" type="text" rows="20" id="advies" required></textarea>
-                            </div>
-
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent "
-                                    id="cancel_button">
+                                    id="cancel_button" tabindex="7">
                                 Annuleren
                             </button>
                         </td>
                         <td>
-                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                                    id="add_button" onclick="addCase()">
+                            <button type="submit"
+                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                                    id="add_button" tabindex="8">
                                 Toevoegen
                             </button>
                         </td>
@@ -129,6 +111,6 @@
     </div>
     <div class="mdl-cell mdl-cell--2-col"></div>
 </div>
-<script src="js/addCase.js"></script>
+<script src="js/addUser.js"></script>
 </body>
 </html>

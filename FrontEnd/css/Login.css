@@ -1,18 +1,22 @@
 * {
-    overflow-x: hidden;
-    margin: 0px;
-    padding: 0px;
+    /*overflow-x: hidden;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
 }
+
+html, body {
+    height: 100%;
+}
+
 .demo-layout-transparent {
     background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
 }
 
 body {
-    background-color: rgba(0, 0, 0, 0.0392156862745098);
     background: linear-gradient(-45deg, rgba(16, 0, 78, 0.3686274509803922), rgba(20, 4, 81, 0));
 }
 
-#login-conatiner{
+#login-container {
     margin: auto;
 }
 
@@ -32,17 +36,23 @@ body {
     min-width: 56px;
     width: 56px;
     overflow: hidden;
-    background: rgba(158,158,158,.2);
-    box-shadow: 0 1px 1.5px 0 rgba(0,0,0,.12), 0 1px 1px 0 rgba(0,0,0,.24);
+    background: rgba(158, 158, 158, .2);
+    box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, .12), 0 1px 1px 0 rgba(0, 0, 0, .24);
     position: absolute;
     top: -30px;
-    text-align: center;
     left: 0;
     right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#lock-icon{
-    line-height: 56px;
+#lock-icon {
+    /*line-height: 56px;*/
+}
+
+#spinner {
+    overflow: hidden;
 }
 
 #login-button {
@@ -51,7 +61,7 @@ body {
     min-width: initial;
 }
 
-#card-heading{
+#card-heading {
     text-align: center;
     font-weight: 600;
     font-size: 32px;
@@ -60,6 +70,14 @@ body {
     color: rgba(0, 0, 0, 0.31);
 }
 
-#forgotpassword{
+#forgotpassword {
     float: right;
+}
+
+.mdl-snackbar {
+    background-color: #dd0003;
+}
+
+.mdl-snackbar__text {
+    color: white;
 }

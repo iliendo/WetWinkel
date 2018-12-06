@@ -44,7 +44,6 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             validateToken(token);
 
         } catch (Exception e) {
-            e.printStackTrace();
             abortWithUnauthorized(requestContext);
         }
     }

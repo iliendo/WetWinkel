@@ -4,7 +4,7 @@ clientDDL();
 jurisdictieDDL();
 
 document.getElementById("add_button").onclick = function () {
-    myFunction();
+    addCase();
 };
 
 function werknemerDDL() {
@@ -97,7 +97,7 @@ function jurisdictieDDL() {
     });
 }
 
-function myFunction() {
+function addCase() {
 
     let naam = document.getElementById("client").value;
     let rechtsgebied = document.getElementById("jurisdictie").value;
