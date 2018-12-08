@@ -34,7 +34,7 @@ function addUser() {
         }
     }).then(function (response) {
         if (response.ok) {
-            //TODO show it worked (redirect to all cases page)
+            //TODO show it worked (redirect to all users page)
             console.log("its all good man");
         } else {
             //TODO show it didnt work and why (add snackbar)

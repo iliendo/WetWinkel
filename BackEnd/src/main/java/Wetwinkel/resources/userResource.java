@@ -75,7 +75,7 @@ public class userResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response editUser(User user){
         try {
-            user.setWachtwoord(Security.getHashedPassword(user.getEmail(), user.getWachtwoord()));
+//            user.setWachtwoord(Security.getHashedPassword(user.getEmail(), user.getWachtwoord()));
             RepositoryService repInstance = RepositoryService.getInstance();
             repInstance.editObject(user);
             return Response.ok().build();
@@ -89,6 +89,13 @@ public class userResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getAllUsers(){
         return RepositoryService.getInstance().getListOfUsers();
+    }
+
+    @GET
+    @Path("/{idUser}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public User getUser(@PathParam("idUser") int idUser){
+        return RepositoryService.getInstance().getUserFromID(idUser);
     }
 }
 
