@@ -54,20 +54,20 @@ function clientDDL() {
         }
     }).then(function (response) {
         return response.json();
-    }).then(function (value) {
-        for (let i = 0; i < value.length; i++) {
+    }).then(function (clienten) {
+        for (let i = 0; i < clienten.length; i++) {
             let client;
 
-            if (value[i].tussenvoegsel === undefined) {
-                client = value[i].initialen + " " + value[i].achternaam;
+            if (clienten[i].tussenvoegsel === undefined) {
+                client = clienten[i].initialen + " " + clienten[i].achternaam;
             } else {
-                client = value[i].initialen + " " + value[i].tussenvoegsel + " " + value[i].achternaam;
+                client = clienten[i].initialen + " " + clienten[i].tussenvoegsel + " " + clienten[i].achternaam;
             }
 
             let option = document.createElement("OPTION");
             let txt = document.createTextNode(client);
             option.appendChild(txt);
-            option.value = value[i].idClient;
+            option.value = clienten[i].idClient;
             clienten.add(option)
         }
     });

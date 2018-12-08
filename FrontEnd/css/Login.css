@@ -1,19 +1,9 @@
-* {
-    /*overflow-x: hidden;*/
-    /*margin: 0;*/
-    /*padding: 0;*/
-}
-
 html, body {
     height: 100%;
 }
 
-.demo-layout-transparent {
-    background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
-}
-
 body {
-    background: linear-gradient(-45deg, rgba(16, 0, 78, 0.3686274509803922), rgba(20, 4, 81, 0));
+    background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
 }
 
 #login-container {
@@ -45,10 +35,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#lock-icon {
-    /*line-height: 56px;*/
 }
 
 #spinner {

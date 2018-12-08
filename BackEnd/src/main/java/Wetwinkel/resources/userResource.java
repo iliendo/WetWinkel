@@ -13,11 +13,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Path("/user")
 public class userResource {
     private final int KEY_LIFETIME_HOURS = 4;
-
+    private User user;
 
     @POST
     @Path("/cred")
@@ -28,15 +29,15 @@ public class userResource {
             authenticate(credentials.getEmail(), credentials.getWachtwoord());
 
             String token = issueToken(credentials.getEmail());
+            boolean superUser = user.isSuperUser();
 
-            return Response.ok(token).build();
+            return Response.ok(token + "," + superUser).build();
         } catch (Exception e){
             return Response.status(Response.Status.FORBIDDEN).build();
         }
     }
 
     private void authenticate(String email, String password) throws Exception {
-        User user;
         password = Security.getHashedPassword(email, password);
         user = RepositoryService.getInstance().login(email, password);
         if (user == null) throw new Exception("login failed");
@@ -66,6 +67,28 @@ public class userResource {
         } catch (Exception e){
             return Response.serverError().build();
         }
+    }
+
+    @PUT
+    @Secured
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response editUser(User user){
+        try {
+            user.setWachtwoord(Security.getHashedPassword(user.getEmail(), user.getWachtwoord()));
+            RepositoryService repInstance = RepositoryService.getInstance();
+            repInstance.editObject(user);
+            return Response.ok().build();
+        } catch (Exception e){
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Secured
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<User> getAllUsers(){
+        return RepositoryService.getInstance().getListOfUsers();
     }
 }
 

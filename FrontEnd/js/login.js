@@ -34,7 +34,10 @@ function login(email, password) {
         }
     }).then(function (value) {
 
-        localStorage.setItem("token", value);
+        let valueArray = value.split(",");
+
+        localStorage.setItem("token", valueArray[0]);
+        localStorage.setItem("superUser", valueArray[1]);
         return fetch(url2, {
             method: 'GET',
             headers: {

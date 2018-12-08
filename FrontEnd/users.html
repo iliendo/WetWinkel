@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wetwinkel</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="css/users.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $("#header").load("header.html");
+        });
+    </script>
+</head>
+<body>
+<div id="header"></div>
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+
+    <table id="userTable" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp center">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Naam</th>
+            <th class="mdl-data-table__cell--non-numeric">Email</th>
+            <th class="mdl-data-table__cell--non-numeric">Super user</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--Users are added with the javascript-->
+        </tbody>
+    </table>
+
+
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="js/users.js"></script>
+</div>
+</body>
+</html>

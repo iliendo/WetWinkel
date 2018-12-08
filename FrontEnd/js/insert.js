@@ -8,7 +8,6 @@ document.getElementById("insert-button").onclick = function () {
 
 document.getElementById("logout-button").onclick = function () {
   localStorage.removeItem("token");
-  window.open("index.html", "_SELF");
 };
 
 function myFunction() {
