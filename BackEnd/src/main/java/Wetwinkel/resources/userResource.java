@@ -3,6 +3,7 @@ package Wetwinkel.resources;
 import Wetwinkel.Objects.Credentials;
 import Wetwinkel.Objects.User;
 import Wetwinkel.Service.RepositoryService;
+import Wetwinkel.util.Role;
 import Wetwinkel.util.Secured;
 import Wetwinkel.util.Security;
 import io.jsonwebtoken.Jwts;
@@ -31,7 +32,7 @@ public class userResource {
             String token = issueToken(credentials.getEmail());
             boolean superUser = user.isSuperUser();
 
-            return Response.ok(token + "," + superUser).build();
+            return Response.ok(token + "," + superUser + "," + user.isNieuw()).build();
         } catch (Exception e){
             return Response.status(Response.Status.FORBIDDEN).build();
         }
@@ -55,12 +56,12 @@ public class userResource {
 
 
     @POST
-    @Secured
+    @Secured(Role.SUPER_USER)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addUser(User user){
         try {
-            user.setWachtwoord(Security.getHashedPassword(user.getEmail(), user.getWachtwoord()));
+            System.out.println("add user: " + user.getWachtwoord());
             RepositoryService repInstance = RepositoryService.getInstance();
             repInstance.addObject(user);
             return Response.ok().build();
@@ -70,13 +71,19 @@ public class userResource {
     }
 
     @PUT
-    @Secured
+    @Secured(Role.SUPER_USER)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response editUser(User user){
+    public Response editUser(User changes){
         try {
-//            user.setWachtwoord(Security.getHashedPassword(user.getEmail(), user.getWachtwoord()));
+            System.out.println("editting user");
             RepositoryService repInstance = RepositoryService.getInstance();
+            User user = repInstance.getUserFromID(changes.getIdUser());
+            user.setAchternaam(changes.getAchternaam());
+            user.setNaam(changes.getNaam());
+            user.setTussenvoegsel(changes.getTussenvoegsel());
+            user.setEmail(changes.getEmail());
+            user.setSuperUser(changes.isSuperUser());
             repInstance.editObject(user);
             return Response.ok().build();
         } catch (Exception e){

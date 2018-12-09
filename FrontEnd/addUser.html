@@ -24,7 +24,7 @@
             <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">Gebruiker toevoegen</h2>
             </div>
-            <form id="addUser" method="post" autocomplete="off">
+            <form id="addUser" method="post" autocomplete="off" onsubmit="addUser()">
                 <table class="mdl-data-table mdl-js-data-table">
                     <tr>
                         <td colspan="3" class="titles">
@@ -90,7 +90,7 @@
                         <td>
                             <button type="submit"
                                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                                    id="add_button" tabindex="8">
+                                    id="add_button" tabindex="8" >
                                 Toevoegen
                             </button>
                         </td>

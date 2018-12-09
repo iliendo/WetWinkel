@@ -1,16 +1,11 @@
 
-
-document.getElementById("add_button").onclick = function () {
-    addUser();
-};
-
 function addUser() {
     const voornaam = document.getElementById("voornaam").value;
     const tussenvoegsel = document.getElementById("tussenvoegsel").value;
     const achternaam = document.getElementById("achternaam").value;
     const email = document.getElementById("email").value;
     const geboortedatum = new Date(document.getElementById("geboortedatum").value);
-    const isSuperuser = document.getElementById("superuser").options[document.getElementById("superuser").selectedIndex].value;
+    const isSuperuser = document.getElementById("superuser").options[document.getElementById("superuser").selectedIndex].value === "ja";
     const geboortejaar = geboortedatum.getFullYear();
     const standaardWachtwoord = voornaam + geboortejaar.toString();
 
@@ -22,7 +17,8 @@ function addUser() {
         'achternaam': achternaam,
         'email': email,
         'superUser': isSuperuser,
-        'wachtwoord': standaardWachtwoord
+        'wachtwoord': standaardWachtwoord,
+        'nieuw': true
     };
 
     fetch(url, {

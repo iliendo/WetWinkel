@@ -11,7 +11,7 @@ public class Security {
     private static final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public static String getHashedPassword(String email, final String wachtwoord) {
-        System.out.println(wachtwoord);
+        System.out.println("get hashed password: " + wachtwoord);
         byte[] salt = email.toLowerCase().getBytes();
         try {
             return hashPassword(wachtwoord, salt);
