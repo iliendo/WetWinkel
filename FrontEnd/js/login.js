@@ -35,6 +35,12 @@ function login(email, password) {
     }).then(function (value) {
 
         let valueArray = value.split(",");
+        let nieuw = valueArray[2];
+
+        if (nieuw){
+            showPasswordPrompt();
+            throw new Error("Account is nieuw, en moet een nieuw wachtwoord krijgen");
+        } else {
 
         localStorage.setItem("token", valueArray[0]);
         localStorage.setItem("superUser", valueArray[1]);
@@ -52,7 +58,7 @@ function login(email, password) {
             } else {
                 throw new Error();
             }
-        });
+        });}
     }).catch(function () {
         document.getElementById("lock-icon").hidden = false;
         document.getElementById("spinner").hidden = true;
@@ -65,6 +71,19 @@ function showLoginFailed() {
     const data = {message: 'Email of wachtwoord is verkeerd.', timeout: 5000};
     snackbarContainer.MaterialSnackbar.showSnackbar(data);
 
+}
+
+function setPassword() {
+    const password1 = document.getElementById("newPassword1").value;
+    const password2 = document.getElementById("newPassword2").value;
+    if(password1 === password2){
+        
+    }
+    document.getElementById("popup").style.display = "none";
+}
+
+function showPasswordPrompt() {
+    document.getElementById("popup").style.display = "block";
 }
 
 
