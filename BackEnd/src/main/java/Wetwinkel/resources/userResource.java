@@ -32,7 +32,7 @@ public class userResource {
             String token = issueToken(credentials.getEmail());
             boolean superUser = user.isSuperUser();
 
-            return Response.ok(token + "," + superUser + "," + user.isNieuw()).build();
+            return Response.ok(token + "," + superUser + "," + user.isNieuw() + "," + user.getIdUser()).build();
         } catch (Exception e){
             return Response.status(Response.Status.FORBIDDEN).build();
         }
@@ -84,6 +84,23 @@ public class userResource {
             user.setTussenvoegsel(changes.getTussenvoegsel());
             user.setEmail(changes.getEmail());
             user.setSuperUser(changes.isSuperUser());
+            repInstance.editObject(user);
+            return Response.ok().build();
+        } catch (Exception e){
+            return Response.serverError().build();
+        }
+    }
+
+    @PUT
+    @Path("/password")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response changePassword(User change){
+        try {
+            RepositoryService repInstance = RepositoryService.getInstance();
+            User user = repInstance.getUserFromID(change.getIdUser());
+            user.setWachtwoordWithoutHash(change.getWachtwoord());
+            user.setNieuw(false);
             repInstance.editObject(user);
             return Response.ok().build();
         } catch (Exception e){

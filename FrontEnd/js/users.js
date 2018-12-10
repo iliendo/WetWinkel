@@ -2,6 +2,11 @@ const table = document.getElementById('userTable').getElementsByTagName('tbody')
 
 generateTable();
 
+document.getElementById("addButton").onclick = function () {
+    console.log("addbutton");
+    window.open("addUser.html","_SELF")
+};
+
 function generateTable() {
     const url = "http://localhost:8080/wetwinkel_war/rest/user"; //TODO change this url when the server is online
 
@@ -67,7 +72,7 @@ function editUser(idUser) {
         return response.json(); //Let javascript know it gets json
     }).then(function (user) {
         html += '<div class="center">' +
-            '<form id="addUser" autocomplete="off" method="post" onsubmit="editUserInDB(' + user.idUser + ')">' +
+            '<form id="editUser" autocomplete="off" method="post" onsubmit="editUserInDB(' + user.idUser + ')">' +
             '<table class="mdl-data-table mdl-js-data-table">\n' +
         '                    <tr>\n' +
         '                        <td colspan="3" class="titles">\n' +
@@ -144,7 +149,7 @@ function editUser(idUser) {
         }
 
 
-            $('#addUser').on('submit', function(e) {
+            $('#editUser').on('submit', function(e) {
                 e.preventDefault();
             });
 
@@ -189,3 +194,4 @@ function editUserInDB(idUser) {
         }
     });
 }
+

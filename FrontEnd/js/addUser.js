@@ -1,3 +1,7 @@
+$('#addUser').on('submit', function(e) {
+    e.preventDefault();
+});
+
 
 function addUser() {
     const voornaam = document.getElementById("voornaam").value;
@@ -30,8 +34,7 @@ function addUser() {
         }
     }).then(function (response) {
         if (response.ok) {
-            //TODO show it worked (redirect to all users page)
-            console.log("its all good man");
+            window.open("users.html", "_SELF");
         } else {
             //TODO show it didnt work and why (add snackbar)
             console.log("didn't work")

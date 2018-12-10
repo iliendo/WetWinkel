@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/users.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        $(function(){
+        $(function () {
             $("#header").load("header.html");
         });
     </script>
@@ -18,19 +18,25 @@
 <div id="header"></div>
 <div id="main" class="demo-layout-transparent mdl-layout mdl-js-layout">
 
+<div class="center">
+    <!-- Colored FAB button with ripple -->
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored center" id="addButton">
+        <i class="material-icons">add</i>
+    </button>
+
     <table id="userTable" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp center">
         <thead>
-        <tr>
-            <th class="mdl-data-table__cell--non-numeric">Naam</th>
-            <th class="mdl-data-table__cell--non-numeric">Email</th>
-            <th class="mdl-data-table__cell--non-numeric">Super user</th>
-        </tr>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">Naam</th>
+                <th class="mdl-data-table__cell--non-numeric">Email</th>
+                <th class="mdl-data-table__cell--non-numeric">Super user</th>
+            </tr>
         </thead>
         <tbody>
         <!--Users are added with the javascript-->
         </tbody>
     </table>
-
+</div>
     <script src="js/users.js"></script>
 
 

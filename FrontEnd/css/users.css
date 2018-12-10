@@ -6,6 +6,15 @@ body {
     background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
 }
 
+button.center {
+    position: relative;
+    left: 50%;
+    right: 50%;
+    top: 55px;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+}
+
 .center {
     margin: auto;
 }
