@@ -1,14 +1,10 @@
-.demo-layout-transparent {
-    background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
-}
-body {
-    background: rgba(0, 0, 0, 0.0392156862745098) linear-gradient(-45deg, rgba(16, 0, 78, 0.3686274509803922), rgba(20, 4, 81, 0));
-}
+
+
 .demo-header .mdl-layout__header-row {
     padding-left: 40px;
 }
 body {
-    background-color: rgb(175, 131, 0);
+    background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
     font-family: 'Segoe UI', 'Roboto', Tahoma;
     display: flex;
     align-items: center;
@@ -19,6 +15,10 @@ body {
 
 h1, h2, h3, h4 {
     font-weight: 400;
+}
+
+.main-divje{
+    margin-top: 120px;
 }
 
 .wrapper {
@@ -73,15 +73,15 @@ ul.menu {
 }
 
 ul.menu li {
-    padding: 10px;
+    padding: 2px;
     padding-left: 15px;
-    color: #444;
+    color: black;
     cursor: pointer;
 }
 
 label {
 
-    color: #999999;
+    color: black;
     cursor: pointer;
 
 }
@@ -154,7 +154,7 @@ label {
 
     color: #fff;
     background:
-           brown;
+            mediumblue;
 }
 .mdl-card__title mdl-card--expand{
     color: mediumblue;
@@ -212,6 +212,6 @@ td#titles {
 }
 .cards{
     height: 90%;
-    width: 98%;
+    width: 99%;
     overflow: auto;
 }

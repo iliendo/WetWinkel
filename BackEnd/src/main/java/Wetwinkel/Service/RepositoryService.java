@@ -48,17 +48,16 @@ public class RepositoryService {
         em.close();
     }
 
-    public <T> void editObject(T object){
+    public <T> void editObject(T object) {
         EntityManager em = getEntityManager();
 
         em.getTransaction().begin();
         em.merge(object);
         em.getTransaction().commit();
-
         em.close();
     }
 
-    public List<Client> getListOfCllients(){
+    public List<Client> getListOfCllients() {
         EntityManager em = getEntityManager();
 
         List<Client> clients = em.createNamedQuery("Client.Get", Client.class).getResultList();
@@ -117,7 +116,7 @@ public class RepositoryService {
         return user;
     }
 
-    public User getUserFromID(int ID){
+    public User getUserFromID(int ID) {
         EntityManager em = entityManagerFactory.createEntityManager();
 
         TypedQuery<User> query = em.createNamedQuery("User.Id", User.class);

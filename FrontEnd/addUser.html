@@ -7,25 +7,15 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <link rel="stylesheet" href="css/addUser.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $("#header").load("header.html");
+        });
+    </script>
 </head>
 <body>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-
-            <span class="mdl-layout-title">Wetwinkel</span>
-
-            <div class="mdl-layout-spacer"></div>
-
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="cases.html">Home</a>
-                <a class="mdl-navigation__link" href="client.html">Cliënt Toevoegen</a>
-                <a class="mdl-navigation__link" href="addCase.html"> Case Toevoegen</a>
-                <a class="mdl-navigation__link" id="logout-button" href="index.html">Uitloggen</a>
-            </nav>
-        </div>
-    </header>
-</div>
+<div id="header" class="mdl-layout mdl-js-layout mdl-layout--fixed-header"></div>
 
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--3-col"></div>
@@ -34,7 +24,7 @@
             <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">Gebruiker toevoegen</h2>
             </div>
-            <form id="addUser" method="post" autocomplete="off">
+            <form id="addUser" method="post" autocomplete="off" onsubmit="addUser()">
                 <table class="mdl-data-table mdl-js-data-table">
                     <tr>
                         <td colspan="3" class="titles">
@@ -93,14 +83,14 @@
                     <tr>
                         <td>
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent "
-                                    id="cancel_button" tabindex="7">
+                                    id="cancel_button" tabindex="7" onclick="window.open('users.html', '_SELF')">
                                 Annuleren
                             </button>
                         </td>
                         <td>
                             <button type="submit"
                                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                                    id="add_button" tabindex="8">
+                                    id="add_button" tabindex="8" >
                                 Toevoegen
                             </button>
                         </td>

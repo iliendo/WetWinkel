@@ -1,8 +1,7 @@
+$('#addUser').on('submit', function(e) {
+    e.preventDefault();
+});
 
-
-document.getElementById("add_button").onclick = function () {
-    addUser();
-};
 
 function addUser() {
     const voornaam = document.getElementById("voornaam").value;
@@ -10,7 +9,7 @@ function addUser() {
     const achternaam = document.getElementById("achternaam").value;
     const email = document.getElementById("email").value;
     const geboortedatum = new Date(document.getElementById("geboortedatum").value);
-    const isSuperuser = document.getElementById("superuser").options[document.getElementById("superuser").selectedIndex].value;
+    const isSuperuser = document.getElementById("superuser").options[document.getElementById("superuser").selectedIndex].value === "ja";
     const geboortejaar = geboortedatum.getFullYear();
     const standaardWachtwoord = voornaam + geboortejaar.toString();
 
@@ -22,7 +21,8 @@ function addUser() {
         'achternaam': achternaam,
         'email': email,
         'superUser': isSuperuser,
-        'wachtwoord': standaardWachtwoord
+        'wachtwoord': standaardWachtwoord,
+        'nieuw': true
     };
 
     fetch(url, {
@@ -34,8 +34,7 @@ function addUser() {
         }
     }).then(function (response) {
         if (response.ok) {
-            //TODO show it worked (redirect to all cases page)
-            console.log("its all good man");
+            window.open("users.html", "_SELF");
         } else {
             //TODO show it didnt work and why (add snackbar)
             console.log("didn't work")

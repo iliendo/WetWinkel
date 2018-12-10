@@ -100,7 +100,10 @@ public class User {
         if (this.wachtwoord == null) {
             //TODO geef een error hier!
         }
+    }
 
+    public void setWachtwoordWithoutHash(String hashedPassword){
+        wachtwoord = hashedPassword;
     }
 
 

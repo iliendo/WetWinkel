@@ -7,75 +7,95 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <link rel="stylesheet" href="css/Cases.css">
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $("#header").load("header.html");
+        });
+    </script>
 </head>
 <body>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
+<div id="header" class="mdl-layout mdl-js-layout mdl-layout--fixed-header"></div>
 
-        <div class="mdl-layout__header-row">
-
-            <span class="mdl-layout-title">Wetwinkel</span>
-
-            <div class="mdl-layout-spacer"></div>
-
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="cases.html">Home</a>
-                <a class="mdl-navigation__link" href="client.html">Cliënt Toevoegen</a>
-                <a class="mdl-navigation__link" href="addCase.html"> Case Toevoegen</a>
-                <a class="mdl-navigation__link" id="logout-button" href="index.html">Uitloggen</a>
-            </nav>
-        </div>
-    </header>
     <div class="demo-layout-transparent mdl-layout main-divje">
         <div id="da">
-        <div class="wrapper" >
-            <div class="side">
-                <div class="head">
-                    <h3>Wetwinkel</h3>
+            <div class="wrapper">
+                <div class="side">
+                    <div class="head">
+                        <h3>Wetwinkel</h3>
+                    </div>
+
+                    <ul class="menu">
+                        <li><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="eigen-cases">
+                            <input type="checkbox" id="eigen-cases" class="mdl-switch__input" checked onclick="showCases()">
+                            <span class="mdl-switch__label">Alleen eigen Cliënten</span>
+                        </label>
+                        </li>
+
+                            <input class="mdl-cell search" type="text" id="zoeken"/>
+                            <button class="mdl-button" id="zoekButton" onclick="showCases()">
+                                zoek
+                            </button>
+
+                        <li><h5 class="Catogriën">Catogriën</h5></li>
+                        <li title="Strafrecht"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                      for="checkbox-Employment">
+                            <input type="checkbox" id="checkbox-Employment" class="mdl-checkbox__input" onclick="showCases()">
+                            <span class="mdl-checkbox__label">Employment</span>
+                        </label></li>
+                        <li title="Huurrecht"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                     for="checkbox-Administratieve">
+                            <input type="checkbox" id="checkbox-Administratieve" class="mdl-checkbox__input" onclick="showCases()" >
+                            <span class="mdl-checkbox__label">Administratieve</span>
+                        </label></li>
+                        <li title="Auto's"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                  for="checkbox-Rental">
+                            <input type="checkbox" id="checkbox-Rental" class="mdl-checkbox__input" onclick="showCases()"  >
+                            <span class="mdl-checkbox__label">Rental</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-Criminal">
+                            <input type="checkbox" id="checkbox-Criminal" class="mdl-checkbox__input" onclick="showCases()" >
+                            <span class="mdl-checkbox__label">Criminal</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-PFL">
+                            <input type="checkbox" id="checkbox-PFL" class="mdl-checkbox__input" onclick="showCases()" >
+                            <span class="mdl-checkbox__label">PFL</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-Social_Insurance_Law">
+                            <input type="checkbox" id="checkbox-Social_Insurance_Law" class="mdl-checkbox__input" onclick="showCases()" >
+                            <span class="mdl-checkbox__label">Social_Insurance_Law</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-Other_Civil">
+                            <input type="checkbox" id="checkbox-Other_Civil" class="mdl-checkbox__input" onclick="showCases()" >
+                            <span class="mdl-checkbox__label">Other_Civil</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-Immigration">
+                            <input type="checkbox" id="checkbox-Immigration" class="mdl-checkbox__input" onclick="showCases()" >
+                            <span class="mdl-checkbox__label">Immigration</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-Ohter_General">
+                            <input type="checkbox" id="checkbox-Ohter_General" class="mdl-checkbox__input" onclick="showCases()" >
+                            <span class="mdl-checkbox__label">Ohter_General</span>
+                        </label></li>
+                    </ul>
                 </div>
+                <div class="main-wrap">
+                    <br>
 
-               <!--<ul class="menu">-->
-                    <!--<li><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">-->
-                        <!--<input type="checkbox" id="switch-1" class="mdl-switch__input" checked>-->
-                        <!--<span class="mdl-switch__label">Alleen eigen Cliënten</span>-->
-                    <!--</label>-->
-                    <!--</li>-->
+                    <div class="cards mdl-grid" id="data"></div>
 
-                    <!--<div class="mdl-cell">-->
-                        <!--<input  class="mdl-cell search" type="text" placeholder="Search"/>-->
-                    <!--</div>-->
-                    <!--<li><h5 class="Catogriën">Catogriën</h5></li>-->
-                    <!--<li title="Strafrecht"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"-->
-                                                  <!--for="checkbox-1">-->
-                        <!--<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input">-->
-                        <!--<span class="mdl-checkbox__label">Strafrecht</span>-->
-                    <!--</label></li>-->
-                    <!--<li title="Huurrecht"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"-->
-                                                 <!--for="checkbox-2">-->
-                        <!--<input type="checkbox" id="checkbox-2" class="mdl-checkbox__input">-->
-                        <!--<span class="mdl-checkbox__label">Huurrecht</span>-->
-                    <!--</label></li>-->
-                    <!--<li title="Auto's"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"-->
-                                              <!--for="checkbox-3">-->
-                        <!--<input type="checkbox" id="checkbox-3" class="mdl-checkbox__input">-->
-                        <!--<span class="mdl-checkbox__label">Auto's</span>-->
-                    <!--</label></li>-->
-                    <!--<li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-4">-->
-                        <!--<input type="checkbox" id="checkbox-4" class="mdl-checkbox__input">-->
-                        <!--<span class="mdl-checkbox__label">Roof</span>-->
-                    <!--</label></li>-->
-                <!--</ul>-->
-            </div>
-            <div class="main-wrap" >
-                <br >
-                <div class="cards mdl-grid" id="data"></div>
-            </div>
+                </div>
             </div>
 
         </div>
     </div>
-<script src="js/cases.js"></script>
+</div>
+    <script src="js/cases.js"></script>
 </body>
 </html>
