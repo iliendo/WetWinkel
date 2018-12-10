@@ -19,20 +19,83 @@
 
     <div class="demo-layout-transparent mdl-layout main-divje">
         <div id="da">
-        <div class="wrapper" >
-            <div class="side">
-                <div class="head">
-                    <h3>Wetwinkel</h3>
+            <div class="wrapper">
+                <div class="side">
+                    <div class="head">
+                        <h3>Wetwinkel</h3>
+                    </div>
+
+                    <ul class="menu">
+                        <li><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+                            <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+                            <span class="mdl-switch__label">Alleen eigen Cliënten</span>
+                        </label>
+                        </li>
+
+                            <input class="mdl-cell search" type="text" id="zoeken"/>
+                            <button class="mdl-button" id="zoekButton" onclick="getSomeCases()">
+                                zoek
+                            </button>
+
+                        <li><h5 class="Catogriën">Catogriën</h5></li>
+                        <li title="Strafrecht"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                      for="checkbox-Employment">
+                            <input type="checkbox" id="checkbox-Employment" class="mdl-checkbox__input" onclick="filterEmployment()">
+                            <span class="mdl-checkbox__label">Employment</span>
+                        </label></li>
+                        <li title="Huurrecht"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                     for="checkbox-Administratieve">
+                            <input type="checkbox" id="checkbox-Administratieve" class="mdl-checkbox__input" onclick="filterAdministratieve()" >
+                            <span class="mdl-checkbox__label">Administratieve</span>
+                        </label></li>
+                        <li title="Auto's"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                  for="checkbox-Rental">
+                            <input type="checkbox" id="checkbox-Rental" class="mdl-checkbox__input" onclick="filterRental()"  >
+                            <span class="mdl-checkbox__label">Rental</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-Criminal">
+                            <input type="checkbox" id="checkbox-Criminal" class="mdl-checkbox__input" onclick="filterCriminal()" >
+                            <span class="mdl-checkbox__label">Criminal</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-PFL">
+                            <input type="checkbox" id="checkbox-PFL" class="mdl-checkbox__input" onclick="filterPFL()" >
+                            <span class="mdl-checkbox__label">PFL</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-Social_Insurance_Law">
+                            <input type="checkbox" id="checkbox-Social_Insurance_Law" class="mdl-checkbox__input" onclick="filterSocial_Insurance_Law()" >
+                            <span class="mdl-checkbox__label">Social_Insurance_Law</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-Other_Civil">
+                            <input type="checkbox" id="checkbox-Other_Civil" class="mdl-checkbox__input" onclick="filterOther_Civil()" >
+                            <span class="mdl-checkbox__label">Other_Civil</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-Immigration">
+                            <input type="checkbox" id="checkbox-Immigration" class="mdl-checkbox__input" onclick="filterImmigration()" >
+                            <span class="mdl-checkbox__label">Immigration</span>
+                        </label></li>
+                        <li title="Roof"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                                for="checkbox-Ohter_General">
+                            <input type="checkbox" id="checkbox-Ohter_General" class="mdl-checkbox__input" onclick="filterOhter_General()" >
+                            <span class="mdl-checkbox__label">Ohter_General</span>
+                        </label></li>
+                    </ul>
                 </div>
-            </div>
-            <div class="main-wrap" >
-                <br >
-                <div class="cards mdl-grid" id="data"></div>
-            </div>
+                <div class="main-wrap">
+                    <br>
+
+                    <div class="cards mdl-grid" id="data"></div>
+
+                </div>
             </div>
 
         </div>
     </div>
-<script src="js/cases.js"></script>
+</div>
+    <script src="js/cases.js"></script>
 </body>
 </html>
