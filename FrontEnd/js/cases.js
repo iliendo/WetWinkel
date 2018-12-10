@@ -21,6 +21,17 @@ let suit;
 let buttonName;
 let casesOfUser = [];
 
+const eigenCases = document.getElementById("eigen-cases");
+const employment = document.getElementById("checkbox-Employment");
+const adminastrive = document.getElementById("checkbox-Administratieve");
+const rental = document.getElementById("checkbox-Rental");
+const criminal = document.getElementById("checkbox-Criminal");
+const pfl = document.getElementById("checkbox-PFL");
+const socialInsurance = document.getElementById("checkbox-Social_Insurance_Law");
+const otherCivil = document.getElementById("checkbox-Other_Civil");
+const immigration = document.getElementById("checkbox-Immigration");
+const other = document.getElementById("checkbox-Ohter_General");
+
 let zoek = document.getElementById("zoeken");
 zoek.addEventListener("keyup", function (event) {
     event.preventDefault();
@@ -29,8 +40,6 @@ zoek.addEventListener("keyup", function (event) {
     }
 });
 
-
-// console.log("1");
 getCasesOfUser();
 
 function getCasesOfUser() {
@@ -50,29 +59,64 @@ function getCasesOfUser() {
     })
 }
 
-function getUserID() {
-    let url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/user";
-    fetch(url, {
-        method: 'GET',
-        headers: {
-            'authorization': 'bearer ' + localStorage.getItem("token")
-        }
-    }).then(function (response) {
-        return response.text()
-    }).then(function (value) {
-        console.log(value);
-        return value;
-    });
+function inSearch(suit) {
+
+    let caseInsensitiveSearchValue = getCaseInsensitiveRegex(zoek.value);
+    let passed = suit.naam.search(caseInsensitiveSearchValue) !== -1 || suit.rechtsgebied.search(caseInsensitiveSearchValue) !== -1 ||
+        suit.status.search(caseInsensitiveSearchValue) !== -1 || suit.feiten.search(caseInsensitiveSearchValue) !== -1 || suit.advies.search(caseInsensitiveSearchValue) !== -1 ||
+        zoek.value.search(getCaseInsensitiveRegex(suit.naam)) !== -1 || zoek.value.search(getCaseInsensitiveRegex(suit.rechtsgebied)) !== -1 ||
+        zoek.value.search(getCaseInsensitiveRegex(status)) !== -1 || zoek.value.search(getCaseInsensitiveRegex(feiten)) !== -1 || zoek.value.search(getCaseInsensitiveRegex(advies)) !== -1;
+
+
+    if (employment.checked) {
+        console.log("employment");
+        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Employment")) !== -1;
+    }
+    if (adminastrive.checked) {
+        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Administratieve")) !== -1;
+    }
+    if (rental.checked) {
+        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Rental")) !== -1;
+    }
+    if (criminal.checked) {
+        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Criminal")) !== -1;
+    }
+    if (pfl.checked) {
+        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("PFL")) !== -1;
+    }
+    if (socialInsurance.checked) {
+        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Social_Insurance_Law")) !== -1;
+    }
+    if (otherCivil.checked) {
+        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Other_Civil")) !== -1;
+    }
+    if (immigration.checked) {
+        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Immigration")) !== -1;
+    }
+    if (other.checked) {
+        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Other_General")) !== -1;
+    }
+
+
+    return passed;
+}
+
+function getCaseInsensitiveRegex(variable) {
+    regex = new RegExp(variable, 'i');
+
+    return regex;
 }
 
 function showCases() {
     let xmlhttp = new XMLHttpRequest();
-    let html = '';
+    let html2 = "";
     xmlhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             const myObj = JSON.parse(this.responseText);
-            for (a in myObj) {
-                suit = myObj[a];
+            const cases = myObj.filter(inSearch);
+
+            for (a in cases) {
+                suit = cases[a];
 
                 idCase = suit.idCase;
                 naam = suit.naam;
@@ -86,10 +130,8 @@ function showCases() {
                 idClient = suit.idClient;
                 buttonName = idCase;
 
-
-                console.log(idCase);
                 if (casesOfUser.indexOf(idCase) !== -1) {
-                    html += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
+                    html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
                         "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
                         "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
                         "    </div>\n" +
@@ -102,9 +144,8 @@ function showCases() {
                         "        </a>\n" +
                         "    </div>\n" +
                         "</div>";
-                    console.log("added with button");
-                } else {
-                    html += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
+                } else if (!eigenCases.checked) {
+                    html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
                         "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
                         "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
                         "    </div>\n" +
@@ -113,84 +154,11 @@ function showCases() {
                         "\n" +
                         "    </div>\n" +
                         "</div>";
-                    console.log("added without button");
-                }
-
-
-            }
-
-            document.getElementById("data").innerHTML = html;
-        }
-
-    };
-
-    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
-    xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-    xmlhttp.send();
-}
-
-//-------------------------------------------------------------------------
-function getSomeCases() {
-    let xmlhttp = new XMLHttpRequest();
-    let html2 = "";
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            const myObj = JSON.parse(this.responseText);
-            for (a in myObj) {
-                suit = myObj[a];
-
-                idCase = suit.idCase;
-                naam = suit.naam;
-                datum = suit.datum.toString().substr(0, 10);
-                rechtsgebied = suit.rechtsgebied;
-                status = suit.status;
-                feiten = suit.feiten;
-                advies = suit.advies;
-                laatsteUpdate = suit.laatsteUpdate;
-                gearchiveerd = suit.gearchiveerd;
-                idClient = suit.idClient;
-                buttonName = idCase;
-
-                if (naam.indexOf(zoek.value) != -1 || naam.indexOf(zoek.value.toUpperCase()) != -1 || naam.indexOf(zoek.value.toLowerCase()) != -1) {
-                    console.log("naam: " + naam);
-
-                    console.log("AA: " + a);
-
-                    console.log("zoeken: " + zoek.value);
-
-                    console.log(idCase);
-                    if (casesOfUser.indexOf(idCase) !== -1) {
-                        html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                            "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                            "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                            "    </div>\n" +
-                            "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                            " <br>      Status:  " + status +
-                            "    </div>\n" +
-                            "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                            "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
-                            "            View\n" +
-                            "        </a>\n" +
-                            "    </div>\n" +
-                            "</div>";
-                        console.log("added with button");
-                    } else {
-                        html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                            "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                            "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                            "    </div>\n" +
-                            "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                            "     <br>    Status: " + status +
-                            "\n" +
-                            "    </div>\n" +
-                            "</div>";
-                        console.log("added without button");
-                    }
                 }
             }
-
-            document.getElementById("data").innerHTML = html2;
         }
+
+        document.getElementById("data").innerHTML = html2;
 
     };
 
@@ -201,8 +169,6 @@ function getSomeCases() {
 
 }
 
-
-//-------------------------------------------------------------------------
 
 function getCase(idCase) {
     var xmlhttp = new XMLHttpRequest();
@@ -386,709 +352,3 @@ function fresh() {
     window.location.reload();
 
 }
-
-
-//-----------------------------------------------------------------------------
-// filter Employment
-let checkboxEmployment = document.getElementById("checkbox-Employment");
-
-function filterEmployment() {
-    if (checkboxEmployment.checked == true) {
-
-        let xmlhttp = new XMLHttpRequest();
-        let html3 = "";
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const myObj = JSON.parse(this.responseText);
-                for (a in myObj) {
-                    suit = myObj[a];
-
-                    idCase = suit.idCase;
-                    naam = suit.naam;
-                    datum = suit.datum.toString().substr(0, 10);
-                    rechtsgebied = suit.rechtsgebied;
-                    status = suit.status;
-                    feiten = suit.feiten;
-                    advies = suit.advies;
-                    laatsteUpdate = suit.laatsteUpdate;
-                    gearchiveerd = suit.gearchiveerd;
-                    idClient = suit.idClient;
-                    buttonName = idCase;
-
-                    if (rechtsgebied.indexOf("Employment") != -1) {
-
-                        console.log(idCase);
-                        if (casesOfUser.indexOf(idCase) !== -1) {
-                            html3 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                " <br>      Status:  " + status +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                                "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
-                                "            View\n" +
-                                "        </a>\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added with button");
-                        } else {
-                            html3 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                "     <br>    Status: " + status +
-                                "\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added without button");
-                        }
-                    }
-                }
-
-                document.getElementById("data").innerHTML = html3;
-            }
-
-        };
-
-        xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
-        xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-        xmlhttp.send();
-
-    } else {
-        showCases();
-    }
-}
-
-//-----------------------------------------------------------------------------
-// filter Administratieve
-let checkboxAdministratieve = document.getElementById("checkbox-Administratieve");
-
-function filterAdministratieve() {
-
-
-    if (checkboxAdministratieve.checked == true) {
-
-        let xmlhttp = new XMLHttpRequest();
-        let html4 = "";
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const myObj = JSON.parse(this.responseText);
-                for (a in myObj) {
-                    suit = myObj[a];
-
-                    idCase = suit.idCase;
-                    naam = suit.naam;
-                    datum = suit.datum.toString().substr(0, 10);
-                    rechtsgebied = suit.rechtsgebied;
-                    status = suit.status;
-                    feiten = suit.feiten;
-                    advies = suit.advies;
-                    laatsteUpdate = suit.laatsteUpdate;
-                    gearchiveerd = suit.gearchiveerd;
-                    idClient = suit.idClient;
-                    buttonName = idCase;
-
-                    if (rechtsgebied.indexOf("Administratieve") != -1) {
-
-                        console.log(idCase);
-                        if (casesOfUser.indexOf(idCase) !== -1) {
-                            html4 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                " <br>      Status:  " + status +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                                "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
-                                "            View\n" +
-                                "        </a>\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added with button");
-                        } else {
-                            html4 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                "     <br>    Status: " + status +
-                                "\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added without button");
-                        }
-                    }
-                }
-
-                document.getElementById("data").innerHTML = html4;
-            }
-
-        };
-
-        xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
-        xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-        xmlhttp.send();
-
-    } else {
-        showCases();
-    }
-
-}
-
-//-----------------------------------------------------------------------------
-// filter Rental
-//-----------------------------------------------------------------------------
-let checkboxRental = document.getElementById("checkbox-Rental");
-
-function filterRental() {
-
-
-    if (checkboxRental.checked == true) {
-
-        let xmlhttp = new XMLHttpRequest();
-        let html5 = "";
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const myObj = JSON.parse(this.responseText);
-                for (a in myObj) {
-                    suit = myObj[a];
-
-                    idCase = suit.idCase;
-                    naam = suit.naam;
-                    datum = suit.datum.toString().substr(0, 10);
-                    rechtsgebied = suit.rechtsgebied;
-                    status = suit.status;
-                    feiten = suit.feiten;
-                    advies = suit.advies;
-                    laatsteUpdate = suit.laatsteUpdate;
-                    gearchiveerd = suit.gearchiveerd;
-                    idClient = suit.idClient;
-                    buttonName = idCase;
-
-                    if (rechtsgebied.indexOf("Rental") != -1) {
-
-                        console.log(idCase);
-                        if (casesOfUser.indexOf(idCase) !== -1) {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                " <br>      Status:  " + status +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                                "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
-                                "            View\n" +
-                                "        </a>\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added with button");
-                        } else {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                "     <br>    Status: " + status +
-                                "\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added without button");
-                        }
-                    }
-                }
-
-                document.getElementById("data").innerHTML = html5;
-            }
-
-        };
-
-        xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
-        xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-        xmlhttp.send();
-
-    } else {
-        showCases();
-    }
-
-}
-//-----------------------------------------------------------------------------
-// filter checkbox-Criminal
-//-----------------------------------------------------------------------------
-
-let checkboxCriminal = document.getElementById("checkbox-Criminal");
-
-function filterCriminal() {
-
-
-    if (checkboxCriminal.checked == true) {
-
-        let xmlhttp = new XMLHttpRequest();
-        let html5 = "";
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const myObj = JSON.parse(this.responseText);
-                for (a in myObj) {
-                    suit = myObj[a];
-
-                    idCase = suit.idCase;
-                    naam = suit.naam;
-                    datum = suit.datum.toString().substr(0, 10);
-                    rechtsgebied = suit.rechtsgebied;
-                    status = suit.status;
-                    feiten = suit.feiten;
-                    advies = suit.advies;
-                    laatsteUpdate = suit.laatsteUpdate;
-                    gearchiveerd = suit.gearchiveerd;
-                    idClient = suit.idClient;
-                    buttonName = idCase;
-
-                    if (rechtsgebied.indexOf("Criminal") != -1) {
-
-                        console.log(idCase);
-                        if (casesOfUser.indexOf(idCase) !== -1) {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                " <br>      Status:  " + status +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                                "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
-                                "            View\n" +
-                                "        </a>\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added with button");
-                        } else {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                "     <br>    Status: " + status +
-                                "\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added without button");
-                        }
-                    }
-                }
-
-                document.getElementById("data").innerHTML = html5;
-            }
-
-        };
-
-        xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
-        xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-        xmlhttp.send();
-
-    } else {
-        showCases();
-    }
-
-}
-//-----------------------------------------------------------------------------
-// filter checkboxPFL
-//-----------------------------------------------------------------------------
-
-let checkboxPFL = document.getElementById("checkbox-PFL");
-
-function filterPFL() {
-
-
-    if (checkboxPFL.checked == true) {
-
-        let xmlhttp = new XMLHttpRequest();
-        let html5 = "";
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const myObj = JSON.parse(this.responseText);
-                for (a in myObj) {
-                    suit = myObj[a];
-
-                    idCase = suit.idCase;
-                    naam = suit.naam;
-                    datum = suit.datum.toString().substr(0, 10);
-                    rechtsgebied = suit.rechtsgebied;
-                    status = suit.status;
-                    feiten = suit.feiten;
-                    advies = suit.advies;
-                    laatsteUpdate = suit.laatsteUpdate;
-                    gearchiveerd = suit.gearchiveerd;
-                    idClient = suit.idClient;
-                    buttonName = idCase;
-
-                    if (rechtsgebied.indexOf("PFL") != -1) {
-
-                        console.log(idCase);
-                        if (casesOfUser.indexOf(idCase) !== -1) {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                " <br>      Status:  " + status +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                                "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
-                                "            View\n" +
-                                "        </a>\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added with button");
-                        } else {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                "     <br>    Status: " + status +
-                                "\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added without button");
-                        }
-                    }
-                }
-
-                document.getElementById("data").innerHTML = html5;
-            }
-
-        };
-
-        xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
-        xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-        xmlhttp.send();
-
-    } else {
-        showCases();
-    }
-
-}
-//-----------------------------------------------------------------------------
-// filter checkboxSocialInsuranceLaw
-//-----------------------------------------------------------------------------
-
-let checkboxSocialInsuranceLaw= document.getElementById("checkbox-Social_Insurance_Law");
-
-function filterSocial_Insurance_Law() {
-
-
-    if (checkboxSocialInsuranceLaw.checked == true) {
-
-        let xmlhttp = new XMLHttpRequest();
-        let html5 = "";
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const myObj = JSON.parse(this.responseText);
-                for (a in myObj) {
-                    suit = myObj[a];
-
-                    idCase = suit.idCase;
-                    naam = suit.naam;
-                    datum = suit.datum.toString().substr(0, 10);
-                    rechtsgebied = suit.rechtsgebied;
-                    status = suit.status;
-                    feiten = suit.feiten;
-                    advies = suit.advies;
-                    laatsteUpdate = suit.laatsteUpdate;
-                    gearchiveerd = suit.gearchiveerd;
-                    idClient = suit.idClient;
-                    buttonName = idCase;
-
-                    if (rechtsgebied.indexOf("Social_Insurance_Law") != -1) {
-
-                        console.log(idCase);
-                        if (casesOfUser.indexOf(idCase) !== -1) {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                " <br>      Status:  " + status +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                                "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
-                                "            View\n" +
-                                "        </a>\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added with button");
-                        } else {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                "     <br>    Status: " + status +
-                                "\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added without button");
-                        }
-                    }
-                }
-
-                document.getElementById("data").innerHTML = html5;
-            }
-
-        };
-
-        xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
-        xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-        xmlhttp.send();
-
-    } else {
-        showCases();
-    }
-
-}
-//-----------------------------------------------------------------------------
-// filter checkboxOtherCivil
-//-----------------------------------------------------------------------------
-
-let checkboxOtherCivil = document.getElementById("checkbox-Other_Civil");
-
-function filterOther_Civil() {
-
-
-    if (checkboxOtherCivil.checked == true) {
-
-        let xmlhttp = new XMLHttpRequest();
-        let html5 = "";
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const myObj = JSON.parse(this.responseText);
-                for (a in myObj) {
-                    suit = myObj[a];
-
-                    idCase = suit.idCase;
-                    naam = suit.naam;
-                    datum = suit.datum.toString().substr(0, 10);
-                    rechtsgebied = suit.rechtsgebied;
-                    status = suit.status;
-                    feiten = suit.feiten;
-                    advies = suit.advies;
-                    laatsteUpdate = suit.laatsteUpdate;
-                    gearchiveerd = suit.gearchiveerd;
-                    idClient = suit.idClient;
-                    buttonName = idCase;
-
-                    if (rechtsgebied.indexOf("Other_Civil") != -1) {
-
-                        console.log(idCase);
-                        if (casesOfUser.indexOf(idCase) !== -1) {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                " <br>      Status:  " + status +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                                "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
-                                "            View\n" +
-                                "        </a>\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added with button");
-                        } else {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                "     <br>    Status: " + status +
-                                "\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added without button");
-                        }
-                    }
-                }
-
-                document.getElementById("data").innerHTML = html5;
-            }
-
-        };
-
-        xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
-        xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-        xmlhttp.send();
-
-    } else {
-        showCases();
-    }
-
-}
-//-----------------------------------------------------------------------------
-// filter checkbox-Immigration
-//-----------------------------------------------------------------------------
-
-let checkboxImmigration = document.getElementById("checkbox-Immigration");
-
-function filterImmigration() {
-
-
-    if (checkboxImmigration.checked == true) {
-
-        let xmlhttp = new XMLHttpRequest();
-        let html5 = "";
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const myObj = JSON.parse(this.responseText);
-                for (a in myObj) {
-                    suit = myObj[a];
-
-                    idCase = suit.idCase;
-                    naam = suit.naam;
-                    datum = suit.datum.toString().substr(0, 10);
-                    rechtsgebied = suit.rechtsgebied;
-                    status = suit.status;
-                    feiten = suit.feiten;
-                    advies = suit.advies;
-                    laatsteUpdate = suit.laatsteUpdate;
-                    gearchiveerd = suit.gearchiveerd;
-                    idClient = suit.idClient;
-                    buttonName = idCase;
-
-                    if (rechtsgebied.indexOf("Immigration") != -1) {
-
-                        console.log(idCase);
-                        if (casesOfUser.indexOf(idCase) !== -1) {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                " <br>      Status:  " + status +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                                "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
-                                "            View\n" +
-                                "        </a>\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added with button");
-                        } else {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                "     <br>    Status: " + status +
-                                "\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added without button");
-                        }
-                    }
-                }
-
-                document.getElementById("data").innerHTML = html5;
-            }
-
-        };
-
-        xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
-        xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-        xmlhttp.send();
-
-    } else {
-        showCases();
-    }
-
-}
-//-----------------------------------------------------------------------------
-// filter checkboxOhter_General
-//-----------------------------------------------------------------------------
-
-let checkboxOhter_General = document.getElementById("checkbox-Ohter_General");
-
-function filterOhter_General() {
-
-
-    if (checkboxOhter_General.checked == true) {
-
-        let xmlhttp = new XMLHttpRequest();
-        let html5 = "";
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const myObj = JSON.parse(this.responseText);
-                for (a in myObj) {
-                    suit = myObj[a];
-
-                    idCase = suit.idCase;
-                    naam = suit.naam;
-                    datum = suit.datum.toString().substr(0, 10);
-                    rechtsgebied = suit.rechtsgebied;
-                    status = suit.status;
-                    feiten = suit.feiten;
-                    advies = suit.advies;
-                    laatsteUpdate = suit.laatsteUpdate;
-                    gearchiveerd = suit.gearchiveerd;
-                    idClient = suit.idClient;
-                    buttonName = idCase;
-
-                    if (rechtsgebied.indexOf("Ohter_General") != -1) {
-
-                        console.log(idCase);
-                        if (casesOfUser.indexOf(idCase) !== -1) {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                " <br>      Status:  " + status +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                                "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
-                                "            View\n" +
-                                "        </a>\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added with button");
-                        } else {
-                            html5 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                                "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                                "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                                "    </div>\n" +
-                                "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                                "     <br>    Status: " + status +
-                                "\n" +
-                                "    </div>\n" +
-                                "</div>";
-                            console.log("added without button");
-                        }
-                    }
-                }
-
-                document.getElementById("data").innerHTML = html5;
-            }
-
-        };
-
-        xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
-        xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-        xmlhttp.send();
-
-    } else {
-        showCases();
-    }
-
-}
-
-
-
-
-
-
-
-
