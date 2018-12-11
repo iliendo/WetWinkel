@@ -44,7 +44,7 @@ function werknemerDDL() {
  * Fills the client dropdown list with the client of the database
  */
 function clientDDL() {
-    let clienten = document.getElementById("client");
+    let clientenDl = document.getElementById("client");
     let url = "http://localhost:8080/wetwinkel_war/rest/case/clients";
 
     fetch(url, {
@@ -68,7 +68,7 @@ function clientDDL() {
             let txt = document.createTextNode(client);
             option.appendChild(txt);
             option.value = clienten[i].idClient;
-            clienten.add(option)
+            clientenDl.add(option)
         }
     });
 }
