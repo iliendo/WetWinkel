@@ -1,8 +1,8 @@
-package Wetwinkel.Service;
+package Wetwinkel.service;
 
-import Wetwinkel.Objects.Case;
-import Wetwinkel.Objects.User;
-import Wetwinkel.Objects.Client;
+import Wetwinkel.objects.Case;
+import Wetwinkel.objects.User;
+import Wetwinkel.objects.Client;
 
 import javax.persistence.*;
 import javax.ws.rs.core.Response;

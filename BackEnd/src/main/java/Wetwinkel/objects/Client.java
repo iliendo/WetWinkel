@@ -1,4 +1,4 @@
-package Wetwinkel.Objects;
+package Wetwinkel.objects;
 
 import javax.persistence.*;
 import java.util.List;

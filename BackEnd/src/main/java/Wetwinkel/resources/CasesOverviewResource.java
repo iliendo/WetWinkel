@@ -1,8 +1,8 @@
 package Wetwinkel.resources;
 
-import Wetwinkel.Objects.Case;
-import Wetwinkel.Objects.User;
-import Wetwinkel.Service.RepositoryService;
+import Wetwinkel.objects.Case;
+import Wetwinkel.objects.User;
+import Wetwinkel.service.RepositoryService;
 import Wetwinkel.util.Secured;
 
 import javax.ws.rs.*;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Path("/casesOverview")
 @Secured
-public class casesOverviewResource {
+public class CasesOverviewResource {
 
     @Context
     SecurityContext securityContext;

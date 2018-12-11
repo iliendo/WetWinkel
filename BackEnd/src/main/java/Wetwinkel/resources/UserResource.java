@@ -1,8 +1,8 @@
 package Wetwinkel.resources;
 
-import Wetwinkel.Objects.Credentials;
-import Wetwinkel.Objects.User;
-import Wetwinkel.Service.RepositoryService;
+import Wetwinkel.objects.Credentials;
+import Wetwinkel.objects.User;
+import Wetwinkel.service.RepositoryService;
 import Wetwinkel.util.Role;
 import Wetwinkel.util.Secured;
 import Wetwinkel.util.Security;
@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 @Path("/user")
-public class userResource {
+public class UserResource {
     private final int KEY_LIFETIME_HOURS = 4;
     private User user;
 
@@ -93,6 +93,7 @@ public class userResource {
 
     @PUT
     @Path("/password")
+    @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response changePassword(User change){
@@ -109,7 +110,7 @@ public class userResource {
     }
 
     @GET
-    @Secured
+    @Secured(Role.SUPER_USER)
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getAllUsers(){
         return RepositoryService.getInstance().getListOfUsers();
@@ -117,6 +118,7 @@ public class userResource {
 
     @GET
     @Path("/{idUser}")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public User getUser(@PathParam("idUser") int idUser){
         return RepositoryService.getInstance().getUserFromID(idUser);
