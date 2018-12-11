@@ -1,4 +1,4 @@
-package Wetwinkel.Objects;
+package Wetwinkel.objects;
 
 
 public class Credentials {

@@ -1,19 +1,15 @@
 package Wetwinkel.resources;
 
-import Wetwinkel.Objects.Case;
-import Wetwinkel.Objects.Client;
-import Wetwinkel.Objects.User;
-import Wetwinkel.Service.RepositoryService;
-import Wetwinkel.reference.Rechtsgebied;
-import Wetwinkel.util.Security;
+import Wetwinkel.objects.Case;
+import Wetwinkel.objects.Client;
+import Wetwinkel.objects.User;
+import Wetwinkel.service.RepositoryService;
+import Wetwinkel.reference.Jurisdiction;
 import com.google.gson.Gson;
 
-import javax.faces.annotation.RequestParameterMap;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -59,7 +55,7 @@ public class AddCaseResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/jurisdictie")
     public Response getJurisdictie() {
-        List<Rechtsgebied> rechtsgebied = Arrays.asList(Rechtsgebied.values());
+        List<Jurisdiction> rechtsgebied = Arrays.asList(Jurisdiction.values());
         String json = new Gson().toJson(rechtsgebied);
 
         return Response.ok(json).build();

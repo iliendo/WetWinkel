@@ -58,6 +58,7 @@ function login(email, password) {
         //when user is new show popup
         if (nieuw === "true") {
             showPasswordPrompt();
+            sessionStorage.setItem("token", valueArray[0]);
             sessionStorage.setItem("id", idUser);
             sessionStorage.setItem("email", email);
             throw new Error("Account is nieuw, en moet een nieuw wachtwoord krijgen");
@@ -106,7 +107,7 @@ function showPasswordPrompt() {
 function setPasswordInDb(password) {
     const email = sessionStorage.getItem("email");
     const idUser = sessionStorage.getItem("id");
-    sessionStorage.clear();
+
 
     let url = "http://localhost:8080/wetwinkel_war/rest/user/password"; //TODO change this url when the server is online
 
@@ -120,7 +121,8 @@ function setPasswordInDb(password) {
         method: 'PUT',
         body: JSON.stringify(data),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'authorization': 'bearer ' + sessionStorage.getItem("token")
         }
     }).then(function (response) {
         if (response.ok) {
@@ -132,6 +134,7 @@ function setPasswordInDb(password) {
         }
     }).finally(function () {
         hideSpinner();
+        sessionStorage.clear();
     });
 }
 

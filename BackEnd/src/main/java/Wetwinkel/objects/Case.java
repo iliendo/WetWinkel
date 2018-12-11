@@ -1,4 +1,4 @@
-package Wetwinkel.Objects;
+package Wetwinkel.objects;
 
 import Wetwinkel.reference.*;
 import org.hibernate.annotations.Generated;
@@ -6,8 +6,6 @@ import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @NamedQueries(value = {
@@ -27,7 +25,7 @@ public class Case {
     private Date datum;
 
     @Enumerated (EnumType.STRING)
-    private Rechtsgebied rechtsgebied;
+    private Jurisdiction rechtsgebied;
 
     @Enumerated (EnumType.STRING)
     private Status status;
@@ -39,7 +37,7 @@ public class Case {
     private Boolean gearchiveerd;
     private int idClient;
 
-    public Case(String naam, Date datum, Rechtsgebied rechtsgebied, Status status, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
+    public Case(String naam, Date datum, Jurisdiction rechtsgebied, Status status, String feiten, String advies, Date laatsteUpdate, Boolean gearchiveerd, int idClient) {
         this.naam = naam;
         this.datum = datum;
         this.rechtsgebied = rechtsgebied;
@@ -119,11 +117,11 @@ public class Case {
         this.idClient = idClient;
     }
 
-    public Rechtsgebied getRechtsgebied() {
+    public Jurisdiction getRechtsgebied() {
         return rechtsgebied;
     }
 
-    public void setRechtsgebied(Rechtsgebied rechtsgebied) {
+    public void setRechtsgebied(Jurisdiction rechtsgebied) {
         this.rechtsgebied = rechtsgebied;
     }
 

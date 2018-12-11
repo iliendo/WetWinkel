@@ -67,38 +67,41 @@ function inSearch(suit) {
         zoek.value.search(getCaseInsensitiveRegex(suit.naam)) !== -1 || zoek.value.search(getCaseInsensitiveRegex(suit.rechtsgebied)) !== -1 ||
         zoek.value.search(getCaseInsensitiveRegex(status)) !== -1 || zoek.value.search(getCaseInsensitiveRegex(feiten)) !== -1 || zoek.value.search(getCaseInsensitiveRegex(advies)) !== -1;
 
+    if (employment.checked || adminastrive.checked || rental.checked || criminal.checked || pfl.checked || socialInsurance.checked || otherCivil.checked || immigration.checked || other.checked) {
+        let inJurisdiction = false;
 
-    if (employment.checked) {
-        console.log("employment");
-        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Employment")) !== -1;
-    }
-    if (adminastrive.checked) {
-        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Administratieve")) !== -1;
-    }
-    if (rental.checked) {
-        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Rental")) !== -1;
-    }
-    if (criminal.checked) {
-        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Criminal")) !== -1;
-    }
-    if (pfl.checked) {
-        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("PFL")) !== -1;
-    }
-    if (socialInsurance.checked) {
-        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Social_Insurance_Law")) !== -1;
-    }
-    if (otherCivil.checked) {
-        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Other_Civil")) !== -1;
-    }
-    if (immigration.checked) {
-        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Immigration")) !== -1;
-    }
-    if (other.checked) {
-        passed = passed && suit.rechtsgebied.search(getCaseInsensitiveRegex("Other_General")) !== -1;
-    }
+        if (employment.checked) {
+            inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Employment")) !== -1;
+        }
+        if (adminastrive.checked) {
+            inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Administratieve")) !== -1;
+        }
+        if (rental.checked) {
+            inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Rental")) !== -1;
+        }
+        if (criminal.checked) {
+            inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Criminal")) !== -1;
+        }
+        if (pfl.checked) {
+            inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("PFL")) !== -1;
+        }
+        if (socialInsurance.checked) {
+            inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Social_Insurance_Law")) !== -1;
+        }
+        if (otherCivil.checked) {
+            inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Other_Civil")) !== -1;
+        }
+        if (immigration.checked) {
+            inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Immigration")) !== -1;
+        }
+        if (other.checked) {
+            inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Other_General")) !== -1;
+        }
 
-
-    return passed;
+        return passed && inJurisdiction;
+    } else {
+        return passed;
+    }
 }
 
 function getCaseInsensitiveRegex(variable) {

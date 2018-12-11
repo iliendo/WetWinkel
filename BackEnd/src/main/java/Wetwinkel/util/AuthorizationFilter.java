@@ -1,8 +1,7 @@
 package Wetwinkel.util;
 
-import Wetwinkel.Objects.User;
-import Wetwinkel.Service.RepositoryService;
-import io.jsonwebtoken.JwtParser;
+import Wetwinkel.objects.User;
+import Wetwinkel.service.RepositoryService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.IOException;
 

@@ -1,6 +1,6 @@
 package Wetwinkel.reference;
 
-public enum Rechtsgebied {
+public enum Jurisdiction {
     Employment,
     Administratieve,
     Rental,

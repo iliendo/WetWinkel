@@ -1,7 +1,7 @@
 package Wetwinkel.resources;
 
-import Wetwinkel.Objects.Client;
-import Wetwinkel.Service.RepositoryService;
+import Wetwinkel.objects.Client;
+import Wetwinkel.service.RepositoryService;
 import Wetwinkel.util.Secured;
 
 import javax.ws.rs.*;
@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 
 @Secured
 @Path("/client")
-public class clientResource {
+public class ClientResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

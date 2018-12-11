@@ -1,4 +1,4 @@
-package Wetwinkel.Objects;
+package Wetwinkel.objects;
 
 
 import Wetwinkel.util.Security;
