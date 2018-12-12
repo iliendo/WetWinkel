@@ -1,7 +1,3 @@
-For the installation manual, please click on the following link:
-
-https://drive.google.com/open?id=1YmJ25BWplDIn1iNgSwfT31cOwHxruRMRuEKB8YOjjYw
-
 The steps to undertake are easy to follow and execute. For this manual we assume the user already has intellij installed and running, and has been invited to the git to pull the project. This manual does not explain how to set up a working connection with the database, because this is already configured in the code and since the database is already online, does not require to be configured. We start off by downloading the project from git, once the project has been downloaded it’s time to get some configurations up and running. 
 
 Step one : 
