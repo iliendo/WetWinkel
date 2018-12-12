@@ -23,7 +23,14 @@ On the next screen we can configure the server. Set it up according to the next 
 ![iman5](/uploads/4d01bf8651829f3ee1a39357f35bd1be/iman5.png)
 
 Select the Payara folder as the Application Server and use ‘domain1’ as the Server Domain. Once that has been filled in it’s time to select the Artifact to be Deployed. Select the ‘Deployment’ tab at the top of the screen. At the right click on the ‘+’ symbol and select Artifact. Select the Wetwinkel:War artifact and finish up by pressing ‘OK’.
+
 ![iman6](/uploads/c1b0c4ba57428374e585ea9a9bdad71d/iman6.png)
 
 The server has now been configured.  
 
+Step three :
+The final and easiest step is to add the front-end. To import the front-end hover over ‘File’ and then over ‘New’, then click on ‘Module from Existing Sources...’ 
+
+![iman7](/uploads/386c82a52d3fe19bf0d72816a2b999f8/iman7.png)
+
+On the next screen select the ‘FrontEnd’ folder. Press ‘Next’ twice and then ‘Finish’, this will import the front-end and finalize the installation of the project. .
