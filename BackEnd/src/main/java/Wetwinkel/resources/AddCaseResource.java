@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class AddCaseResource {
     public Case addCase(Case suit, @QueryParam("userIds") List<Integer> userIds) {
         RepositoryService repInstance = RepositoryService.getInstance();
         repInstance.addObject(suit);
-        for (int userId: userIds) {
+        for (int userId : userIds) {
             User user = repInstance.getUserFromID(userId);
             user.addCase(suit);
             repInstance.editObject(user);
@@ -55,8 +56,13 @@ public class AddCaseResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/jurisdictie")
     public Response getJurisdictie() {
-        List<Jurisdiction> rechtsgebied = Arrays.asList(Jurisdiction.values());
-        String json = new Gson().toJson(rechtsgebied);
+
+        List<String> jusrisdictionDutch = new ArrayList<>();
+        List<Jurisdiction> jurisdictionList = Arrays.asList(Jurisdiction.values());
+
+        jurisdictionList.forEach(jurisdiction -> jusrisdictionDutch.add(jurisdiction.getDutch()));
+
+        String json = new Gson().toJson(jusrisdictionDutch);
 
         return Response.ok(json).build();
 

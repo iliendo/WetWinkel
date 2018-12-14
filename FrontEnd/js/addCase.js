@@ -85,6 +85,7 @@ function jurisdictieDDL() {
     }).then(function (response) {
         return response.json();
     }).then(function (value) {
+        console.log(value);
         for (let i = 0; i < value.length; i++) {
 
             let rechtsgebied = value[i];

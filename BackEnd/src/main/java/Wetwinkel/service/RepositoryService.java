@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class RepositoryService {
 
@@ -81,10 +82,11 @@ public class RepositoryService {
         Response r;
         em.getTransaction().begin();
         User user = em.find(User.class, email);
+
         if (user == null) {
             r = Response.status(Response.Status.NOT_FOUND).entity("User does not exist").build();
         } else {
-            em.remove(user);
+            em.remove(user); //TODO check if everything went as planned (cases link to user deleted)
             r = Response.status(Response.Status.ACCEPTED).entity("Deleted").build();
         }
         em.getTransaction().commit();
