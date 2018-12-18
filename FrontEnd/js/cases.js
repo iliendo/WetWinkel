@@ -323,11 +323,11 @@ function editCase(idCase) {
 }
 
 function mergeCase(idCase) {
-    let passFeiten = document.getElementById("feitenChange").value;
-    let passAdvies = document.getElementById("adviesChange").value;
+    const passFeiten = document.getElementById("feitenChange").value;
+    const passAdvies = document.getElementById("adviesChange").value;
 
-    var url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/updatecase/" + idCase; //TODO change this url when the server is online
-    var data = {
+    const url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/updatecase/" + idCase; //TODO change this url when the server is online
+    const data = {
         'feiten': passFeiten,
         'advies': passAdvies
     };

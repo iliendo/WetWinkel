@@ -22,10 +22,11 @@ function generateTable() {
             // Insert a row in the table at the last row
             let userRow = table.insertRow(table.rows.length);
             // Insert a cell in the row at index 0
-            let nameCell = userRow.insertCell(0);
-            let emailCell = userRow.insertCell(1);
-            let superUserCell = userRow.insertCell(2);
-            let editCell = userRow.insertCell(3);
+            let deleteCell = userRow.insertCell(0);
+            let nameCell = userRow.insertCell(1);
+            let emailCell = userRow.insertCell(2);
+            let superUserCell = userRow.insertCell(3);
+            let editCell = userRow.insertCell(4);
             let naam;
             let email = users[i].email;
             let superUser;
@@ -42,18 +43,21 @@ function generateTable() {
                 superUser = "nee";
             }
 
-            let button = document.createElement("input");
-            button.type = "button";
-            button.value = "bewerk";
-            button.className = "mdl-button mdl-js-button mdl-button--accent";
-            button.onclick = function () {
+            let editButton = document.createElement("input");
+            editButton.type = "button";
+            editButton.value = "bewerk";
+            editButton.className = "mdl-button mdl-js-button mdl-button--accent";
+            editButton.onclick = function () {
                 editUser(users[i].idUser);
             };
+
+            let deleteButton = document.createElement("input");
+            //TODO make working button
 
             nameCell.appendChild(document.createTextNode(naam));
             emailCell.appendChild(document.createTextNode(email));
             superUserCell.appendChild(document.createTextNode(superUser));
-            editCell.appendChild(button);
+            editCell.appendChild(editButton);
         }
     });
 
