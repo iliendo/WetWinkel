@@ -123,5 +123,12 @@ public class UserResource {
     public User getUser(@PathParam("idUser") int idUser){
         return RepositoryService.getInstance().getUserFromID(idUser);
     }
+
+    @DELETE
+    @Secured(Role.SUPER_USER)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void deleteUser(){
+
+    }
 }
 
