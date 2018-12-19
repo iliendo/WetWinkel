@@ -24,7 +24,7 @@ h1, h2, h3, h4 {
 .wrapper {
     width: 800px;
     height: 600px;
-    margin: 10px auto;
+    margin:  auto;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, .4);
     box-shadow: 8px 10px 66px 1px rgba(0, 0, 0, 0.4);
 }
@@ -51,6 +51,7 @@ ul {
     float: left;
     width: 250px;
     height: 100%;
+    margin:  auto;
 }
 
 
@@ -151,14 +152,11 @@ label {
     border-collapse: collapse;
 }
 .demo-card-square > .mdl-card__title {
-
+    background: url(https://cdn3.tz.nl/wp-content/uploads/xxl/2779_7636d618.jpg)center / cover;
     color: #fff;
-    background:
-            mediumblue;
+
 }
-.mdl-card__title mdl-card--expand{
-    color: mediumblue;
-}
+
 .search {
     width: 220px;
     padding: 8px 5px;
@@ -215,3 +213,9 @@ td#titles {
     width: 99%;
     overflow: auto;
 }
+.button{
+    color: black;
+    cursor: pointer;
+
+}
+
