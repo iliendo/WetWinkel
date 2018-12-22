@@ -32,7 +32,7 @@ const otherCivil = document.getElementById("checkbox-Other_Civil");
 const immigration = document.getElementById("checkbox-Immigration");
 const other = document.getElementById("checkbox-Ohter_General");
 
-let zoek = document.getElementById("zoeken");
+const zoek = document.getElementById("zoeken");
 zoek.addEventListener("keyup", function (event) {
     event.preventDefault();
     if (event.keyCode === 13) {
@@ -335,11 +335,11 @@ function editCase(idCase) {
 
 
 function mergeCase(idCase) {
-    let passFeiten = document.getElementById("feitenChange").value;
-    let passAdvies = document.getElementById("adviesChange").value;
+    const passFeiten = document.getElementById("feitenChange").value;
+    const passAdvies = document.getElementById("adviesChange").value;
 
-    var url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/updatecase/" + idCase; //TODO change this url when the server is online
-    var data = {
+    const url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/updatecase/" + idCase; //TODO change this url when the server is online
+    const data = {
         'feiten': passFeiten,
         'advies': passAdvies
     };
