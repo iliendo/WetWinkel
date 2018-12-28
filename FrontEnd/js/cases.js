@@ -32,7 +32,7 @@ const otherCivil = document.getElementById("checkbox-Other_Civil");
 const immigration = document.getElementById("checkbox-Immigration");
 const other = document.getElementById("checkbox-Ohter_General");
 
-let zoek = document.getElementById("zoeken");
+const zoek = document.getElementById("zoeken");
 zoek.addEventListener("keyup", function (event) {
     event.preventDefault();
     if (event.keyCode === 13) {
