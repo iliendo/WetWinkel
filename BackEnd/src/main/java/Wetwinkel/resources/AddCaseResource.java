@@ -62,7 +62,9 @@ public class AddCaseResource {
 
         jurisdictionList.forEach(jurisdiction -> jusrisdictionDutch.add(jurisdiction.getDutch()));
 
-        String json = new Gson().toJson(jusrisdictionDutch);
+        String json1 = new Gson().toJson(jusrisdictionDutch);
+        String json2 = new Gson().toJson(jurisdictionList);
+        String json = json1 + "-" + json2;
 
         return Response.ok(json).build();
 

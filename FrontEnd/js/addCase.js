@@ -83,16 +83,19 @@ function jurisdictieDDL() {
     fetch(url, {
         method: 'GET'
     }).then(function (response) {
-        return response.json();
+        return response.text();
     }).then(function (value) {
-        console.log(value);
-        for (let i = 0; i < value.length; i++) {
+        let jsons = value.split("-");
+        let dutch = JSON.parse(jsons[0]);
+        let constants = JSON.parse(jsons[1]);
+        for (let i = 0; i < dutch.length; i++) {
 
-            let rechtsgebied = value[i];
+            let jusridiction = dutch[i];
 
             let option = document.createElement("OPTION");
-            let txt = document.createTextNode(rechtsgebied);
+            let txt = document.createTextNode(jusridiction);
             option.appendChild(txt);
+            option.value = constants[i];
             jurisdictie.add(option);
         }
     });
