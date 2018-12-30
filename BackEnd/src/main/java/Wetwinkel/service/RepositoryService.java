@@ -87,7 +87,7 @@ public class RepositoryService {
             r = Response.status(Response.Status.NOT_FOUND).entity("User does not exist").build();
         } else {
             em.remove(user); //TODO check if everything went as planned (cases link to user deleted)
-            r = Response.status(Response.Status.ACCEPTED).entity("Deleted").build();
+            r = Response.status(Response.Status.OK).entity("Deleted").build();
         }
         em.getTransaction().commit();
         em.close();
