@@ -14,11 +14,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.*;
 
-@Secured
+
 @Path("/file")
 public class FileResource {
     /** The path to the folder where we want to store the uploaded files */
-    private static final String UPLOAD_FOLDER = "files/cases/";
+    private static final String UPLOAD_FOLDER = "../files/cases/";
 
     public FileResource() {
     }
@@ -37,9 +37,11 @@ public class FileResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(
             @FormDataParam("file") InputStream uploadedInputStream,
-            @FormDataParam("file") FormDataContentDisposition fileDetail,
-            @QueryParam("caseId") int caseId) {
+            @FormDataParam("file") FormDataContentDisposition fileDetail
+            ) {
+        int caseId = 1;
         String destFolder;
+        System.out.println("saving file");
 
         // check if all form parameters are provided
         if (uploadedInputStream == null || fileDetail == null)
@@ -54,7 +56,7 @@ public class FileResource {
                     .build();
         }
 
-        String uploadedFileLocation = destFolder + fileDetail.getFileName();
+        String uploadedFileLocation = destFolder + "/" + fileDetail.getFileName();
         try {
             saveToFile(uploadedInputStream, uploadedFileLocation);
         } catch (IOException e) {
@@ -97,9 +99,13 @@ public class FileResource {
      */
     private String createFolderIfNotExists(String dirName)
             throws SecurityException {
+        System.out.println(dirName);
         File theDir = new File(dirName);
+        System.out.println(theDir.getAbsolutePath());
+        System.out.println("creating folder");
         if (!theDir.exists()) {
-            theDir.mkdir();
+            boolean dirCreated = theDir.mkdirs();
+            System.out.println(dirCreated);
         }
         if (theDir.isDirectory()){
             return  theDir.getPath();

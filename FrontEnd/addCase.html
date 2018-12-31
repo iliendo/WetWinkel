@@ -24,7 +24,7 @@
             <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">Zaak toevoegen</h2>
             </div>
-            <form id=" addCase" method="post" autocomplete="off">
+            <form id="addCase" method="post" autocomplete="off">
                 <table class="mdl-data-table mdl-js-data-table">
                     <tr>
                         <td colspan="2" class="titles">
@@ -103,11 +103,12 @@
 
                         </td>
                     </tr>
+
                     <tr>
+
                         <td>
-                            <input formaction="http://localhost:8080/wetwinkel_war/rest/file" formenctype="multipart/form-data" type="file" id="files" name="files" multiple> <!-- TODO change url, and add css -->
+
                         </td>
-                        <td></td>
                     </tr>
 
                     <tr>
@@ -127,6 +128,17 @@
                     </tr>
                 </table>
             </form>
+
+            <!--<form id="fileForm" method="post" enctype="multipart/form-data" action="http://localhost:8080/wetwinkel_war/rest/file">-->
+                <!--<input type="file" id="files" name="files">-->
+                <!--<input type="submit">-->
+            <!--</form>-->
+
+            <form action="http://localhost:8080/wetwinkel_war/rest/file" method="post" enctype="multipart/form-data">
+                <input name="file" id="filename" type="file" /><br><br>
+                <button name="submit" type="submit">Upload</button>
+            </form>
+
         </div>
     </div>
     <div class="mdl-cell mdl-cell--2-col"></div>

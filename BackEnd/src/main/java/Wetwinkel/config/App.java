@@ -8,7 +8,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
 
-@ApplicationPath("rest")
+@ApplicationPath("/rest")
 public class App extends ResourceConfig {
 
 
