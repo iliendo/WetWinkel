@@ -1,8 +1,7 @@
 package Wetwinkel.resources;
 
 import Wetwinkel.util.Secured;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.glassfish.jersey.media.multipart.*;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -13,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.*;
+import java.util.List;
 
 
 @Path("/file")
@@ -36,35 +36,49 @@ public class FileResource {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(
-            @FormDataParam("file") InputStream uploadedInputStream,
-            @FormDataParam("file") FormDataContentDisposition fileDetail
+            @FormDataParam("files") List<FormDataBodyPart> bodyParts,
+            @FormDataParam("files") FormDataContentDisposition fileDispositions
             ) {
-        int caseId = 1;
-        String destFolder;
-        System.out.println("saving file");
 
-        // check if all form parameters are provided
-        if (uploadedInputStream == null || fileDetail == null)
-            return Response.status(400).entity("Invalid form data").build();
+        for (FormDataBodyPart bodyPart : bodyParts) {
+            /*
+             * Casting FormDataBodyPart to BodyPartEntity, which can give us
+             * InputStream for uploaded file
+             */
+            BodyPartEntity bodyPartEntity = (BodyPartEntity) bodyPart.getEntity();
+            ContentDisposition fileDetail = bodyPart.getContentDisposition();
+            InputStream uploadedInputStream = bodyPartEntity.getInputStream();
 
-        // create our destination folder, if it not exists
-        try {
-            destFolder = createFolderIfNotExists(UPLOAD_FOLDER + caseId);
-        } catch (SecurityException se) {
-            return Response.status(500)
-                    .entity("Can not create destination folder on server")
-                    .build();
-        }
+            int caseId = 1;
+            String destFolder;
+            System.out.println("saving file");
 
-        String uploadedFileLocation = destFolder + "/" + fileDetail.getFileName();
-        try {
-            saveToFile(uploadedInputStream, uploadedFileLocation);
-        } catch (IOException e) {
-            return Response.status(500).entity("Can not save file").build();
+            // check if all form parameters are provided
+            if (uploadedInputStream == null || fileDetail == null)
+                return Response.status(400).entity("Invalid form data").build();
+
+            // create our destination folder, if it not exists
+            try {
+                destFolder = createFolderIfNotExists(UPLOAD_FOLDER + caseId);
+            } catch (SecurityException se) {
+                return Response.status(500)
+                        .entity("Can not create destination folder on server")
+                        .build();
+            }
+
+            String uploadedFileLocation = destFolder + "/" + fileDetail.getFileName();
+            try {
+                saveToFile(uploadedInputStream, uploadedFileLocation);
+            } catch (IOException e) {
+                return Response.status(500).entity("Can not save file").build();
+            }
+
+
         }
 
         return Response.status(200)
-                .entity("File saved to " + uploadedFileLocation).build();
+                .entity("Files saved").build();
+
     }
 
     /**

@@ -143,33 +143,32 @@ function showCases() {
             idClient = suit.idClient;
             buttonName = idCase;
 
-                if (casesOfUser.indexOf(idCase) !== -1) {
-                    html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                        "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                        "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                        "    </div>\n" +
-                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                        " <br>      Status:  " + status +
-                      "</div>\n" +
-                        "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                        "        <a class=\"button\" onclick=getCase(" + buttonName + ") >\n" +
-                        "            Open\n" +
-                        "        </a>\n" +
-                        "    </div>\n" +
-                        "</div>";
-                } else if (!eigenCases.checked) {
-                    html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                        "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                        "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                        "    </div>\n" +
-                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                        "     <br>    Status: " + status +
+            if (casesOfUser.indexOf(idCase) !== -1) {
+                html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
+                    "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
+                    "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
+                    "    </div>\n" +
+                    "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
+                    " <br>      Status:  " + status +
+                    "</div>\n" +
+                    "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
+                    "        <a class=\"button\" onclick=getCase(" + buttonName + ") >\n" +
+                    "            Open\n" +
+                    "        </a>\n" +
+                    "    </div>\n" +
+                    "</div>";
+            } else if (!eigenCases.checked) {
+                html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
+                    "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
+                    "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
+                    "    </div>\n" +
+                    "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
+                    "     <br>    Status: " + status +
 
-                        "    </div>\n" +
-                        "</div>";
-                }
+                    "    </div>\n" +
+                    "</div>";
             }
-
+        }
 
 
         document.getElementById("data").innerHTML = html2;
@@ -205,49 +204,58 @@ function getCase(idCase) {
         idClient = myObj.idClient;
 
 
-        html1 += "<br>\n" +
-            "<br>\n" +
-            "<br>\n" +
+        html1 += '<br>\n' +
+            '<br>\n' +
+            '<br>\n' +
 
-            "<div>\n" +
-            "    <div class=\"mdl-grid\">\n" +
-            "\n" +
-            "            <div class=\"demo-card-wide mdl-card mdl-shadow--2dp mdl-grid \">\n" +
-            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-            "                    <label class=\"label \">Client naam:</label>\n" +
-            "                    <h6 id=\"clientNaam\">" + naam + "</h6>\n" +
-            "                </div>\n" +
-            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-            "                    <label class=\"label\">Aanmaak datum van de zaak:</label>\n" +
-            "                    <h6 id=\"datum\">" + datum + "</h6>\n" +
-            "                </div>\n" +
-            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-            "                    <label class=\"label \">Status van de zaak:</label>\n" +
-            "                    <h6 id=\"status\">" + status + "</h6>\n" +
-            "                </div>\n" +
-            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-            "                    <label class=\"label\">Rechtsgebied:</label>\n" +
-            "                    <h6 id=\"rechtsgebied\">" + rechtsgebied + "</h6>\n" +
-            "                </div>\n" +
-            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-            "                    <label class=\"label\">Feiten:</label>\n" +
-            "                    <h6 id=\"feiten\">" + feiten + "</h6>\n" +
-            "                </div>\n" +
-            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-            "                    <label class=\"label\">Advies:</label>\n" +
-            "                    <h6 id=\"advise\">" + advies + "</h6>\n" +
-            "                </div>\n" +
-            "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-            "        <a class=\"button\" onclick=editCase(" + idCase + ") >\n" +
-            "            Bewerken\n" +
-            "        </a>\n" +
-            "        <a class=\"button\" id=\"goback\" onClick=fresh() >\n" +
-            "            Terug\n" +
-            "        </a>\n" +
-            "    </div>\n" +
-            "            </div>\n" +
-            "    </div>\n" +
-            "</div>";
+            '<div>\n' +
+            '    <div class="mdl-grid">\n' +
+            '\n' +
+            '            <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-grid ">\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label ">Client naam:</label>\n' +
+            '                    <h6 id="clientNaam">' + naam + '</h6>\n' +
+            '                </div>\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label">Aanmaak datum van de zaak:</label>\n' +
+            '                    <h6 id="datum">' + datum + '</h6>\n' +
+            '                </div>\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label ">Status van de zaak:</label>\n' +
+            '                    <h6 id="status">' + status + '</h6>\n' +
+            '                </div>\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label">Rechtsgebied:</label>\n' +
+            '                    <h6 id="rechtsgebied">' + rechtsgebied + '</h6>\n' +
+            '                </div>\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label">Feiten:</label>\n' +
+            '                    <h6 id="feiten">' + feiten + '</h6>\n' +
+            '                </div>\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label">Advies:</label>\n' +
+            '                    <h6 id="advise">' + advies + '</h6>\n' +
+            '                </div>\n' +
+            '    <div class="mdl-card__actions mdl-card--border">\n' +
+            '        <a class="button" onclick=editCase(' + idCase + ') >\n' +
+            '            Bewerken\n' +
+            '        </a>\n' +
+            '        <a class="button" id="goback" onClick=fresh() >\n' +
+            '            Terug\n' +
+            '        </a>\n' +
+            '    </div>\n' +
+            '            </div>\n' +
+            '    </div>\n' +
+            '<div>' +
+            '<h2>Bestanden</h2>' +
+            '<div id="fileDiv"></div>' +
+            '<form action="http://localhost:8080/wetwinkel_war/rest/file" method="post" enctype="multipart/form-data">\n' +
+            '                <input class="inputfile" name="files" id="files" type="file" multiple\>' +
+            '<label for="files">kies bestanden om toe te voegen</label><br>\n' +
+            // '                <button name="submit" type="submit">Voeg toe</button>\n' +
+            '            </form>' +
+            '</div>' +
+            '</div>';
 
         document.getElementById("data").innerHTML = html1;
 
