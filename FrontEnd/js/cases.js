@@ -32,7 +32,7 @@ const otherCivil = document.getElementById("checkbox-Other_Civil");
 const immigration = document.getElementById("checkbox-Immigration");
 const other = document.getElementById("checkbox-Ohter_General");
 
-let zoek = document.getElementById("zoeken");
+const zoek = document.getElementById("zoeken");
 zoek.addEventListener("keyup", function (event) {
     event.preventDefault();
     if (event.keyCode === 13) {
@@ -56,6 +56,7 @@ function getCasesOfUser() {
             casesOfUser.push(cases[suit]['idCase']);
         }
         showCases();
+
     })
 }
 
@@ -111,223 +112,242 @@ function getCaseInsensitiveRegex(variable) {
 }
 
 function showCases() {
-    let xmlhttp = new XMLHttpRequest();
+
     let html2 = "";
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            const myObj = JSON.parse(this.responseText);
-            const cases = myObj.filter(inSearch);
+    const url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases"; //TODO change this url when the server is online
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem("token")
+        }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (cases) {
 
-            for (a in cases) {
-                suit = cases[a];
+        const myObj = cases;
+        cases = myObj.filter(inSearch);
 
-                idCase = suit.idCase;
-                naam = suit.naam;
-                datum = suit.datum.toString().substr(0, 10);
-                rechtsgebied = suit.rechtsgebied;
-                status = suit.status;
-                feiten = suit.feiten;
-                advies = suit.advies;
-                laatsteUpdate = suit.laatsteUpdate;
-                gearchiveerd = suit.gearchiveerd;
-                idClient = suit.idClient;
-                buttonName = idCase;
 
-                if (casesOfUser.indexOf(idCase) !== -1) {
-                    html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                        "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                        "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                        "    </div>\n" +
-                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                        " <br>      Status:  " + status +
-                        "    </div>\n" +
-                        "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                        "        <a class=\"mdl-button--colored mdl-js-button\" onclick=getCase(" + buttonName + ") >\n" +
-                        "            View\n" +
-                        "        </a>\n" +
-                        "    </div>\n" +
-                        "</div>";
-                } else if (!eigenCases.checked) {
-                    html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
-                        "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
-                        "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
-                        "    </div>\n" +
-                        "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
-                        "     <br>    Status: " + status +
-                        "\n" +
-                        "    </div>\n" +
-                        "</div>";
-                }
+        for (a in cases) {
+            suit = cases[a];
+
+            idCase = suit.idCase;
+            naam = suit.naam;
+            datum = suit.datum.toString().substr(0, 10);
+            rechtsgebied = suit.rechtsgebied;
+            status = suit.status;
+            feiten = suit.feiten;
+            advies = suit.advies;
+            laatsteUpdate = suit.laatsteUpdate;
+            gearchiveerd = suit.gearchiveerd;
+            idClient = suit.idClient;
+            buttonName = idCase;
+
+            if (casesOfUser.indexOf(idCase) !== -1) {
+                html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
+                    "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
+                    "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
+                    "    </div>\n" +
+                    "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
+                    " <br>      Status:  " + status +
+                    "</div>\n" +
+                    "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
+                    "        <a class=\"button\" onclick=getCase(" + buttonName + ") >\n" +
+                    "            Open\n" +
+                    "        </a>\n" +
+                    "    </div>\n" +
+                    "</div>";
+            } else if (!eigenCases.checked) {
+                html2 += "<div class=\"demo-card-square mdl-card mdl-shadow--2dp mdl-cell mdl-cell--1-col\">\n" +
+                    "    <div class=\"mdl-card__title mdl-card--expand\">\n" +
+                    "        <h2 class=\"mdl-card__title-text\" >" + naam + "</h2>\n" +
+                    "    </div>\n" +
+                    "    <div class=\"mdl-card__supporting-text\" id=\"card-text\">\n Rechtsgebied: " + rechtsgebied +
+                    "     <br>    Status: " + status +
+
+                    "    </div>\n" +
+                    "</div>";
             }
         }
 
+
         document.getElementById("data").innerHTML = html2;
 
-    };
-
-    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/allcases", true);
-    xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-    xmlhttp.send();
+    })
 
 
 }
 
-
 function getCase(idCase) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var myObj = JSON.parse(this.responseText);
 
-
-            idCase = myObj.idCase;
-            naam = myObj.naam;
-            datum = myObj.datum.toString().substr(0, 10);
-            rechtsgebied = myObj.rechtsgebied;
-            status = myObj.status;
-            feiten = myObj.feiten;
-            advies = myObj.advies;
-            laatsteUpdate = myObj.laatsteUpdate;
-            gearchiveerd = myObj.gearchiveerd;
-            idClient = myObj.idClient;
-
-
-            html1 += "<br>\n" +
-                "<br>\n" +
-                "<br>\n" +
-
-                "<div>\n" +
-                "    <div class=\"mdl-grid\">\n" +
-                "\n" +
-                "            <div class=\"demo-card-wide mdl-card mdl-shadow--2dp mdl-grid \">\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label \">Client naam:</label>\n" +
-                "                    <h6 id=\"clientNaam\">" + naam + "</h6>\n" +
-                "                </div>\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label\">Aanmaak datum van de zaak:</label>\n" +
-                "                    <h6 id=\"datum\">" + datum + "</h6>\n" +
-                "                </div>\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label \">Status van de zaak:</label>\n" +
-                "                    <h6 id=\"status\">" + status + "</h6>\n" +
-                "                </div>\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label\">Rechtsgebied:</label>\n" +
-                "                    <h6 id=\"rechtsgebied\">" + rechtsgebied + "</h6>\n" +
-                "                </div>\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label\">Feiten:</label>\n" +
-                "                    <h6 id=\"feiten\">" + feiten + "</h6>\n" +
-                "                </div>\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label\">Advies:</label>\n" +
-                "                    <h6 id=\"advise\">" + advies + "</h6>\n" +
-                "                </div>\n" +
-                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                "        <a class=\"mdl-button--colored mdl-js-button\" onclick=editCase(" + idCase + ") >\n" +
-                "            Bewerken\n" +
-                "        </a>\n" +
-                "        <a class=\"mdl-button--colored mdl-js-button\" id=\"goback\" onClick=fresh() >\n" +
-                "            Terug\n" +
-                "        </a>\n" +
-                "    </div>\n" +
-                "            </div>\n" +
-                "    </div>\n" +
-                "</div>";
-
-            document.getElementById("data").innerHTML = html1;
+    let html2 = "";
+    const url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/" + idCase; //TODO change this url when the server is online
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem("token")
         }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (cases) {
+        const myObj = cases;
 
-    };
+        idCase = myObj.idCase;
+        naam = myObj.naam;
+        datum = myObj.datum.toString().substr(0, 10);
+        rechtsgebied = myObj.rechtsgebied;
+        status = myObj.status;
+        feiten = myObj.feiten;
+        advies = myObj.advies;
+        laatsteUpdate = myObj.laatsteUpdate;
+        gearchiveerd = myObj.gearchiveerd;
+        idClient = myObj.idClient;
 
-    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/" + idCase, true);
-    xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-    xmlhttp.send();
+
+        html1 += '<br>\n' +
+            '<br>\n' +
+            '<br>\n' +
+
+            '<div>\n' +
+            '    <div class="mdl-grid">\n' +
+            '\n' +
+            '            <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-grid ">\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label ">Client naam:</label>\n' +
+            '                    <h6 id="clientNaam">' + naam + '</h6>\n' +
+            '                </div>\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label">Aanmaak datum van de zaak:</label>\n' +
+            '                    <h6 id="datum">' + datum + '</h6>\n' +
+            '                </div>\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label ">Status van de zaak:</label>\n' +
+            '                    <h6 id="status">' + status + '</h6>\n' +
+            '                </div>\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label">Rechtsgebied:</label>\n' +
+            '                    <h6 id="rechtsgebied">' + rechtsgebied + '</h6>\n' +
+            '                </div>\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label">Feiten:</label>\n' +
+            '                    <h6 id="feiten">' + feiten + '</h6>\n' +
+            '                </div>\n' +
+            '                <div class="mdl-cell mdl-cell--6-col">\n' +
+            '                    <label class="label">Advies:</label>\n' +
+            '                    <h6 id="advise">' + advies + '</h6>\n' +
+            '                </div>\n' +
+            '    <div class="mdl-card__actions mdl-card--border">\n' +
+            '        <a class="button" onclick=editCase(' + idCase + ') >\n' +
+            '            Bewerken\n' +
+            '        </a>\n' +
+            '        <a class="button" id="goback" onClick=fresh() >\n' +
+            '            Terug\n' +
+            '        </a>\n' +
+            '    </div>\n' +
+            '            </div>\n' +
+            '    </div>\n' +
+            '<div>' +
+            '<h2>Bestanden</h2>' +
+            '<div id="fileDiv"></div>' +
+            '<form action="http://localhost:8080/wetwinkel_war/rest/file" method="post" enctype="multipart/form-data">\n' +
+            '                <input class="inputfile" name="files" id="files" type="file" multiple\>' +
+            '<label for="files">kies bestanden om toe te voegen</label><br>\n' +
+            // '                <button name="submit" type="submit">Voeg toe</button>\n' +
+            '            </form>' +
+            '</div>' +
+            '</div>';
+
+        document.getElementById("data").innerHTML = html1;
+
+    })
+
+
 }
 
 function editCase(idCase) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var myObj = JSON.parse(this.responseText);
 
-
-            toUseIdCase = idCase;
-            naam = myObj.naam;
-            datum = myObj.datum.toString().substr(0, 10);
-            rechtsgebied = myObj.rechtsgebied;
-            status = myObj.status;
-            feiten = myObj.feiten;
-            advies = myObj.advies;
-            laatsteUpdate = myObj.laatsteUpdate;
-            gearchiveerd = myObj.gearchiveerd;
-            idClient = myObj.idClient;
-
-            html1 = "<br>\n" +
-                "<br>\n" +
-                "<br>\n" +
-
-                "<div>\n" +
-                "    <div class=\"mdl-grid\">\n" +
-                "\n" +
-                "        <div class=\"mdl-cell mdl-cell--7-col\">\n" +
-                "            <div class=\"demo-card-wide mdl-card mdl-shadow--2dp mdl-grid \">\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label \">Client naam:</label>\n" +
-                "                    <h6 id=\"naamChange\">" + naam + "</h6>\n" +
-                "                </div>\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label\">Aanmaak datum van de zaak:</label>\n" +
-                "                    <h6 id=\"datumChange\">" + datum + "</h6>\n" +
-                "                </div>\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label \">Status van de zaak:</label>\n" +
-                "                    <h6 id=\"statusChange\">" + status + "</h6>\n" +
-                "                </div>\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label\">Rechtsgebied:</label>\n" +
-                "                    <h6 id=\"rechtsgebiedChange\">" + rechtsgebied + "</h6>\n" +
-                "                </div>\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label\">Feiten:</label>\n" +
-                "                    <textarea class =\"mdl-textfield__input\" id=\"feitenChange\">" + feiten + "</textarea>\n" +
-                "                </div>\n" +
-                "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
-                "                    <label class=\"label\">Advies:</label>\n" +
-                "                    <textarea class =\"mdl-textfield__input\" id=\"adviesChange\">" + advies + "</textarea>\n" +
-                "                </div>\n" +
-                "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
-                "        <a class=\"mdl-button--colored mdl-js-button\" onclick=mergeCase(toUseIdCase) >\n" + //
-                "            Opslaan\n" +
-                "        </a>\n" +
-                "        <a class=\"mdl-button--colored mdl-js-button\" id=\"goback\" onClick=fresh() >\n" +
-                "            Terug\n" +
-                "        </a>\n" +
-                "    </div>\n" +
-                "            </div>\n" +
-                "        </div>\n" +
-                "        <div class=\"mdl-cell mdl-cell--2-col\"></div>\n" +
-                "    </div>\n" +
-                "</div>";
-
-
-            document.getElementById("data").innerHTML = html1;
+    const url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/" + idCase; //TODO change this url when the server is online
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem("token")
         }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (cases) {
+        const myObj = cases;
 
-    };
+        toUseIdCase = idCase;
+        naam = myObj.naam;
+        datum = myObj.datum.toString().substr(0, 10);
+        rechtsgebied = myObj.rechtsgebied;
+        status = myObj.status;
+        feiten = myObj.feiten;
+        advies = myObj.advies;
+        laatsteUpdate = myObj.laatsteUpdate;
+        gearchiveerd = myObj.gearchiveerd;
+        idClient = myObj.idClient;
 
-    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/" + idCase, true);
-    xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
-    xmlhttp.send();
+        html1 = "<br>\n" +
+            "<br>\n" +
+            "<br>\n" +
+
+            "<div>\n" +
+            "    <div class=\"mdl-grid\">\n" +
+            "\n" +
+            "        <div class=\"mdl-cell mdl-cell--7-col\">\n" +
+            "            <div class=\"demo-card-wide mdl-card mdl-shadow--2dp mdl-grid \">\n" +
+            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
+            "                    <label class=\"label \">Client naam:</label>\n" +
+            "                    <h6 id=\"naamChange\">" + naam + "</h6>\n" +
+            "                </div>\n" +
+            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
+            "                    <label class=\"label\">Aanmaak datum van de zaak:</label>\n" +
+            "                    <h6 id=\"datumChange\">" + datum + "</h6>\n" +
+            "                </div>\n" +
+            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
+            "                    <label class=\"label \">Status van de zaak:</label>\n" +
+            "                    <h6 id=\"statusChange\">" + status + "</h6>\n" +
+            "                </div>\n" +
+            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
+            "                    <label class=\"label\">Rechtsgebied:</label>\n" +
+            "                    <h6 id=\"rechtsgebiedChange\">" + rechtsgebied + "</h6>\n" +
+            "                </div>\n" +
+            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
+            "                    <label class=\"label\">Feiten:</label>\n" +
+            "                    <textarea class =\"mdl-textfield__input\" id=\"feitenChange\">" + feiten + "</textarea>\n" +
+            "                </div>\n" +
+            "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
+            "                    <label class=\"label\">Advies:</label>\n" +
+            "                    <textarea class =\"mdl-textfield__input\" id=\"adviesChange\">" + advies + "</textarea>\n" +
+            "                </div>\n" +
+            "    <div class=\"mdl-card__actions mdl-card--border\">\n" +
+            "        <a class=\"button\" onclick=mergeCase(toUseIdCase) >\n" + //
+            "            Opslaan\n" +
+            "        </a>\n" +
+            "        <a class=\"button\" id=\"goback\" onClick=fresh() >\n" +
+            "            Terug\n" +
+            "        </a>\n" +
+            "    </div>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <div class=\"mdl-cell mdl-cell--2-col\"></div>\n" +
+            "    </div>\n" +
+            "</div>";
+
+
+        document.getElementById("data").innerHTML = html1;
+
+    })
 }
 
-function mergeCase(idCase) {
-    let passFeiten = document.getElementById("feitenChange").value;
-    let passAdvies = document.getElementById("adviesChange").value;
 
-    var url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/updatecase/" + idCase; //TODO change this url when the server is online
-    var data = {
+function mergeCase(idCase) {
+    const passFeiten = document.getElementById("feitenChange").value;
+    const passAdvies = document.getElementById("adviesChange").value;
+
+    const url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/updatecase/" + idCase; //TODO change this url when the server is online
+    const data = {
         'feiten': passFeiten,
         'advies': passAdvies
     };
@@ -355,3 +375,5 @@ function fresh() {
     window.location.reload();
 
 }
+
+

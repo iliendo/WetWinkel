@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class AddCaseResource {
     public Case addCase(Case suit, @QueryParam("userIds") List<Integer> userIds) {
         RepositoryService repInstance = RepositoryService.getInstance();
         repInstance.addObject(suit);
-        for (int userId: userIds) {
+        for (int userId : userIds) {
             User user = repInstance.getUserFromID(userId);
             user.addCase(suit);
             repInstance.editObject(user);
@@ -32,11 +33,7 @@ public class AddCaseResource {
         return suit;
     }
 
-    @GET
-    public Response openCasePage() throws URISyntaxException {
-        URI uri = new URI("http://localhost:8080/wetwinkel_war/addObject.html"); //TODO change when server goes live
-        return Response.temporaryRedirect(uri).build();
-    }
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -55,8 +52,15 @@ public class AddCaseResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/jurisdictie")
     public Response getJurisdictie() {
-        List<Jurisdiction> rechtsgebied = Arrays.asList(Jurisdiction.values());
-        String json = new Gson().toJson(rechtsgebied);
+
+        List<String> jusrisdictionDutch = new ArrayList<>();
+        List<Jurisdiction> jurisdictionList = Arrays.asList(Jurisdiction.values());
+
+        jurisdictionList.forEach(jurisdiction -> jusrisdictionDutch.add(jurisdiction.getDutch()));
+
+        String json1 = new Gson().toJson(jusrisdictionDutch);
+        String json2 = new Gson().toJson(jurisdictionList);
+        String json = json1 + "-" + json2;
 
         return Response.ok(json).build();
 

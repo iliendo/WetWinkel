@@ -3,9 +3,15 @@ werknemerDDL();
 clientDDL();
 jurisdictieDDL();
 
-document.getElementById("add_button").onclick = function () {
+// document.getElementById("add_button").onclick = function () {
+//     addCase();
+// };
+
+$('#addCase').submit(function (e) {
+    e.preventDefault();
     addCase();
-};
+    return false;
+});
 
 function werknemerDDL() {
     let werknemer = document.getElementsByClassName("werknemer");
@@ -83,15 +89,19 @@ function jurisdictieDDL() {
     fetch(url, {
         method: 'GET'
     }).then(function (response) {
-        return response.json();
+        return response.text();
     }).then(function (value) {
-        for (let i = 0; i < value.length; i++) {
+        let jsons = value.split("-");
+        let dutch = JSON.parse(jsons[0]);
+        let constants = JSON.parse(jsons[1]);
+        for (let i = 0; i < dutch.length; i++) {
 
-            let rechtsgebied = value[i];
+            let jusridiction = dutch[i];
 
             let option = document.createElement("OPTION");
-            let txt = document.createTextNode(rechtsgebied);
+            let txt = document.createTextNode(jusridiction);
             option.appendChild(txt);
+            option.value = constants[i];
             jurisdictie.add(option);
         }
     });
@@ -99,15 +109,18 @@ function jurisdictieDDL() {
 
 function addCase() {
 
-    let naam = document.getElementById("client").value;
-    let rechtsgebied = document.getElementById("jurisdictie").value;
-    let status = "open";
-    let feiten = document.getElementById("feiten").value;
-    let advies = document.getElementById("advies").value;
-    let gearchiveerd = false;
-    let idClient = document.getElementById("client");
-    let user1 = document.getElementById("werknemer1").value;
-    let user2 = document.getElementById("werknemer2").value;
+    document.getElementById("fileForm").submit(); //upload chosen files
+    // console.log("henk");
+
+    const naam = document.getElementById("client").value;
+    const rechtsgebied = document.getElementById("jurisdictie").value;
+    const status = "OPEN";
+    const feiten = document.getElementById("feiten").value;
+    const advies = document.getElementById("advies").value;
+    const gearchiveerd = false;
+    const idClient = document.getElementById("client");
+    const user1 = document.getElementById("werknemer1").value;
+    const user2 = document.getElementById("werknemer2").value;
 
     let url = "http://localhost:8080/wetwinkel_war/rest/case?userIds=" + user1 + "&userIds=" + user2; //TODO change this url when the server is online
 
