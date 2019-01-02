@@ -1,7 +1,13 @@
 const email = document.getElementById("email");
 
-function resetPassword(email){
-    const url = "http://localhost:8080/wetwinkel_war/rest/mail/mailaings";
+document.getElementById("reset-button").onclick = function () {
+    resetPassword(email.value);
+    showSpinner();
+};
+
+function resetPassword(email) {
+    const data = {'email': email};
+    const url = "http://localhost:8080/wetwinkel_war/rest/mail/mailcheck";
     fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -10,9 +16,11 @@ function resetPassword(email){
         }
     }).then(function (response) {
         if (response.ok) {
-            showNotification("Wachtwoord is hersteld")
+            showNotification("Email met instructies is naar het emailadres toe gestuurd")
+            hideSpinner();
         } else {
             showNotification("Email bestaat niet")
+            hideSpinner();
         }
     });
 }
@@ -21,4 +29,14 @@ function showNotification(message) {
     const snackbarContainer = document.getElementById("warning-popup");
     const data = {message: message, timeout: 5000};
     snackbarContainer.MaterialSnackbar.showSnackbar(data);
+}
+
+function showSpinner() {
+    document.getElementById("lock-icon").hidden = true;
+    document.getElementById("spinner").hidden = false;
+}
+
+function hideSpinner() {
+    document.getElementById("lock-icon").hidden = false;
+    document.getElementById("spinner").hidden = true;
 }
