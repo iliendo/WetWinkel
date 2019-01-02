@@ -1,16 +1,24 @@
 const email = document.getElementById("email");
 
-//when enter is pressed it will automatically fire the click event of the login button
-email.addEventListener("keyup", function (event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("reset-button").click();
-        showNotification("Wachtwoord is gereset");
-    }
-});
+function resetPassword(email){
+    const url = "http://localhost:8080/wetwinkel_war/rest/mail/mailaings";
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(function (response) {
+        if (response.ok) {
+            showNotification("Wachtwoord is hersteld")
+        } else {
+            showNotification("Email bestaat niet")
+        }
+    });
+}
 
 function showNotification(message) {
-    const snackbarContainer = document.getElementById("reset-warning");
+    const snackbarContainer = document.getElementById("warning-popup");
     const data = {message: message, timeout: 5000};
     snackbarContainer.MaterialSnackbar.showSnackbar(data);
 }
