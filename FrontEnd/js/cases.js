@@ -1,3 +1,5 @@
+
+
 let idCase = 0;
 let naam = null;
 let datum = null;
@@ -20,6 +22,7 @@ let a;
 let suit;
 let buttonName;
 let casesOfUser = [];
+
 
 const eigenCases = document.getElementById("eigen-cases");
 const employment = document.getElementById("checkbox-Employment");
@@ -249,15 +252,17 @@ function getCase(idCase) {
             '<div>' +
             '<h2>Bestanden</h2>' +
             '<div id="fileDiv"></div>' +
-            '<form action="http://localhost:8080/wetwinkel_war/rest/file" method="post" enctype="multipart/form-data">\n' +
-            '                <input class="inputfile" name="files" id="files" type="file" multiple\>' +
-            '<label for="files">kies bestanden om toe te voegen</label><br>\n' +
-            // '                <button name="submit" type="submit">Voeg toe</button>\n' +
-            '            </form>' +
+            '<form method="post" enctype="multipart/form-data" name="fileForm">\n' +
+            '                <input class="inputfile" name="files" id="files" type="file" onchange="uploadFiles(' + idCase + ')" multiple\>' +
+            '<label for="files" >\n' +
+            '  Voeg bestanden toe</label><br>\n' +
+            '</form>' +
             '</div>' +
             '</div>';
 
+        //action="http://localhost:8080/wetwinkel_war/rest/file" method="post" enctype="multipart/form-data"
         document.getElementById("data").innerHTML = html1;
+
 
     })
 
@@ -373,6 +378,38 @@ function mergeCase(idCase) {
 
 function fresh() {
     window.location.reload();
+
+}
+
+function uploadFiles(idCase) {
+
+    let fileForm = document.forms.namedItem("fileForm");
+
+    const url = "http://localhost:8080/wetwinkel_war/rest/file"; //TODO change this url when the server is online
+    let data;
+    data = new FormData(fileForm);
+    data.append("idCase", idCase);
+
+    for (var [key, value] of data.entries()) {
+        console.log(key, value);
+    }
+
+
+    fetch(url, {
+        method: 'POST',
+        body: data,
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem("token")
+        }
+    }).then(function (response) {
+        if (response.ok) {
+            //TODO rerun file showing function
+        } else {
+           //TODO show it failed
+        }
+    });
+
+
 
 }
 

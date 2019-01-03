@@ -1,12 +1,10 @@
 package Wetwinkel.resources;
 
 import Wetwinkel.util.Secured;
+import com.google.gson.Gson;
 import org.glassfish.jersey.media.multipart.*;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -36,6 +34,7 @@ public class FileResource {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(
+            @FormDataParam("idCase") int caseId,
             @FormDataParam("files") List<FormDataBodyPart> bodyParts,
             @FormDataParam("files") FormDataContentDisposition fileDispositions
             ) {
@@ -49,7 +48,6 @@ public class FileResource {
             ContentDisposition fileDetail = bodyPart.getContentDisposition();
             InputStream uploadedInputStream = bodyPartEntity.getInputStream();
 
-            int caseId = 1;
             String destFolder;
             System.out.println("saving file");
 
@@ -76,8 +74,7 @@ public class FileResource {
 
         }
 
-        return Response.status(200)
-                .entity("Files saved").build();
+        return Response.ok().build();
 
     }
 
