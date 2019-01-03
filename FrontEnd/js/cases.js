@@ -252,18 +252,25 @@ function downloadDocument(idCase, fileName) {
     fetch(url, {
         method: 'GET',
         headers: {
-            'authorization': 'bearer ' + localStorage.getItem("token"),
-            'Content-Type': 'application/download'
+            'authorization': 'bearer ' + localStorage.getItem("token")
         }
     }).then(function (response) {
         return response.blob();
-    }).then(function (file) {
-        console.log(file.type);
+    }).then(function (blob) {
 
-        // let fileReader = new FileReader();
-        // let file2 = fileReader.readAsBinaryString(file);
-        // let fileURL = URL.createObjectURL(file2);
-        // document.getElementById('download').src = file2;
+        let file = new File([blob], fileName);
+        let fileURL = URL.createObjectURL(file);
+        console.log(file.name);
+        console.log(fileURL);
+        var a = document.createElement("a");
+        a.href = fileURL;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
 
     });
 }
@@ -355,8 +362,7 @@ function getCase(idCase) {
             '  Voeg bestanden toe</label><br>\n' +
             '</form>' +
             '</div>' +
-            '</div>' +
-            '<iframe id="download" style="display:none;"></iframe>';
+            '</div>';
 
         document.getElementById("data").innerHTML = html1;
 
@@ -488,10 +494,6 @@ function uploadFiles(idCase) {
     let data;
     data = new FormData(fileForm);
     data.append("idCase", idCase);
-
-    for (var [key, value] of data.entries()) {
-        console.log(key, value);
-    }
 
 
     fetch(url, {

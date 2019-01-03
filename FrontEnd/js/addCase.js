@@ -3,10 +3,6 @@ werknemerDDL();
 clientDDL();
 jurisdictieDDL();
 
-// document.getElementById("add_button").onclick = function () {
-//     addCase();
-// };
-
 
 
 function werknemerDDL() {
