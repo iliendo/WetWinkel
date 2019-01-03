@@ -18,7 +18,7 @@ h1, h2, h3, h4 {
 }
 
 #da{
-    margin-top: 120px;
+    margin: auto;
 }
 
 .wrapper {
@@ -93,32 +93,19 @@ label {
 }
 
 .mdl-data-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    top: 90px;
+    /*font-family: arial, sans-serif;*/
+    /*border-collapse: collapse;*/
+    /*top: 90px;*/
     /*height: 380px;*/
+    margin: auto;
 }
 
 .mdl-grid{
     width: 750px;
     height: 530px;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
+    margin: auto;
 
 }
-
-/*.mdl-button{*/
-    /*width: 175px;*/
-    /*top: 85px;*/
-    /*left: 480px;*/
-/*}*/
-
 
 .fixed_header{
     width: 660px;

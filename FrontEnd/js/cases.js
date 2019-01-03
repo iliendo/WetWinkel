@@ -219,7 +219,7 @@ function loadDocuments(idCase) {
         for (let fileNamesKey in fileNames) {
             let fileName = fileNames[fileNamesKey];
 
-            let fileRow = newTable.insertRow(table.rows.length);
+            let fileRow = newTable.insertRow(newTable.rows.length);
             let nameCell = fileRow.insertCell(0);
             let deleteCell = fileRow.insertCell(1);
 
@@ -305,7 +305,8 @@ function getCase(idCase) {
             '<br>\n' +
             '<br>\n' +
 
-            '<div>\n' +
+            '<div>' +
+            '<h2>Zaak</h2>\n' +
             '    <div class="mdl-grid">\n' +
             '\n' +
             '            <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-grid ">\n' +
