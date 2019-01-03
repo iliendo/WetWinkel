@@ -7,7 +7,8 @@ document.getElementById("reset-button").onclick = function () {
 
 function resetPassword(email) {
     const data = {'email': email};
-    const url = "http://localhost:8080/wetwinkel_war/rest/mail/mailcheck";
+    const url = "http://localhost:8080/wetwinkel_war/rest/mail/mailcheck"; //TODO change this url when the server is online
+
     fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
