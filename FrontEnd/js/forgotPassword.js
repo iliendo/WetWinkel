@@ -1,11 +1,11 @@
 const email = document.getElementById("email");
 
 document.getElementById("reset-button").onclick = function () {
-    resetPassword(email.value);
+    checkEmail(email.value);
     showSpinner();
 };
 
-function resetPassword(email) {
+function checkEmail(email) {
     const data = {'email': email};
     const url = "http://localhost:8080/wetwinkel_war/rest/mail/mailcheck"; //TODO change this url when the server is online
 
