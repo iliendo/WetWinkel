@@ -2,13 +2,21 @@ package Wetwinkel.config;
 
 
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.server.ResourceConfig;
 
-@ApplicationPath("rest")
-public class App extends Application {
+
+import javax.ws.rs.ApplicationPath;
+
+@ApplicationPath("/rest")
+public class App extends ResourceConfig {
+
+
 
     public App(){
-
+        packages("Wetwinkel.util", "Wetwinkel.resources");
+        register(MultiPartFeature.class);
     }
+
+
 }

@@ -17,14 +17,14 @@ h1, h2, h3, h4 {
     font-weight: 400;
 }
 
-.main-divje{
-    margin-top: 120px;
+#da{
+    margin: auto;
 }
 
 .wrapper {
     width: 800px;
     height: 600px;
-    margin: 10px auto;
+    margin:  auto;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, .4);
     box-shadow: 8px 10px 66px 1px rgba(0, 0, 0, 0.4);
 }
@@ -51,6 +51,7 @@ ul {
     float: left;
     width: 250px;
     height: 100%;
+    margin:  auto;
 }
 
 
@@ -92,32 +93,19 @@ label {
 }
 
 .mdl-data-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    top: 90px;
-    height: 380px;
+    /*font-family: arial, sans-serif;*/
+    /*border-collapse: collapse;*/
+    /*top: 90px;*/
+    /*height: 380px;*/
+    margin: auto;
 }
 
 .mdl-grid{
     width: 750px;
     height: 530px;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
+    margin: auto;
 
 }
-
-.mdl-button{
-    width: 175px;
-    top: 85px;
-    left: 480px;
-}
-
 
 .fixed_header{
     width: 660px;
@@ -151,14 +139,11 @@ label {
     border-collapse: collapse;
 }
 .demo-card-square > .mdl-card__title {
-
+    background: url(https://cdn3.tz.nl/wp-content/uploads/xxl/2779_7636d618.jpg)center / cover;
     color: #fff;
-    background:
-            mediumblue;
+
 }
-.mdl-card__title mdl-card--expand{
-    color: mediumblue;
-}
+
 .search {
     width: 220px;
     padding: 8px 5px;
@@ -177,7 +162,7 @@ body {
 }
 
 .mdl-data-table.mdl-js-data-table{
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .demo-card-wide.mdl-card {
@@ -215,3 +200,30 @@ td#titles {
     width: 99%;
     overflow: auto;
 }
+.button{
+    color: black;
+    cursor: pointer;
+
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+
