@@ -8,15 +8,16 @@ function checkPassword() {
     const password1 = document.getElementById("newPassword1").value;
     const password2 = document.getElementById("newPassword2").value;
     const code = document.getElementById("code").value;
-    const verzondenCode = 0;
-    
-    if (password1 === password2 && password1 !== "") {
+    const receivedCode = "0";
+
+    if(code !== receivedCode){
+        showNotification("Doe normaal a Niffo")
+    } else if (password1 === password2 && password1 !== "") {
         //setPasswordInDb(password1);
         showNotification('HUTS');
     } else {
         showNotification('De twee wachtwoorden komen niet overeen.');
     }
-
 }
 
 function showNotification(message) {
