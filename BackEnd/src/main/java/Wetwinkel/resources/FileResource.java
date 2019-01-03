@@ -1,6 +1,7 @@
 package Wetwinkel.resources;
 
 import Wetwinkel.util.Secured;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.google.gson.Gson;
 import org.glassfish.jersey.media.multipart.*;
 
@@ -10,9 +11,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
-
+@Secured
 @Path("/file")
 public class FileResource {
     /** The path to the folder where we want to store the uploaded files */
@@ -123,5 +125,55 @@ public class FileResource {
         } else {
             return null;
         }
+    }
+
+    @GET
+    @Path("/{idCase}")
+    public Response listFilesAndFolders(@PathParam("idCase") int idCase){
+
+        String directoryName = UPLOAD_FOLDER + "/" + idCase;
+
+        File directory = new File(directoryName);
+
+
+
+        //get all the files from a directory
+
+        File[] fList = directory.listFiles();
+        List<String> nameList = new ArrayList<>();
+
+
+        for (File file : fList){
+            nameList.add(file.getName());
+        }
+        String json = new Gson().toJson(nameList);
+
+        return Response.ok(json).build();
+
+    }
+
+    @DELETE
+    @Path("/{caseId}/{fileName}")
+    public Response deleteFile(@PathParam("caseId") int caseId, @PathParam("fileName") String fileName){
+        String filePath = UPLOAD_FOLDER + "/" + caseId + "/" + fileName;
+
+        File file = new File(filePath);
+
+        if (file.delete()){
+            return Response.ok().build();
+        } else {
+            return Response.status(409).build();
+        }
+    }
+
+    @Path("/{caseId}/{fileName}")
+    @GET
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response getFile(@PathParam("caseId") int caseId, @PathParam("fileName") String fileName) throws Exception {
+        String filePath = UPLOAD_FOLDER + "/" + caseId + "/" + fileName;
+
+        File file = new File(filePath);
+
+        return Response.ok(file).build();
     }
 }

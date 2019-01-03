@@ -17,7 +17,7 @@ h1, h2, h3, h4 {
     font-weight: 400;
 }
 
-.main-divje{
+#da{
     margin-top: 120px;
 }
 
@@ -96,7 +96,7 @@ label {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     top: 90px;
-    height: 380px;
+    /*height: 380px;*/
 }
 
 .mdl-grid{
@@ -113,11 +113,11 @@ label {
 
 }
 
-.mdl-button{
-    width: 175px;
-    top: 85px;
-    left: 480px;
-}
+/*.mdl-button{*/
+    /*width: 175px;*/
+    /*top: 85px;*/
+    /*left: 480px;*/
+/*}*/
 
 
 .fixed_header{
@@ -175,7 +175,7 @@ body {
 }
 
 .mdl-data-table.mdl-js-data-table{
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .demo-card-wide.mdl-card {
