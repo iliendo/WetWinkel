@@ -1,5 +1,3 @@
-
-
 let idCase = 0;
 let naam = null;
 let datum = null;
@@ -222,24 +220,32 @@ function loadDocuments(idCase) {
             let fileRow = newTable.insertRow(newTable.rows.length);
             let nameCell = fileRow.insertCell(0);
             let deleteCell = fileRow.insertCell(1);
+            let downloadCell = fileRow.insertCell(2);
 
             let deleteButton = document.createElement("button");
             deleteButton.className = "mdl-button mdl-js-button mdl-button--icon mdl-button--colored";
             deleteButton.innerHTML = '<i class="material-icons">delete</i>';
+            let downloadButton = document.createElement("button");
+            downloadButton.className = "mdl-button mdl-js-button mdl-button--icon mdl-button--colored btn-circle-download";
+            downloadButton.innerHTML = '<i class="material-icons">print</i>';
+            downloadButton.onclick = function (e) {
+
+                    e.preventDefault();
+                    downloadDocument(idCase, fileName);
+
+            };
 
             deleteButton.onclick = function () {
-                if(confirm("Weet je zeker dat je " + fileName + " wilt verwijderen?")){
+                if (confirm("Weet je zeker dat je " + fileName + " wilt verwijderen?")) {
                     deleteFile(fileName, idCase);
                 }
             };
 
             nameCell.appendChild(document.createTextNode(fileName));
             deleteCell.appendChild(deleteButton);
+            downloadCell.appendChild(downloadButton);
 
-            fileRow.ondblclick = function (e) {
-                e.preventDefault();
-                downloadDocument(idCase, fileName);
-            }
+
         }
         table.parentNode.replaceChild(newTable, table);
     })
@@ -267,7 +273,7 @@ function downloadDocument(idCase, fileName) {
         a.download = fileName;
         document.body.appendChild(a);
         a.click();
-        setTimeout(function() {
+        setTimeout(function () {
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
         }, 0);
@@ -305,10 +311,11 @@ function getCase(idCase) {
             '<br>\n' +
             '<br>\n' +
 
-            '<div>' +
-            '<h2>Zaak</h2>\n' +
+            '<div class="mdl-grid">' +
+
+            '<h4 class="mdl-cell mdl-cell--10-col">Zaak van ' + naam + ' </h4>\n' +
+
             '    <div class="mdl-grid">\n' +
-            '\n' +
             '            <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-grid ">\n' +
             '                <div class="mdl-cell mdl-cell--6-col">\n' +
             '                    <label class="label ">Client naam:</label>\n' +
@@ -344,25 +351,29 @@ function getCase(idCase) {
             '    </div>\n' +
             '            </div>\n' +
             '    </div>\n' +
-            '<div>' +
-            '<h2>Bestanden</h2>' +
+
+            '<h6 class="mdl-cell mdl-cell--10-col">Toegevoegde bestanden</h6>' +
+
             '<div id="fileDiv">' +
+            '<form method="post" enctype="multipart/form-data" name="fileForm" class="center">\n' +
+            ' <input class="inputfile" name="files" id="files" type="file" onchange="uploadFiles(' + idCase + ')" multiple\>' +
+            '<label title="Voeg Bestanden aan de zaak" for="files" class="label-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored center">\n' +
+            ' <i title="Voeg Bestanden aan de zaak" class="material-icons center">add</i>\n' +
+            ' </label>\n' +
+            '</form> ' +
             '<table id="fileTable" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp center">\n' +
             '        <thead>\n' +
             '            <tr>\n' +
             '                <th class="mdl-data-table__cell--non-numeric">Naam</th>\n' +
+            '                <th class="mdl-data-table__cell--non-numeric">Delete</th>\n' +
+            '                <th class="mdl-data-table__cell--non-numeric">Download</th>\n' +
             '            </tr>\n' +
             '        </thead>\n' +
             '        <tbody>\n' +
             '        <!--files are added with the loadDocuments function-->\n' +
             '        </tbody>\n' +
             '    </table></div>' +
-            '<form method="post" enctype="multipart/form-data" name="fileForm">\n' +
-            '                <input class="inputfile" name="files" id="files" type="file" onchange="uploadFiles(' + idCase + ')" multiple\>' +
-            '<label for="files" >\n' +
-            '  Voeg bestanden toe</label><br>\n' +
-            '</form>' +
-            '</div>' +
+
             '</div>';
 
         document.getElementById("data").innerHTML = html1;
@@ -507,10 +518,9 @@ function uploadFiles(idCase) {
         if (response.ok) {
             loadDocuments(idCase);
         } else {
-           //TODO show it failed
+            //TODO show it failed
         }
     });
-
 
 
 }

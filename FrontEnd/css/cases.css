@@ -93,10 +93,7 @@ label {
 }
 
 .mdl-data-table {
-    /*font-family: arial, sans-serif;*/
-    /*border-collapse: collapse;*/
-    /*top: 90px;*/
-    /*height: 380px;*/
+    border-collapse:revert;
     margin: auto;
 }
 
@@ -162,7 +159,7 @@ body {
 }
 
 .mdl-data-table.mdl-js-data-table{
-    /*width: 100%;*/
+    width: 100%;
 }
 
 .demo-card-wide.mdl-card {
@@ -225,5 +222,14 @@ td#titles {
 .inputfile:focus + label,
 .inputfile + label:hover {
     background-color: red;
+}
+
+.label-button {
+    position: relative;
+    left: 50%;
+    right: 50%;
+    top: 50px;
+    z-index: 1;
+    transform: translate(-50%, -50%);
 }
 
