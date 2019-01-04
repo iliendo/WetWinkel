@@ -1,25 +1,24 @@
 const email = document.getElementById("email");
+let receivedCode = "";
 
-var smd = "suck my dick";
-document.getElementById("reset-button").onclick = function () {
+let smd = "suck my dick";
+document.getElementById("reset-button").onclick = generateEmail();
+
+function generateEmail() {
     checkEmail(email.value);
     showSpinner();
-    var code;
-    var tekst = "";
-    var i;
-    for (i = 0; i < 5; i++) {
-        code = Math.floor(Math.random() * (100 - 1 + 1) + 1);
-        tekst = tekst + String(code);
+    for (let i = 0; i < 5; i++) {
+        receivedCode = Math.floor(Math.random() * (100 - 1 + 1) + 1).toString();
     }
 
-    var template_params = {
+    let template_params = {
         "reply_to": "wetwinkel.reset@gmail.com",
         "from_name": "EWA-3",
         "to_name": "Wetwinkelier",
         "message_html": "Dit is om te testen " + smd + " check it : " + tekst
     }
-    var service_id = "default_service";
-    var template_id = "template_ZPtmHmwg";
+    let service_id = "default_service";
+    let template_id = "template_ZPtmHmwg";
     emailjs.send(service_id, template_id, template_params);
 
 };
@@ -53,23 +52,22 @@ document.getElementById("save-button").onclick = function () {
 function checkPassword() {
     const password1 = document.getElementById("newPassword1").value;
     const password2 = document.getElementById("newPassword2").value;
-    const code = document.getElementById("code").value;
-    const receivedCode = "0";
+    const inputCode = document.getElementById("code").value;
 
-    if(code !== receivedCode){
+    if (inputCode !== receivedCode) {
         showNotification("Verificatiecode klopt niet. Probeer het opnieuw")
     } else if (password1 === password2 && password1 !== "") {
         setPasswordInDb(password1);
         showNotification('Het wachtwoord is succesvol veranderd!');
-        window.location.replace("index.html");
+        window.location.replace("index.html"); //TODO change this url when the server is online
     } else {
         showNotification('De twee wachtwoorden komen niet overeen.');
     }
 }
 
 function setPasswordInDb(password) {
-    const email = "admin@wetwinkel.nl";
-    const idUser = 14;
+    const email = "ilias.azagagh@gmail.com";
+    const idUser = 76;
 
 
     let url = "http://localhost:8080/wetwinkel_war/rest/user/password"; //TODO change this url when the server is online
