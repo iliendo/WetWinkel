@@ -1,3 +1,5 @@
+
+
 let idCase = 0;
 let naam = null;
 let datum = null;
@@ -20,6 +22,7 @@ let a;
 let suit;
 let buttonName;
 let casesOfUser = [];
+
 
 const eigenCases = document.getElementById("eigen-cases");
 const employment = document.getElementById("checkbox-Employment");
@@ -178,6 +181,100 @@ function showCases() {
 
 }
 
+function deleteFile(fileName, idCase) {
+    const url = "http://localhost:8080/wetwinkel_war/rest/file/" + idCase + "/" + fileName; //TODO change this url when the server is online
+
+
+    fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem("token")
+        }
+    }).then(function (response) {
+        if (response.ok) {
+            loadDocuments(idCase);
+        }
+    });
+
+    console.log("deleted " + fileName);
+}
+
+function loadDocuments(idCase) {
+
+    const table = document.getElementById('fileTable').getElementsByTagName('tbody')[0];
+    let newTable = document.createElement('tbody');
+    let html = '';
+    const url = "http://localhost:8080/wetwinkel_war/rest/file/" + idCase; //TODO change this url when the server is online
+
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem("token")
+        }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (fileNames) {
+        console.log(fileNames);
+        for (let fileNamesKey in fileNames) {
+            let fileName = fileNames[fileNamesKey];
+
+            let fileRow = newTable.insertRow(newTable.rows.length);
+            let nameCell = fileRow.insertCell(0);
+            let deleteCell = fileRow.insertCell(1);
+
+            let deleteButton = document.createElement("button");
+            deleteButton.className = "mdl-button mdl-js-button mdl-button--icon mdl-button--colored";
+            deleteButton.innerHTML = '<i class="material-icons">delete</i>';
+
+            deleteButton.onclick = function () {
+                if(confirm("Weet je zeker dat je " + fileName + " wilt verwijderen?")){
+                    deleteFile(fileName, idCase);
+                }
+            };
+
+            nameCell.appendChild(document.createTextNode(fileName));
+            deleteCell.appendChild(deleteButton);
+
+            fileRow.ondblclick = function (e) {
+                e.preventDefault();
+                downloadDocument(idCase, fileName);
+            }
+        }
+        table.parentNode.replaceChild(newTable, table);
+    })
+}
+
+function downloadDocument(idCase, fileName) {
+    const url = "http://localhost:8080/wetwinkel_war/rest/file/" + idCase + "/" + fileName; //TODO change this url when the server is online
+
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem("token")
+        }
+    }).then(function (response) {
+        return response.blob();
+    }).then(function (blob) {
+
+        let file = new File([blob], fileName);
+        let fileURL = URL.createObjectURL(file);
+        console.log(file.name);
+        console.log(fileURL);
+        var a = document.createElement("a");
+        a.href = fileURL;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+
+    });
+}
+
 function getCase(idCase) {
 
     let html2 = "";
@@ -208,7 +305,8 @@ function getCase(idCase) {
             '<br>\n' +
             '<br>\n' +
 
-            '<div>\n' +
+            '<div>' +
+            '<h2>Zaak</h2>\n' +
             '    <div class="mdl-grid">\n' +
             '\n' +
             '            <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-grid ">\n' +
@@ -248,16 +346,29 @@ function getCase(idCase) {
             '    </div>\n' +
             '<div>' +
             '<h2>Bestanden</h2>' +
-            '<div id="fileDiv"></div>' +
-            '<form action="http://localhost:8080/wetwinkel_war/rest/file" method="post" enctype="multipart/form-data">\n' +
-            '                <input class="inputfile" name="files" id="files" type="file" multiple\>' +
-            '<label for="files">kies bestanden om toe te voegen</label><br>\n' +
-            // '                <button name="submit" type="submit">Voeg toe</button>\n' +
-            '            </form>' +
+            '<div id="fileDiv">' +
+            '<table id="fileTable" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp center">\n' +
+            '        <thead>\n' +
+            '            <tr>\n' +
+            '                <th class="mdl-data-table__cell--non-numeric">Naam</th>\n' +
+            '            </tr>\n' +
+            '        </thead>\n' +
+            '        <tbody>\n' +
+            '        <!--files are added with the loadDocuments function-->\n' +
+            '        </tbody>\n' +
+            '    </table></div>' +
+            '<form method="post" enctype="multipart/form-data" name="fileForm">\n' +
+            '                <input class="inputfile" name="files" id="files" type="file" onchange="uploadFiles(' + idCase + ')" multiple\>' +
+            '<label for="files" >\n' +
+            '  Voeg bestanden toe</label><br>\n' +
+            '</form>' +
             '</div>' +
             '</div>';
 
         document.getElementById("data").innerHTML = html1;
+
+        loadDocuments(idCase);
+
 
     })
 
@@ -373,6 +484,34 @@ function mergeCase(idCase) {
 
 function fresh() {
     window.location.reload();
+
+}
+
+function uploadFiles(idCase) {
+
+    let fileForm = document.forms.namedItem("fileForm");
+
+    const url = "http://localhost:8080/wetwinkel_war/rest/file"; //TODO change this url when the server is online
+    let data;
+    data = new FormData(fileForm);
+    data.append("idCase", idCase);
+
+
+    fetch(url, {
+        method: 'POST',
+        body: data,
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem("token")
+        }
+    }).then(function (response) {
+        if (response.ok) {
+            loadDocuments(idCase);
+        } else {
+           //TODO show it failed
+        }
+    });
+
+
 
 }
 
