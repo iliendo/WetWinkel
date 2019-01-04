@@ -7,10 +7,10 @@ body {
 }
 
 button.center {
-    position: relative;
+position: relative;
     left: 50%;
     right: 50%;
-    top: 55px;
+    top: 110px;
     z-index: 1;
     transform: translate(-50%, -50%);
 }
@@ -19,6 +19,10 @@ button.center {
     margin: auto;
 }
 
-
+.mdl-data-table{
+    position: center;
+    top: 55px;
+    bottom: 20px;
+}
 
 

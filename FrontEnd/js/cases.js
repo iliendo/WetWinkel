@@ -39,7 +39,7 @@ const zoek = document.getElementById("zoeken");
 zoek.addEventListener("keyup", function (event) {
     event.preventDefault();
     if (event.keyCode === 13) {
-        document.getElementById("zoekButton").click();
+        document.getElementById("zoeken").click();
     }
 });
 
