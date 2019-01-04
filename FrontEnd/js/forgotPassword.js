@@ -13,7 +13,7 @@ document.getElementById("reset-button").onclick = function () {
         "reply_to": "wetwinkel.reset@gmail.com",
         "from_name": "EWA-3",
         "to_name": "Wetwinkelier",
-        "message_html": "Dit is om te testen " + smd + " check it : "
+        "message_html": receivedCode
     }
     let service_id = "default_service";
     let template_id = "template_ZPtmHmwg";
