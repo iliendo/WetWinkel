@@ -277,7 +277,6 @@ function downloadDocument(idCase, fileName) {
 
 function getCase(idCase) {
 
-    let html2 = "";
     const url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/" + idCase; //TODO change this url when the server is online
     fetch(url, {
         method: 'GET',

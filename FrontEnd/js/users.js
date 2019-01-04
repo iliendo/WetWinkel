@@ -1,4 +1,3 @@
-const table = document.getElementById('userTable').getElementsByTagName('tbody')[0];
 
 generateTable();
 
@@ -7,7 +6,35 @@ document.getElementById("addButton").onclick = function () {
     window.open("addUser.html","_SELF")
 };
 
+function deleteUser(idUser, force) {
+    let url = "http://localhost:8080/wetwinkel_war/rest/user/" + idUser; //TODO change this url when the server is online
+
+    if (force) {
+        url += "?force=true"
+    }
+
+    fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'authorization': 'bearer ' + localStorage.getItem("token")
+        }
+    }).then(function (response) {
+        if (response.ok) {
+            generateTable();
+            console.log("deleted " + idUser);
+        } else if(response.status === 409){
+            if(confirm("Deze gebruiker is nog bezig met zaken. Wilt u deze gebruiker alsnog verwijderen? (Deze actie kan er voor zorgen dat gebruikers aleen aan een zaak gekoppeld staan)")){
+                deleteUser(idUser, true)
+            }
+        }
+    });
+
+
+}
+
 function generateTable() {
+    const table = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+    let newTable = document.createElement('tbody');
     const url = "http://localhost:8080/wetwinkel_war/rest/user"; //TODO change this url when the server is online
 
     fetch(url, {
@@ -18,26 +45,34 @@ function generateTable() {
     }).then(function (response) {
         return response.json(); //Let javascript know it gets json
     }).then(function (users) {
+        let superUserCount = 0;
+
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].superUser){
+                superUserCount++;
+            }
+        }
+
         for (let i = 0; i < users.length; i++) {
             // Insert a row in the table at the last row
-            let userRow = table.insertRow(table.rows.length);
+            let userRow = newTable.insertRow(newTable.rows.length);
             // Insert a cell in the row at index 0
             let deleteCell = userRow.insertCell(0);
             let nameCell = userRow.insertCell(1);
             let emailCell = userRow.insertCell(2);
             let superUserCell = userRow.insertCell(3);
             let editCell = userRow.insertCell(4);
-            let naam;
+            let name;
             let email = users[i].email;
             let superUser;
 
             if (users[i].tussenvoegsel !== undefined) {
-                naam = users[i].naam + " " + users[i].tussenvoegsel + " " + users[i].achternaam;
+                name = users[i].naam + " " + users[i].tussenvoegsel + " " + users[i].achternaam;
             } else {
-                naam = users[i].naam + " " + users[i].achternaam;
+                name = users[i].naam + " " + users[i].achternaam;
             }
 
-            if (users[i].superUser === true) {
+            if (users[i].superUser) {
                 superUser = "ja";
             } else {
                 superUser = "nee";
@@ -51,14 +86,29 @@ function generateTable() {
                 editUser(users[i].idUser);
             };
 
-            let deleteButton = document.createElement("input");
-            //TODO make working button
+            let deleteButton = document.createElement("button");
+            deleteButton.className = "mdl-button mdl-js-button mdl-button--icon mdl-button--colored";
+            deleteButton.innerHTML = '<i class="material-icons">delete</i>';
 
-            nameCell.appendChild(document.createTextNode(naam));
+            deleteButton.onclick = function () {
+                del:{if (superUserCount <= 1 && users[i].superUser){
+                    alert("Deze gebruiker is de laatste superUser en kan daarom niet worden verwijderd.");
+                    break del;
+                } else if(users[i].superUser){
+                    superUserCount--;
+                }
+                if(confirm("Weet je zeker dat je " + name + " wilt verwijderen?")){
+                    deleteUser(users[i].idUser, false);
+                }}
+            };
+
+            deleteCell.appendChild(deleteButton);
+            nameCell.appendChild(document.createTextNode(name));
             emailCell.appendChild(document.createTextNode(email));
             superUserCell.appendChild(document.createTextNode(superUser));
             editCell.appendChild(editButton);
         }
+        document.getElementById('userTable').replaceChild(newTable, table);
     });
 
 }

@@ -1,4 +1,14 @@
 // Fill comboboxes when page is loaded
+
+$('#addCase').on('submit', function(e) {
+    e.preventDefault();
+});
+
+$('#add_button').on('click', function(e) {
+    e.preventDefault();
+    addCase();
+});
+
 werknemerDDL();
 clientDDL();
 jurisdictieDDL();
@@ -100,10 +110,6 @@ function jurisdictieDDL() {
 }
 
 function addCase() {
-
-
-
-    const naam = document.getElementById("client").value;
     const rechtsgebied = document.getElementById("jurisdictie").value;
     const status = "OPEN";
     const feiten = document.getElementById("feiten").value;
@@ -134,8 +140,8 @@ function addCase() {
         }
     }).then(function (response) {
         if (response.ok) {
+            window.open("cases.html", "_self")
             //TODO show it worked (redirect to all cases page)
-            console.log("its all good man");
         } else {
             //TODO show it didnt work and why (add snackbar)
             console.log("didn't work")

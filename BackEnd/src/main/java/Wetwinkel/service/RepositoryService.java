@@ -77,17 +77,25 @@ public class RepositoryService {
         return users;
     }
 
-    public Response deleteUser(String email) {
+    public Response deleteUser(User user, boolean force) {
         EntityManager em = getEntityManager();
         Response r;
         em.getTransaction().begin();
-        User user = em.find(User.class, email);
 
         if (user == null) {
             r = Response.status(Response.Status.NOT_FOUND).entity("User does not exist").build();
         } else {
-            em.remove(user); //TODO check if everything went as planned (cases link to user deleted)
-            r = Response.status(Response.Status.OK).entity("Deleted").build();
+            if(!force && !user.getCases().isEmpty()){
+                r = Response.status(409).entity("This user still has cases on his name.").build();
+            } else {
+                if(force){
+                    Query query = em.createNativeQuery("DELETE FROM users_suit WHERE idUser = ?");
+                    query.setParameter(1, user.getIdUser());
+                    query.executeUpdate();
+                }
+                em.remove(em.contains(user) ? user : em.merge(user));
+                r = Response.status(Response.Status.OK).entity("Deleted").build();
+            }
         }
         em.getTransaction().commit();
         em.close();
