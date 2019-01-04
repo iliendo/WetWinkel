@@ -1,20 +1,20 @@
 package Wetwinkel.resources;
 
 import Wetwinkel.util.Secured;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
+import com.google.gson.Gson;
 import org.glassfish.jersey.media.multipart.*;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
-
+@Secured
 @Path("/file")
 public class FileResource {
     /** The path to the folder where we want to store the uploaded files */
@@ -36,6 +36,7 @@ public class FileResource {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(
+            @FormDataParam("idCase") int caseId,
             @FormDataParam("files") List<FormDataBodyPart> bodyParts,
             @FormDataParam("files") FormDataContentDisposition fileDispositions
             ) {
@@ -49,7 +50,6 @@ public class FileResource {
             ContentDisposition fileDetail = bodyPart.getContentDisposition();
             InputStream uploadedInputStream = bodyPartEntity.getInputStream();
 
-            int caseId = 1;
             String destFolder;
             System.out.println("saving file");
 
@@ -76,8 +76,7 @@ public class FileResource {
 
         }
 
-        return Response.status(200)
-                .entity("Files saved").build();
+        return Response.ok().build();
 
     }
 
@@ -126,5 +125,55 @@ public class FileResource {
         } else {
             return null;
         }
+    }
+
+    @GET
+    @Path("/{idCase}")
+    public Response listFilesAndFolders(@PathParam("idCase") int idCase){
+
+        String directoryName = UPLOAD_FOLDER + "/" + idCase;
+
+        File directory = new File(directoryName);
+
+
+
+        //get all the files from a directory
+
+        File[] fList = directory.listFiles();
+        List<String> nameList = new ArrayList<>();
+
+
+        for (File file : fList){
+            nameList.add(file.getName());
+        }
+        String json = new Gson().toJson(nameList);
+
+        return Response.ok(json).build();
+
+    }
+
+    @DELETE
+    @Path("/{caseId}/{fileName}")
+    public Response deleteFile(@PathParam("caseId") int caseId, @PathParam("fileName") String fileName){
+        String filePath = UPLOAD_FOLDER + "/" + caseId + "/" + fileName;
+
+        File file = new File(filePath);
+
+        if (file.delete()){
+            return Response.ok().build();
+        } else {
+            return Response.status(409).build();
+        }
+    }
+
+    @Path("/{caseId}/{fileName}")
+    @GET
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response getFile(@PathParam("caseId") int caseId, @PathParam("fileName") String fileName) throws Exception {
+        String filePath = UPLOAD_FOLDER + "/" + caseId + "/" + fileName;
+
+        File file = new File(filePath);
+
+        return Response.ok(file).build();
     }
 }
