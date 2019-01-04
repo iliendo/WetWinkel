@@ -1,4 +1,5 @@
 const email = document.getElementById("email");
+
 var smd = "suck my dick";
 document.getElementById("reset-button").onclick = function () {
     checkEmail(email.value);
@@ -7,7 +8,7 @@ document.getElementById("reset-button").onclick = function () {
     var tekst = "";
     var i;
     for (i = 0; i < 5; i++) {
-       code = Math.floor(Math.random()*(100-1+1)+1);
+        code = Math.floor(Math.random() * (100 - 1 + 1) + 1);
         tekst = tekst + String(code);
     }
 
@@ -36,12 +37,17 @@ function checkEmail(email) {
     }).then(function (response) {
         if (response.ok) {
             showNotification("Email met instructies is naar het emailadres toe gestuurd")
+            changeContent();
             hideSpinner();
         } else {
             showNotification("Email bestaat niet")
             hideSpinner();
         }
     });
+}
+
+function changeContent() {
+    document.getElementById("popup").style.display = "inherit";
 }
 
 function showNotification(message) {
