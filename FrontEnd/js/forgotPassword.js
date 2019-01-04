@@ -49,12 +49,71 @@ function checkEmail(email) {
     }).then(function (response) {
         if (response.ok) {
             showNotification("Email met instructies is naar het emailadres toe gestuurd")
+            changeContent();
             hideSpinner();
         } else {
             showNotification("Email bestaat niet")
             hideSpinner();
         }
     });
+}
+
+document.getElementById("save-button").onclick = function () {
+    checkPassword();
+};
+
+function checkPassword() {
+    const password1 = document.getElementById("newPassword1").value;
+    const password2 = document.getElementById("newPassword2").value;
+    const inputCode = document.getElementById("code").value;
+
+    if(inputCode !== receivedCode){
+        showNotification("Verificatiecode klopt niet. Probeer het opnieuw")
+    } else if (password1 === password2 && password1 !== "") {
+        setPasswordInDb(password1);
+        showNotification('Het wachtwoord is succesvol veranderd!');
+        window.location.replace("index.html"); //TODO change this url when the server is online
+    } else {
+        showNotification('De twee wachtwoorden komen niet overeen.');
+    }
+}
+
+function setPasswordInDb(password) {
+    const email = "ilias.azagagh@gmail.com";
+    const idUser = 76;
+
+
+    let url = "http://localhost:8080/wetwinkel_war/rest/user/password"; //TODO change this url when the server is online
+
+    let data = {
+        'idUser': idUser,
+        'email': email,
+        'wachtwoord': password
+    };
+
+    fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'bearer ' + sessionStorage.getItem("token")
+        }
+    }).then(function (response) {
+        if (response.ok) {
+            //TODO show it worked (redirect to all users page)
+            console.log("its all good man");
+        } else {
+            //TODO show it didnt work and why (add snackbar)
+            console.log("didn't work")
+        }
+    }).finally(function () {
+        hideSpinner();
+        sessionStorage.clear();
+    });
+}
+
+function changeContent() {
+    document.getElementById("popup").style.display = "inherit";
 }
 
 function showNotification(message) {

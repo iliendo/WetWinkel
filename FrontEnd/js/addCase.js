@@ -3,15 +3,7 @@ werknemerDDL();
 clientDDL();
 jurisdictieDDL();
 
-// document.getElementById("add_button").onclick = function () {
-//     addCase();
-// };
 
-$('#addCase').submit(function (e) {
-    e.preventDefault();
-    addCase();
-    return false;
-});
 
 function werknemerDDL() {
     let werknemer = document.getElementsByClassName("werknemer");
@@ -109,8 +101,7 @@ function jurisdictieDDL() {
 
 function addCase() {
 
-    document.getElementById("fileForm").submit(); //upload chosen files
-    // console.log("henk");
+
 
     const naam = document.getElementById("client").value;
     const rechtsgebied = document.getElementById("jurisdictie").value;
