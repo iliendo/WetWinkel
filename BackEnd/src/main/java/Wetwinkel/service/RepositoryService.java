@@ -95,7 +95,6 @@ public class RepositoryService {
     }
 
     public User login(String email, String password) {
-
         EntityManager em = entityManagerFactory.createEntityManager();
 
         TypedQuery<User> query = em.createNamedQuery("User.Login", User.class);

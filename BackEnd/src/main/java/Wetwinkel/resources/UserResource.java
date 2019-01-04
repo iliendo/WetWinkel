@@ -8,7 +8,6 @@ import Wetwinkel.util.Secured;
 import Wetwinkel.util.Security;
 import io.jsonwebtoken.Jwts;
 
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,22 +24,31 @@ public class UserResource {
     @Path("/cred")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response login (Credentials credentials){
-        try{
-            authenticate(credentials.getEmail(), credentials.getWachtwoord());
+    public Response login(Credentials credentials) {
+        try {
+            if(credentials.getWachtwoord() == null){
+                authenticate(credentials.getEmail(), null);
+            } else {
+                authenticate(credentials.getEmail(), credentials.getWachtwoord());
+            }
+
 
             String token = issueToken(credentials.getEmail());
             boolean superUser = user.isSuperUser();
 
             return Response.ok(token + "," + superUser + "," + user.isNieuw() + "," + user.getIdUser()).build();
-        } catch (Exception e){
+        } catch (Exception e) {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
     }
 
     private void authenticate(String email, String password) throws Exception {
-        password = Security.getHashedPassword(email, password);
-        user = RepositoryService.getInstance().login(email, password);
+        if (password == null) {
+            user = RepositoryService.getInstance().getUserFromMail(email);
+        } else {
+            password = Security.getHashedPassword(email, password);
+            user = RepositoryService.getInstance().login(email, password);
+        }
         if (user == null) throw new Exception("login failed");
     }
 
@@ -54,18 +62,17 @@ public class UserResource {
         return Jwts.builder().setSubject(email).setExpiration(expirationDate).signWith(Security.getKey()).compact();
     }
 
-
     @POST
     @Secured(Role.SUPER_USER)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addUser(User user){
+    public Response addUser(User user) {
         try {
             System.out.println("add user: " + user.getWachtwoord());
             RepositoryService repInstance = RepositoryService.getInstance();
             repInstance.addObject(user);
             return Response.ok().build();
-        } catch (Exception e){
+        } catch (Exception e) {
             return Response.serverError().build();
         }
     }
@@ -74,7 +81,7 @@ public class UserResource {
     @Secured(Role.SUPER_USER)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response editUser(User changes){
+    public Response editUser(User changes) {
         try {
             System.out.println("editting user");
             RepositoryService repInstance = RepositoryService.getInstance();
@@ -86,25 +93,24 @@ public class UserResource {
             user.setSuperUser(changes.isSuperUser());
             repInstance.editObject(user);
             return Response.ok().build();
-        } catch (Exception e){
+        } catch (Exception e) {
             return Response.serverError().build();
         }
     }
 
     @PUT
     @Path("/password")
-    @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response changePassword(User change){
+    public Response changePassword(User change) {
         try {
             RepositoryService repInstance = RepositoryService.getInstance();
-            User user = repInstance.getUserFromID(change.getIdUser());
+            User user = repInstance.getUserFromMail(change.getEmail());
             user.setWachtwoordWithoutHash(change.getWachtwoord());
             user.setNieuw(false);
             repInstance.editObject(user);
             return Response.ok().build();
-        } catch (Exception e){
+        } catch (Exception e) {
             return Response.serverError().build();
         }
     }
@@ -112,7 +118,7 @@ public class UserResource {
     @GET
     @Secured(Role.SUPER_USER)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return RepositoryService.getInstance().getListOfUsers();
     }
 
@@ -120,14 +126,14 @@ public class UserResource {
     @Path("/{idUser}")
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
-    public User getUser(@PathParam("idUser") int idUser){
+    public User getUser(@PathParam("idUser") int idUser) {
         return RepositoryService.getInstance().getUserFromID(idUser);
     }
 
     @DELETE
     @Secured(Role.SUPER_USER)
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteUser(){
+    public void deleteUser() {
 
     }
 }
