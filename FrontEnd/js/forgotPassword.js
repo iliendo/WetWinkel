@@ -2,9 +2,7 @@ const email = document.getElementById("email");
 let receivedCode = "";
 
 let smd = "suck my dick";
-document.getElementById("reset-button").onclick = generateEmail();
-
-function generateEmail() {
+document.getElementById("reset-button").onclick = function () {
     checkEmail(email.value);
     showSpinner();
     for (let i = 0; i < 5; i++) {
@@ -15,7 +13,7 @@ function generateEmail() {
         "reply_to": "wetwinkel.reset@gmail.com",
         "from_name": "EWA-3",
         "to_name": "Wetwinkelier",
-        "message_html": "Dit is om te testen " + smd + " check it : " + tekst
+        "message_html": "Dit is om te testen " + smd + " check it : "
     }
     let service_id = "default_service";
     let template_id = "template_ZPtmHmwg";
@@ -54,7 +52,7 @@ function checkPassword() {
     const password2 = document.getElementById("newPassword2").value;
     const inputCode = document.getElementById("code").value;
 
-    if (inputCode !== receivedCode) {
+    if(inputCode !== receivedCode){
         showNotification("Verificatiecode klopt niet. Probeer het opnieuw")
     } else if (password1 === password2 && password1 !== "") {
         setPasswordInDb(password1);
