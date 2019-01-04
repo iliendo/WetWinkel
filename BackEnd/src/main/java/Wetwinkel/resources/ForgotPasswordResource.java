@@ -11,16 +11,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("mail")
+@Path("/password")
 public class ForgotPasswordResource {
     private User user;
 
     @POST
-    @Path("/mailcheck")
+    @Path("/reset")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response resetPassword(Credentials credentials) {
-        System.out.println("25: /mail resource");
         try {
             authenticate(credentials.getEmail());
 
@@ -31,7 +30,6 @@ public class ForgotPasswordResource {
     }
 
     private void authenticate(String email) throws Exception {
-        System.out.println("37: authenticate");
         user = RepositoryService.getInstance().getUserFromMail(email);
         if (user == null) throw new Exception("User does not exist");
     }
