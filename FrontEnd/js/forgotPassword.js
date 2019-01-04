@@ -1,8 +1,26 @@
 const email = document.getElementById("email");
-
+var smd = "suck my dick";
 document.getElementById("reset-button").onclick = function () {
     checkEmail(email.value);
     showSpinner();
+    var code;
+    var tekst = "";
+    var i;
+    for (i = 0; i < 5; i++) {
+       code = Math.floor(Math.random()*(100-1+1)+1);
+        tekst = tekst + String(code);
+    }
+
+    var template_params = {
+        "reply_to": "wetwinkel.reset@gmail.com",
+        "from_name": "EWA-3",
+        "to_name": "Wetwinkelier",
+        "message_html": "Dit is om te testen " + smd + " check it : " + tekst
+    }
+    var service_id = "default_service";
+    var template_id = "template_ZPtmHmwg";
+    emailjs.send(service_id, template_id, template_params);
+
 };
 
 function checkEmail(email) {
@@ -40,4 +58,8 @@ function showSpinner() {
 function hideSpinner() {
     document.getElementById("lock-icon").hidden = false;
     document.getElementById("spinner").hidden = true;
+}
+
+function sendMail() {
+
 }
