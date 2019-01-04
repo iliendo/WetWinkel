@@ -21,9 +21,8 @@ function deleteUser(idUser, force) {
     }).then(function (response) {
         if (response.ok) {
             generateTable();
-            console.log("deleted " + idUser);
         } else if(response.status === 409){
-            if(confirm("Deze gebruiker is nog bezig met zaken. Wilt u deze gebruiker alsnog verwijderen? (Deze actie kan er voor zorgen dat gebruikers aleen aan een zaak gekoppeld staan)")){
+            if(confirm("Deze gebruiker is nog bezig met zaken. Wilt u deze gebruiker alsnog verwijderen? (Deze actie kan er voor zorgen dat gebruikers alleen aan een zaak gekoppeld staan)")){
                 deleteUser(idUser, true)
             }
         }

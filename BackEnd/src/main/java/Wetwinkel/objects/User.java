@@ -31,7 +31,7 @@ public class User {
     @Column(name="nieuw", insertable=false)
     private boolean nieuw;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "users_suit",
             joinColumns = {@JoinColumn(name = "idUser")},
