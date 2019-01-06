@@ -4,7 +4,13 @@ body {
     height: auto;
 
 }
-
+.app-layout-header{
+    background-color: rgba(64, 42, 229, 0.7);
+}
+.
+.made-layout{
+    font-size: 17px;
+}
 .mdl-data-table.mdl-js-data-table{
     width: 100%;
 }
@@ -12,6 +18,9 @@ body {
 .demo-card-wide.mdl-card {
     min-width: 100%;
     margin-top: 75px;
+    position: center;
+    right: 110px;
+
 }
 
 .mdl-data-table.mdl-js-data-table td {
@@ -36,4 +45,8 @@ width: 100%;
 .mdl-textfield textarea.mdl-textfield__input#sample5 {
     display: block;
     min-width: 700px;
+}
+.mdl-button{
+    color: white;
+    background-color:  rgba(64, 42, 229, 0.7);
 }
