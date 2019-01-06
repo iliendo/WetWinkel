@@ -16,7 +16,7 @@ button.center {
 position: relative;
     left: 50%;
     right: 50%;
-    top: 80px;
+    top: 100px;
     z-index: 1;
     transform: translate(-50%, -50%);
     background-color: rgba(64, 42, 229, 0.7);
@@ -28,8 +28,7 @@ position: relative;
 
 .mdl-data-table {
     position: center;
-    top: 40px;
-    bottom: 20px;
+    margin-top: 60px;
     overflow: auto;
 }
 
@@ -37,5 +36,8 @@ position: relative;
     color: white;
     background-color:  rgba(64, 42, 229, 0.7);
 
+}
+.made-div{
+    overflow: auto;
 }
 
