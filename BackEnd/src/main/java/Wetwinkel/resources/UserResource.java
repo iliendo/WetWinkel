@@ -26,7 +26,7 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(Credentials credentials) {
         try {
-            if(credentials.getWachtwoord() == null){
+            if (credentials.getWachtwoord() == null) {
                 authenticate(credentials.getEmail(), null);
             } else {
                 authenticate(credentials.getEmail(), credentials.getWachtwoord());
@@ -135,6 +135,28 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public void deleteUser() {
 
+    }
+
+    @POST
+    @Path("/postReset")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void postResetCode(User user) {
+        User checkUser = user;
+
+        User updateUser = RepositoryService.getInstance().getUserFromMail(checkUser.getEmail());
+        updateUser.setResetCode(checkUser.getResetCode());
+
+        RepositoryService.getInstance().editObject(updateUser);
+
+    }
+
+    @GET
+    @Path("/getcode")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCode(@QueryParam("email") String email) {
+        String code = RepositoryService.getInstance().getCodeFromMail(email);
+        return Response.ok(code).build();
     }
 }
 

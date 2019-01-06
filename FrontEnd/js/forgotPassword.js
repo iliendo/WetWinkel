@@ -24,6 +24,8 @@ document.getElementById("reset-button").onclick = function () {
     let service_id = "default_service";
     let template_id = "template_ZPtmHmwg";
     emailjs.send(service_id, template_id, template_params);
+    postResetCode();
+    checkResetCode(email);
 };
 
 // Checks of the email exists in the database
@@ -119,4 +121,69 @@ function showSpinner() {
 function hideSpinner() {
     document.getElementById("lock-icon").hidden = false;
     document.getElementById("spinner").hidden = true;
+
 }
+    function postResetCode() {
+        const data = {
+            'email': email.value,
+            'resetCode': receivedCode
+        };
+        const url = "http://localhost:8080/wetwinkel_war/rest/user/postReset";
+
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function (response) {
+            if (response.ok) {
+                console.log("'Dit gedeelte is gelukt");
+            } else {
+                console.log("Of niet");
+            }
+        });
+    }
+
+// Checks if the resetcode exists in the database
+function checkResetCode(email) {
+    let url = "http://localhost:8080/wetwinkel_war/rest/user/getcode?email=" +email.value;
+    console.log(email.value);
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            //'authorization': 'bearer ' + localStorage.getItem("token")
+        }
+    }).then(function (response) {
+        console.log(response)
+        //return response.json();
+    }).then(function (resetCode) {
+        console.log("Deze moet je hebben " + String(resetCode));
+
+
+    });
+}
+
+
+
+
+    // const data = {'resetCode': receivedCode};
+    // const url = "http://localhost:8080/wetwinkel_war/rest/user/cred";
+    //
+    // fetch(url, {
+    //     method: 'POST',
+    //     body: JSON.stringify(data),
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     }
+    // }).then(function (response) {
+    //     if (response.ok) {
+    //         showNotification("Email met instructies is naar het emailadres toe gestuurd")
+    //         changeContent();
+    //         hideSpinner();
+    //     } else {
+    //         showNotification("Email bestaat niet")
+    //         hideSpinner();
+    //     }
+    // });
+//}

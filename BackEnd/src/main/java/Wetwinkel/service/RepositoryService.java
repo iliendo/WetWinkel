@@ -146,4 +146,15 @@ public class RepositoryService {
         return query.getSingleResult();
     }
 
+    public String getCodeFromMail(String email) {
+
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        TypedQuery<User> query = em.createNamedQuery("User.Get", User.class);
+        query.setParameter("email", email);
+        User user = query.getSingleResult();
+        em.close();
+        String theCode = "12345";
+        return theCode;
+    }
 }

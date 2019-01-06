@@ -30,6 +30,7 @@ public class User {
     @Generated(GenerationTime.INSERT)
     @Column(name="nieuw", insertable=false)
     private boolean nieuw;
+    private String resetCode;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -89,6 +90,14 @@ public class User {
 
     public void setAchternaam(String achternaam) {
         this.achternaam = achternaam;
+    }
+
+    public String getResetCode() {
+        return resetCode;
+    }
+
+    public void setResetCode(String resetCode) {
+        this.resetCode = resetCode;
     }
 
     public String getWachtwoord() {
