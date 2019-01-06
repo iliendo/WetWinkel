@@ -76,7 +76,7 @@ function inSearch(suit) {
             inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Employment")) !== -1;
         }
         if (adminastrive.checked) {
-            inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Administratieve")) !== -1;
+            inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Administrative")) !== -1;
         }
         if (rental.checked) {
             inJurisdiction = inJurisdiction || suit.rechtsgebied.search(getCaseInsensitiveRegex("Rental")) !== -1;
@@ -282,7 +282,7 @@ function downloadDocument(idCase, fileName) {
 }
 
 function getCase(idCase) {
-
+    let html2 = "";
     const url = "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/" + idCase; //TODO change this url when the server is online
     fetch(url, {
         method: 'GET',
