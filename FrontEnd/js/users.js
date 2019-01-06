@@ -80,7 +80,7 @@ function generateTable() {
             let editButton = document.createElement("input");
             editButton.type = "button";
             editButton.value = "bewerk";
-            editButton.className = "mdl-button mdl-js-button mdl-button--accent";
+            editButton.className = "button-layout-made mdl-button mdl-js-button";
             editButton.onclick = function () {
                 editUser(users[i].idUser);
             };
@@ -179,14 +179,14 @@ function editUser(idUser) {
         '                    </tr>\n' +
         '                    <tr>\n' +
         '                        <td>\n' +
-        '                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent "\n' +
+        '                            <button class="button-layout-made mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect "\n' +
         '                                    id="cancel_button" tabindex="7">\n' +
         '                                Annuleren\n' +
         '                            </button>\n' +
         '                        </td>\n' +
         '                        <td>\n' +
         '                            <button type="submit"\n' +
-        '                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"\n' +
+        '                                    class="button-layout-made mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"\n' +
         '                                    id="save_button" tabindex="8" >\n' +
         '                                Opslaan\n' +
         '                            </button>\n' +
