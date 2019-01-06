@@ -1,8 +1,21 @@
 
-
 .demo-header .mdl-layout__header-row {
     padding-left: 40px;
 }
+
+.cards-layout-header {
+    background-color: rgba(64, 42, 229, 0.7);
+}
+
+.app-layout-header {
+    background-color: rgba(64, 42, 229, 0.7);
+}
+
+.
+.made-layout {
+    font-size: 17px;
+}
+
 body {
     background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
     font-family: 'Segoe UI', 'Roboto', Tahoma;
@@ -17,57 +30,59 @@ h1, h2, h3, h4 {
     font-weight: 400;
 }
 
-#da{
+#da {
     margin: auto;
 }
 
 .wrapper {
     width: 800px;
     height: 600px;
-    margin:  auto;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, .4);
-    box-shadow: 8px 10px 66px 1px rgba(0, 0, 0, 0.4);
+    margin: auto;
+    position: center;
+    perspective-origin: left;
+
 }
 
 .main-wrap {
+    top: 20px;
     position: relative;
     background-color: #f8f8f8;
     height: 100%;
     width: 100%;
-    margin-left: 250px;
+    margin-left: 230px;
+    right: 15%;
+
 
 }
-
+.side {
+    top: 20px;
+    position: relative;
+    background-color: rgba(150, 159, 229, 0.7);
+    float: left;
+    width: 230px;
+    height: 100%;
+    margin: auto;
+    right: 15%;
+}
 ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.side {
-
-    position: relative;
-    background-color: rgba(200, 203, 229, 0.7);
-    float: left;
-    width: 250px;
-    height: 100%;
-    margin:  auto;
-}
 
 
 .side h3 {
-
     font-size: 35px;
     margin: 15px 5px 0px;
     color: #eff2e8;
-    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
+
 }
 
 .side > div,
 .side > input {
     margin: 5px 10px;
 }
-
 
 ul.menu {
     margin: 15px 0;
@@ -80,35 +95,33 @@ ul.menu li {
     cursor: pointer;
 }
 
-label {
-
+.label {
     color: black;
     cursor: pointer;
 
 }
 
-#goback {
-    margin-left: 600px;
-    margin-top: 0px;
-}
+
 
 .mdl-data-table {
-    border-collapse:revert;
+    border-collapse: revert;
     margin: auto;
+
 }
 
-.mdl-grid{
+.mdl-grid {
     width: 750px;
     height: 530px;
     margin: auto;
 
 }
 
-.fixed_header{
+.fixed_header {
     width: 660px;
 
 }
-.fixed_header tbody{
+
+.fixed_header tbody {
 
     height: 300px;
     display: block;
@@ -120,12 +133,13 @@ label {
     width: 660px;
 
 }
-.fixed_header td{
+
+.fixed_header td {
     text-align: left;
-    width:8%;
+    width: 8%;
 }
 
-.fixed_header th{
+.fixed_header th {
     text-align: left;
     width: 1%;
 }
@@ -135,8 +149,9 @@ label {
     height: 200px;
     border-collapse: collapse;
 }
+
 .demo-card-square > .mdl-card__title {
-    background: url(https://cdn3.tz.nl/wp-content/uploads/xxl/2779_7636d618.jpg)center / cover;
+    background: url(https://cdn3.tz.nl/wp-content/uploads/xxl/2779_7636d618.jpg) center / cover;
     color: #fff;
 
 }
@@ -147,24 +162,26 @@ label {
     border: solid 2px #777;
     outline: none;
 }
-.mdl-button--colored{
 
+.mdl-button--colored {
     cursor: pointer;
 }
+
 .demo-layout-transparent {
     background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
 }
+
 body {
     background: rgba(0, 0, 0, 0.0392156862745098) linear-gradient(-45deg, rgba(16, 0, 78, 0.3686274509803922), rgba(20, 4, 81, 0));
 }
 
-.mdl-data-table.mdl-js-data-table{
+.mdl-data-table.mdl-js-data-table {
     width: 100%;
 }
 
 .demo-card-wide.mdl-card {
     min-width: 100%;
-   max-height: 150%;
+    max-height: 150%;
     overflow: auto;
 
 }
@@ -184,7 +201,7 @@ td#titles {
     max-width: 100%;
 }
 
-.mdl-textfield{
+.mdl-textfield {
     width: 100%;
 }
 
@@ -192,15 +209,24 @@ td#titles {
     display: block;
     min-width: 700px;
 }
-.cards{
-    height: 90%;
+
+.cards {
+    height: 97%;
     width: 99%;
     overflow: auto;
 }
-.button{
-    color: black;
-    cursor: pointer;
 
+.button {
+    color:  white;
+    cursor: pointer;
+background-color:  rgba(64, 42, 229, 0.7);
+
+}
+
+.nav-bar-made {
+    cursor: pointer;
+    border-collapse: revert;
+position: relative;
 }
 
 .inputfile {
@@ -211,18 +237,15 @@ td#titles {
     position: absolute;
     z-index: -1;
 }
+
 .inputfile + label {
     font-size: 1.25em;
     font-weight: 700;
-    color: white;
-    background-color: black;
+    background-color: rgba(64, 42, 229, 0.7);
     display: inline-block;
 }
 
-.inputfile:focus + label,
-.inputfile + label:hover {
-    background-color: red;
-}
+
 
 .label-button {
     position: relative;
@@ -231,5 +254,6 @@ td#titles {
     top: 50px;
     z-index: 1;
     transform: translate(-50%, -50%);
+    background-color: mediumblue;
 }
 
