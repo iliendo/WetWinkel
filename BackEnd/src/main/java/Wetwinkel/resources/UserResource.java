@@ -137,7 +137,7 @@ public class UserResource {
 
     }
 
-    @POST
+    @PUT
     @Path("/postReset")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

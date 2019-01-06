@@ -154,7 +154,7 @@ public class RepositoryService {
         query.setParameter("email", email);
         User user = query.getSingleResult();
         em.close();
-        String theCode = "12345";
+        String theCode = user.getResetCode();
         return theCode;
     }
 }
