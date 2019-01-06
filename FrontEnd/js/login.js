@@ -108,7 +108,6 @@ function setPasswordInDb(password) {
     const email = sessionStorage.getItem("email");
     const idUser = sessionStorage.getItem("id");
 
-
     let url = "http://localhost:8080/wetwinkel_war/rest/user/password"; //TODO change this url when the server is online
 
     let data = {

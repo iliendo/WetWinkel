@@ -112,13 +112,9 @@ public class FileResource {
      */
     private String createFolderIfNotExists(String dirName)
             throws SecurityException {
-        System.out.println(dirName);
         File theDir = new File(dirName);
-        System.out.println(theDir.getAbsolutePath());
-        System.out.println("creating folder");
         if (!theDir.exists()) {
-            boolean dirCreated = theDir.mkdirs();
-            System.out.println(dirCreated);
+            theDir.mkdirs();
         }
         if (theDir.isDirectory()){
             return  theDir.getPath();
