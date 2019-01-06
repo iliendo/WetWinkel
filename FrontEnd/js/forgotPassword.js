@@ -28,10 +28,6 @@ document.getElementById("reset-button").onclick = function () {
     emailjs.send(service_id, template_id, template_params);
 };
 
-document.getElementById("back-button").onclick = function () {
-    window.location.replace("index.html");
-}
-
 // Checks of the email exists in the database
 function checkEmail(email) {
     const data = {'email': email};
@@ -56,12 +52,14 @@ function checkEmail(email) {
 }
 
 document.getElementById("save-button").onclick = function () {
+    console.log("59: save-button is clicked");
     checkResetCode(email);
     checkPassword();
 };
 
 // Checks if the user can change the password
 function checkPassword() {
+    console.log("66: start check password")
     const password1 = document.getElementById("newPassword1").value;
     const password2 = document.getElementById("newPassword2").value;
     const inputCode = document.getElementById("code").value;
@@ -150,6 +148,7 @@ function hideSpinner() {
 
 // Checks if the resetcode exists in the database
 function checkResetCode(email) {
+    console.log("154: code gets checked");
     let url = "http://localhost:8080/wetwinkel_war/rest/user/getcode?email=" +email.value;
     fetch(url, {
         method: 'GET'
