@@ -131,10 +131,12 @@ public class UserResource {
     }
 
     @DELETE
+    @Path("/{idUser}")
     @Secured(Role.SUPER_USER)
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteUser() {
-
+    public Response deleteUser(@PathParam("idUser") int idUser, @QueryParam("force") boolean force){
+        User user = RepositoryService.getInstance().getUserFromID(idUser);
+        return RepositoryService.getInstance().deleteUser(user, force);
     }
 
     @PUT

@@ -32,7 +32,7 @@ public class User {
     private boolean nieuw;
     private String resetCode;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "users_suit",
             joinColumns = {@JoinColumn(name = "idUser")},
