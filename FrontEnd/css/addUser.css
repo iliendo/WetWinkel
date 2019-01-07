@@ -22,6 +22,9 @@ body {
     right: 110px;
 
 }
+.mdl-button:hover{
+    background-color: blueviolet;
+}
 
 .mdl-data-table.mdl-js-data-table td {
     text-align: center;

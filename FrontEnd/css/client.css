@@ -44,7 +44,9 @@ body {
 .demo-content h3 {
     margin-top: 48px;
 }
-
+.mdl-button:hover{
+    background-color: blueviolet;
+}
 .demo-footer {
     padding-left: 40px;
 }

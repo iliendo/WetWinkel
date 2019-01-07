@@ -21,7 +21,9 @@ position: relative;
     transform: translate(-50%, -50%);
     background-color: rgba(64, 42, 229, 0.7);
 }
-
+.mdl-button:hover{
+    background-color: blueviolet;
+}
 .center {
     margin: auto;
 }
