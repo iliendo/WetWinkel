@@ -52,8 +52,8 @@ h1, h2, h3, h4 {
     margin-left: 230px;
     right: 15%;
 
-
 }
+
 .side {
     top: 20px;
     position: relative;
@@ -64,13 +64,12 @@ h1, h2, h3, h4 {
     margin: auto;
     right: 15%;
 }
+
 ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-
-
 
 .side h3 {
     font-size: 35px;
@@ -100,8 +99,6 @@ ul.menu li {
     cursor: pointer;
 
 }
-
-
 
 .mdl-data-table {
     border-collapse: revert;
@@ -217,16 +214,20 @@ td#titles {
 }
 
 .button {
-    color:  white;
+    color: white;
     cursor: pointer;
-background-color:  rgba(64, 42, 229, 0.7);
+    background-color: rgba(64, 42, 229, 0.7);
 
+
+}
+.mdl-button:hover{
+background-color: blueviolet;
 }
 
 .nav-bar-made {
     cursor: pointer;
     border-collapse: revert;
-position: relative;
+    position: relative;
 }
 
 .inputfile {
@@ -244,8 +245,6 @@ position: relative;
     background-color: rgba(64, 42, 229, 0.7);
     display: inline-block;
 }
-
-
 
 .label-button {
     position: relative;
