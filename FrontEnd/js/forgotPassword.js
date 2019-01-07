@@ -28,10 +28,6 @@ document.getElementById("reset-button").onclick = function () {
     emailjs.send(service_id, template_id, template_params);
 };
 
-document.getElementById("back-button").onclick = function () {
-    window.location.replace("index.html");
-}
-
 // Checks of the email exists in the database
 function checkEmail(email) {
     const data = {'email': email};
@@ -56,13 +52,14 @@ function checkEmail(email) {
 }
 
 document.getElementById("save-button").onclick = function () {
+    console.log("59: save-button is clicked");
     checkResetCode(email);
     checkPassword();
 };
 
 // Checks if the user can change the password
 function checkPassword() {
-    console.log("65: checkpassword");
+    console.log("66: start check password")
     const password1 = document.getElementById("newPassword1").value;
     const password2 = document.getElementById("newPassword2").value;
     const inputCode = document.getElementById("code").value;
@@ -70,12 +67,8 @@ function checkPassword() {
     if (inputCode !== receivedCode) {
         showNotification("Verificatiecode klopt niet. Probeer het opnieuw")
     } else if (password1 === password2 && password1 !== "") {
-        console.log("Voer nu setPasswordInDb uit.");
         setPasswordInDb(password1);
-        console.log("uitgevoerd!");
         showNotification('Het wachtwoord is succesvol veranderd!');
-
-        //window.location.replace("index.html"); //TODO change this url when the server is online
     } else {
         showNotification('De twee wachtwoorden komen niet overeen.');
     }
@@ -83,7 +76,6 @@ function checkPassword() {
 
 // Changes password in the database
 function setPasswordInDb(password) {
-    console.log("83: setpassword");
     let url = "http://localhost:8080/wetwinkel_war/rest/user/password"; //TODO change this url when the server is online
 
     let data = {
@@ -100,11 +92,10 @@ function setPasswordInDb(password) {
         }
     }).then(function (response) {
         if (response.ok) {
-            //TODO show it worked (redirect to all users page)
             console.log("password changed");
+            window.location.replace("index.html"); //TODO change this url when the server is online
         } else {
-            //TODO show it didnt work and why (add snackbar)
-            console.log("password not changed")
+            console.log("password did not changed")
         }
     }).finally(function () {
         hideSpinner();
@@ -157,12 +148,11 @@ function hideSpinner() {
 
 // Checks if the resetcode exists in the database
 function checkResetCode(email) {
+    console.log("154: code gets checked");
     let url = "http://localhost:8080/wetwinkel_war/rest/user/getcode?email=" +email.value;
-    console.log(email.value);
     fetch(url, {
         method: 'GET'
     }).then(function (response) {
-        // console.log(response);
         return response.text();
     }).then(function (resetCode) {
         console.log("Deze moet je hebben " + String(resetCode));
@@ -170,27 +160,3 @@ function checkResetCode(email) {
     });
 
 }
-
-
-
-
-    // const data = {'resetCode': receivedCode};
-    // const url = "http://localhost:8080/wetwinkel_war/rest/user/cred";
-    //
-    // fetch(url, {
-    //     method: 'POST',
-    //     body: JSON.stringify(data),
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // }).then(function (response) {
-    //     if (response.ok) {
-    //         showNotification("Email met instructies is naar het emailadres toe gestuurd")
-    //         changeContent();
-    //         hideSpinner();
-    //     } else {
-    //         showNotification("Email bestaat niet")
-    //         hideSpinner();
-    //     }
-    // });
-//}
