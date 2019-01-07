@@ -1,16 +1,16 @@
-if (localStorage.getItem("token") === null){
-    window.open("index.html", "_SELF");
-}
+
+
+document.getElementById("clientForm").onsubmit = function (e){
+    e.preventDefault();
+};
 
 document.getElementById("insert-button").onclick = function () {
-    myFunction();
+    addClient();
 };
 
-document.getElementById("logout-button").onclick = function () {
-  localStorage.removeItem("token");
-};
+function addClient() {
 
-function myFunction() {
+    console.log("adding Client insert.js:9");
 
     const initialen = document.getElementById("initialen").value;
     const tussenvoegsel = document.getElementById("tussenvoegsel").value;
@@ -35,10 +35,10 @@ function myFunction() {
             'Content-Type': 'application/json'
         }
     }).then(function (response) {
-        if (!response.ok){
-            window.open("index.html", "_SELF")
+        if (response.ok){
+            window.open("cases.html", "_SELF")
         }
     });
 
-    window.open("client.html", "_SELF");
+    // window.open("client.html", "_SELF");
 }

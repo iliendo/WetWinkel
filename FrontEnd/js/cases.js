@@ -311,7 +311,7 @@ function getCase(idCase) {
 
             '                            <nav class="mdl-navigation">\n' +
             '                                <a class="nav-bar-made mdl-navigation__link"><h6>Zaak van ' + naam + '</h6></a>\n' +
-            '                                <a class="nav-bar-made mdl-navigation__link" onclick="showDocument(' + idCase + ')">Bestanden van de zaak</a>\n' +
+            '                                <a class="nav-bar-made mdl-navigation__link" onclick="showDocument(' + idCase + ')">Bestanden</a>\n' +
             '                            </nav>\n' +
             '                        </div>\n' +
             '                    </header>' +
