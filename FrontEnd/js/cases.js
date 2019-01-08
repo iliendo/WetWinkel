@@ -369,7 +369,7 @@ function showDocument(idCase) {
         '                        <div class="mdl-layout__header-row">\n' +
         '                            <nav class="mdl-navigation">\n' +
         '                                <a class="nav-bar-made mdl-navigation__link"  onclick="getCase(' + idCase + ')">Zaak van ' + naam + '</a>\n' +
-        '                                <a class="nav-bar-made mdl-navigation__link" onclick="showDocument(' + idCase + ')"><h6>Bestanden van de zaak</h6></a>\n' +
+        '                                <a class="nav-bar-made mdl-navigation__link" onclick="showDocument(' + idCase + ')"><h6>Bestanden</h6></a>\n' +
         '                            </nav>\n' +
         '                        </div>\n' +
         '                    </header>' +
@@ -378,8 +378,8 @@ function showDocument(idCase) {
         '<h6 class="mdl-cell mdl-cell--10-col">Toegevoegde bestanden</h6>' +
         '<form method="post" enctype="multipart/form-data" name="fileForm" class="center">\n' +
         ' <input class="inputfile " name="files" id="files" type="file" onchange="uploadFiles(' + idCase + ')" multiple\>' +
-        '<label title="Voeg Bestanden aan de zaak" for="files" class="label-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect center">\n' +
-        ' <i title="Voeg Bestanden aan de zaak" class=" material-icons center">add</i>\n' +
+        '<label title="Voeg Bestanden toe" for="files" class="label-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect center">\n' +
+        ' <i title="Voeg Bestanden toe" class=" material-icons center">add</i>\n' +
         ' </label>\n' +
         '</form> ' +
         '<table id="fileTable" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp center">\n' +

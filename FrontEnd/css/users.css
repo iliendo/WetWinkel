@@ -5,21 +5,15 @@ html, body {
 body {
     background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
 }
-.app-layout-header{
-    background-color: rgba(64, 42, 229, 0.7);
-}
 
-.made-layout{
-    font-size: 17px;
-}
 button.center {
 position: relative;
     left: 50%;
     right: 50%;
-    top: 100px;
+    top: 110px;
     z-index: 1;
     transform: translate(-50%, -50%);
-    background-color: rgba(64, 42, 229, 0.7);
+    background-color: rgba(64, 42, 229);
 }
 .mdl-button:hover{
     background-color: blueviolet;
