@@ -18,9 +18,11 @@ body {
     overflow: visible !important;
     z-index: auto !important;
 }
-.button:hover{
+
+.button:hover {
     background-color: blueviolet;
 }
+
 .button {
     color: white;
     cursor: pointer;
@@ -28,6 +30,7 @@ body {
 
 
 }
+
 #login-fab {
     border-radius: 50%;
     height: 56px;
@@ -79,14 +82,14 @@ body {
 }
 
 #popup {
-    padding:20px;
-    background-color:white;
-    position:absolute;
-    top:0;
+    padding: 20px;
+    background-color: white;
+    position: absolute;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    display:none;
+    display: none;
 }
 
 #popupHoofdtekst {
@@ -97,7 +100,8 @@ body {
     padding-top: 30px;
     color: rgba(0, 0, 0, 0.31);
 }
-#popupSecond{
+
+#popupSecond {
     text-align: center;
     color: rgba(0, 0, 0, 0.31);
 }

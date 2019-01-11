@@ -230,8 +230,8 @@ function loadDocuments(idCase) {
             downloadButton.innerHTML = '<i class="material-icons">save</i>';
             downloadButton.onclick = function (e) {
 
-                    e.preventDefault();
-                    downloadDocument(idCase, fileName);
+                e.preventDefault();
+                downloadDocument(idCase, fileName);
 
             };
 
@@ -351,17 +351,16 @@ function getCase(idCase) {
             '                </div>\n' +
             '            </div>\n' +
             '    </div>\n' +
-                        '</div>';
+            '</div>';
 
         document.getElementById("data").innerHTML = html2;
-
-
 
 
     })
 
 
 }
+
 function showDocument(idCase) {
     let html2 = "";
 
@@ -394,14 +393,13 @@ function showDocument(idCase) {
         '        <!--files are added with the loadDocuments function-->\n' +
         '        </tbody>\n' +
         '    </table></div>' +
-        '</div>' ;
-
+        '</div>';
 
 
     document.getElementById("data").innerHTML = html2;
 
     loadDocuments(idCase);
-    
+
 }
 
 function editCase(idCase) {

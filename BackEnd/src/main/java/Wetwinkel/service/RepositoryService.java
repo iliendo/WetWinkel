@@ -1,14 +1,13 @@
 package Wetwinkel.service;
 
 import Wetwinkel.objects.Case;
-import Wetwinkel.objects.User;
 import Wetwinkel.objects.Client;
+import Wetwinkel.objects.User;
 
 import javax.persistence.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class RepositoryService {
 
@@ -85,10 +84,10 @@ public class RepositoryService {
         if (user == null) {
             r = Response.status(Response.Status.NOT_FOUND).entity("User does not exist").build();
         } else {
-            if(!force && !user.getCases().isEmpty()){
+            if (!force && !user.getCases().isEmpty()) {
                 r = Response.status(409).entity("This user still has cases on his name.").build();
             } else {
-                if(force){
+                if (force) {
                     Query query = em.createNativeQuery("DELETE FROM users_suit WHERE idUser = ?");
                     query.setParameter(1, user.getIdUser());
                     query.executeUpdate();

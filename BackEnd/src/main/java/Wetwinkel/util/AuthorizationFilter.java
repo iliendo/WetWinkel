@@ -85,7 +85,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
             if (classRoles.isEmpty()) {
                 //all users accepted
                 checkPermissions(allRoles, token);
-            } else if (methodRoles.isEmpty()){
+            } else if (methodRoles.isEmpty()) {
                 checkPermissions(classRoles, token);
             } else {
                 checkPermissions(methodRoles, token);
@@ -120,13 +120,13 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         String email = Jwts.parser().setSigningKey(Security.getKey()).parseClaimsJws(token).getBody().getSubject();
         User user = repositoryService.getUserFromMail(email);
         Role role;
-        if (user.isSuperUser()){
+        if (user.isSuperUser()) {
             role = Role.SUPER_USER;
         } else {
             role = Role.NORMAL_USER;
         }
 
-        if (!allowedRoles.contains(role)){
+        if (!allowedRoles.contains(role)) {
             throw new Exception("You do not have the permissions for this action");
         }
 

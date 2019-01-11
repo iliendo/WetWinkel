@@ -44,7 +44,7 @@ public class CasesOverviewResource {
         User user = RepositoryService.getInstance().getUserFromMail(email);
 
         if (user != null) {
-            if (user.isSuperUser()){
+            if (user.isSuperUser()) {
                 return Response.ok(RepositoryService.getInstance().getCases()).build();
             } else {
                 return Response.ok(user.getCases()).build();
@@ -53,9 +53,10 @@ public class CasesOverviewResource {
             return Response.noContent().build();
         }
     }
+
     @GET
     @Path("/case/{idCase}")
-    @Produces(MediaType.APPLICATION_JSON )
+    @Produces(MediaType.APPLICATION_JSON)
     public Case getCase(@PathParam("idCase") int idCase) {
 
         return RepositoryService.getInstance().getCaseById(idCase);
@@ -75,7 +76,6 @@ public class CasesOverviewResource {
 
         RepositoryService.getInstance().editObject(updateSuit);
     }
-
 
 
 }

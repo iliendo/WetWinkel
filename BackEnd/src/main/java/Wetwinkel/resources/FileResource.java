@@ -1,7 +1,6 @@
 package Wetwinkel.resources;
 
 import Wetwinkel.util.Secured;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.google.gson.Gson;
 import org.glassfish.jersey.media.multipart.*;
 

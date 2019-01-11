@@ -1,6 +1,7 @@
 package Wetwinkel.objects;
 
-import Wetwinkel.reference.*;
+import Wetwinkel.reference.Jurisdiction;
+import Wetwinkel.reference.Status;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
@@ -21,18 +22,18 @@ public class Case {
     private int idCase;
     private String naam;
     @Generated(GenerationTime.ALWAYS)
-    @Column(name="datum", insertable=false,updatable=false)
+    @Column(name = "datum", insertable = false, updatable = false)
     private Date datum;
 
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Jurisdiction rechtsgebied;
 
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Status status;
     private String feiten;
     private String advies;
     @Generated(GenerationTime.INSERT)
-    @Column(name="laatsteUpdate", insertable=false)
+    @Column(name = "laatsteUpdate", insertable = false)
     private Date laatsteUpdate;
     private Boolean gearchiveerd;
     private int idClient;

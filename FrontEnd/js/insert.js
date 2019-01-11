@@ -1,6 +1,4 @@
-
-
-document.getElementById("clientForm").onsubmit = function (e){
+document.getElementById("clientForm").onsubmit = function (e) {
     e.preventDefault();
 };
 
@@ -25,7 +23,19 @@ function addClient() {
 
 
     const url = "http://localhost:8080/wetwinkel_war/rest/client/"; //TODO change this url when the server is online
-    const data = {'initialen': initialen, 'tussenvoegsel': tussenvoegsel, 'achternaam': achternaam, 'straatnaam': straatnaam, 'postcode': postcode, 'huisnummer': huisnummer, 'toevoeging': toevoeging, 'land': land, 'telefoonnummer': telefoonnummer, 'email': email, 'ontdekkingWw': 1};
+    const data = {
+        'initialen': initialen,
+        'tussenvoegsel': tussenvoegsel,
+        'achternaam': achternaam,
+        'straatnaam': straatnaam,
+        'postcode': postcode,
+        'huisnummer': huisnummer,
+        'toevoeging': toevoeging,
+        'land': land,
+        'telefoonnummer': telefoonnummer,
+        'email': email,
+        'ontdekkingWw': 1
+    };
 
     fetch(url, {
         method: 'POST',
@@ -35,7 +45,7 @@ function addClient() {
             'Content-Type': 'application/json'
         }
     }).then(function (response) {
-        if (response.ok){
+        if (response.ok) {
             window.open("cases.html", "_SELF")
         }
     });

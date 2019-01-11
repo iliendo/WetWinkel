@@ -134,7 +134,7 @@ public class UserResource {
     @Path("/{idUser}")
     @Secured(Role.SUPER_USER)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteUser(@PathParam("idUser") int idUser, @QueryParam("force") boolean force){
+    public Response deleteUser(@PathParam("idUser") int idUser, @QueryParam("force") boolean force) {
         User user = RepositoryService.getInstance().getUserFromID(idUser);
         return RepositoryService.getInstance().deleteUser(user, force);
     }

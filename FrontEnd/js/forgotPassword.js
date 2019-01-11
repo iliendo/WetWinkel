@@ -124,32 +124,33 @@ function hideSpinner() {
     document.getElementById("spinner").hidden = true;
 
 }
-    function postResetCode() {
-        const data = {
-            'email': email.value,
-            'resetCode': receivedCode
-        };
-        const url = "http://localhost:8080/wetwinkel_war/rest/user/postReset";
 
-        fetch(url, {
-            method: 'PUT',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(function (response) {
-            if (response.ok) {
-                console.log("'Dit gedeelte is gelukt");
-            } else {
-                console.log("Of niet");
-            }
-        });
-    }
+function postResetCode() {
+    const data = {
+        'email': email.value,
+        'resetCode': receivedCode
+    };
+    const url = "http://localhost:8080/wetwinkel_war/rest/user/postReset";
+
+    fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(function (response) {
+        if (response.ok) {
+            console.log("'Dit gedeelte is gelukt");
+        } else {
+            console.log("Of niet");
+        }
+    });
+}
 
 // Checks if the resetcode exists in the database
 function checkResetCode(email) {
     console.log("154: code gets checked");
-    let url = "http://localhost:8080/wetwinkel_war/rest/user/getcode?email=" +email.value;
+    let url = "http://localhost:8080/wetwinkel_war/rest/user/getcode?email=" + email.value;
     fetch(url, {
         method: 'GET'
     }).then(function (response) {

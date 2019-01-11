@@ -3,15 +3,13 @@ package Wetwinkel.resources;
 import Wetwinkel.objects.Case;
 import Wetwinkel.objects.Client;
 import Wetwinkel.objects.User;
-import Wetwinkel.service.RepositoryService;
 import Wetwinkel.reference.Jurisdiction;
+import Wetwinkel.service.RepositoryService;
 import com.google.gson.Gson;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +30,6 @@ public class AddCaseResource {
         }
         return suit;
     }
-
 
 
     @GET

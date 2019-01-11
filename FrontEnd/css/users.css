@@ -7,17 +7,19 @@ body {
 }
 
 button.center {
-position: relative;
+    position: relative;
     left: 50%;
     right: 50%;
     top: 110px;
     z-index: 1;
     transform: translate(-50%, -50%);
-    background-color: rgba(64, 42, 229);
+    background-color: rgb(64, 42, 229);
 }
-.mdl-button:hover{
+
+.mdl-button:hover {
     background-color: blueviolet;
 }
+
 .center {
     margin: auto;
 }
@@ -28,12 +30,13 @@ position: relative;
     overflow: auto;
 }
 
-.button-layout-made.mdl-button{
+.button-layout-made.mdl-button {
     color: white;
-    background-color:  rgba(64, 42, 229, 0.7);
+    background-color: rgba(64, 42, 229, 0.7);
 
 }
-.made-div{
+
+.made-div {
     overflow: auto;
 }
 

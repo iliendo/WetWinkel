@@ -1,10 +1,10 @@
 // Fill comboboxes when page is loaded
 
-$('#addCase').on('submit', function(e) {
+$('#addCase').on('submit', function (e) {
     e.preventDefault();
 });
 
-$('#add_button').on('click', function(e) {
+$('#add_button').on('click', function (e) {
     e.preventDefault();
     addCase();
 });
@@ -12,7 +12,6 @@ $('#add_button').on('click', function(e) {
 werknemerDDL();
 clientDDL();
 jurisdictieDDL();
-
 
 
 function werknemerDDL() {

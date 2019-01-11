@@ -69,7 +69,7 @@ ul {
 
 .side h3 {
     font-size: 35px;
-    margin: 15px 5px 0px;
+    margin: 15px 5px 0;
     color: #eff2e8;
 
 }
@@ -190,7 +190,7 @@ td#titles {
 
 .mdl-data-table.mdl-js-data-table td#tekstveld {
     text-align: left;
-    padding: 0px 55px 0px 55px;
+    padding: 0 55px 0 55px;
     max-width: 100%;
 }
 
@@ -216,8 +216,9 @@ td#titles {
 
 
 }
-.mdl-button:hover{
-background-color: blueviolet;
+
+.mdl-button:hover {
+    background-color: blueviolet;
 }
 
 .nav-bar-made {
