@@ -1,9 +1,8 @@
-
 generateTable();
 
 document.getElementById("addButton").onclick = function () {
     console.log("addbutton");
-    window.open("addUser.html","_SELF")
+    window.open("addUser.html", "_SELF")
 };
 
 function deleteUser(idUser, force) {
@@ -21,8 +20,8 @@ function deleteUser(idUser, force) {
     }).then(function (response) {
         if (response.ok) {
             generateTable();
-        } else if(response.status === 409){
-            if(confirm("Deze gebruiker is nog bezig met zaken. Wilt u deze gebruiker alsnog verwijderen? (Deze actie kan er voor zorgen dat gebruikers alleen aan een zaak gekoppeld staan)")){
+        } else if (response.status === 409) {
+            if (confirm("Deze gebruiker is nog bezig met zaken. Wilt u deze gebruiker alsnog verwijderen? (Deze actie kan er voor zorgen dat gebruikers alleen aan een zaak gekoppeld staan)")) {
                 deleteUser(idUser, true)
             }
         }
@@ -47,7 +46,7 @@ function generateTable() {
         let superUserCount = 0;
 
         for (let i = 0; i < users.length; i++) {
-            if (users[i].superUser){
+            if (users[i].superUser) {
                 superUserCount++;
             }
         }
@@ -90,15 +89,17 @@ function generateTable() {
             deleteButton.innerHTML = '<i class="material-icons">delete</i>';
 
             deleteButton.onclick = function () {
-                del:{if (superUserCount <= 1 && users[i].superUser){
-                    alert("Deze gebruiker is de laatste superUser en kan daarom niet worden verwijderd.");
-                    break del;
-                } else if(users[i].superUser){
-                    superUserCount--;
+                del:{
+                    if (superUserCount <= 1 && users[i].superUser) {
+                        alert("Deze gebruiker is de laatste superUser en kan daarom niet worden verwijderd.");
+                        break del;
+                    } else if (users[i].superUser) {
+                        superUserCount--;
+                    }
+                    if (confirm("Weet je zeker dat je " + name + " wilt verwijderen?")) {
+                        deleteUser(users[i].idUser, false);
+                    }
                 }
-                if(confirm("Weet je zeker dat je " + name + " wilt verwijderen?")){
-                    deleteUser(users[i].idUser, false);
-                }}
             };
 
             deleteCell.appendChild(deleteButton);
@@ -127,73 +128,73 @@ function editUser(idUser) {
         html += '<div class="center">' +
             '<form id="editUser" autocomplete="off" method="post" onsubmit="editUserInDB(' + user.idUser + ')">' +
             '<table class="mdl-data-table mdl-js-data-table">\n' +
-        '                    <tr>\n' +
-        '                        <td colspan="3" class="titles">\n' +
-        '                            <h5>Persoonsgegevens</h5>\n' +
-        '                        </td>\n' +
-        '                    </tr>\n' +
-        '                    <tr>\n' +
-        '                        <td>\n' +
-        '                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\n' +
-        '                                <input class="mdl-textfield__input" type="text" id="voornaam" required tabindex="1" value="'+ user.naam +'">\n' +
-        '                            </div>\n' +
-        '                        </td>\n' +
-        '                        <td>\n' +
-        '                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\n' +
-        '                                <input class="mdl-textfield__input" type="email" id="email" required tabindex="4" value="'+ user.email +'">\n' +
-        '                            </div>\n' +
-        '                        </td>\n' +
-        '                    </tr>\n' +
-        '                    <tr>\n' +
-        '                        <td>\n' +
-        '                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\n' +
-        '                                <input class="mdl-textfield__input" type="text" id="tussenvoegsel" tabindex="2"';
+            '                    <tr>\n' +
+            '                        <td colspan="3" class="titles">\n' +
+            '                            <h5>Persoonsgegevens</h5>\n' +
+            '                        </td>\n' +
+            '                    </tr>\n' +
+            '                    <tr>\n' +
+            '                        <td>\n' +
+            '                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\n' +
+            '                                <input class="mdl-textfield__input" type="text" id="voornaam" required tabindex="1" value="' + user.naam + '">\n' +
+            '                            </div>\n' +
+            '                        </td>\n' +
+            '                        <td>\n' +
+            '                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\n' +
+            '                                <input class="mdl-textfield__input" type="email" id="email" required tabindex="4" value="' + user.email + '">\n' +
+            '                            </div>\n' +
+            '                        </td>\n' +
+            '                    </tr>\n' +
+            '                    <tr>\n' +
+            '                        <td>\n' +
+            '                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\n' +
+            '                                <input class="mdl-textfield__input" type="text" id="tussenvoegsel" tabindex="2"';
 
 
-        if (user.tussenvoegsel !== undefined){
-            html += 'value="'+ user.tussenvoegsel +'">\n';
+        if (user.tussenvoegsel !== undefined) {
+            html += 'value="' + user.tussenvoegsel + '">\n';
         } else {
-            html +='>\n' +
+            html += '>\n' +
                 '<label class="mdl-textfield__label"\n' +
                 '        for="tussenvoegsel">Tussenvoegsel</label>\n'
         }
 
-        html+= '                            </div>\n' +
-        '                        </td>\n' +
-        '                    </tr>\n' +
-        '                    <tr>\n' +
-        '                        <td>\n' +
-        '                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\n' +
-        '                                <input class="mdl-textfield__input" type="text" id="achternaam" required tabindex="3" value="'+ user.achternaam +'">\n' +
-        '                            </div>\n' +
-        '                        </td>\n' +
-        '                        <td>\n' +
-        '                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\n' +
-            '<label style="margin-right: 100%"> super user?</label>\n'+
-        '                                <select class="mdl-textfield__input" id="superuser" name="superuser" required tabindex="6">\n' +
-        '                                    <option>nee</option>\n' +
-        '                                    <option>ja</option>\n' +
-        '                                </select>\n' +
-        '                            </div>\n' +
-        '                        </td>\n' +
-        '                    </tr>\n' +
-        '                    <tr>\n' +
-        '                        <td>\n' +
-        '                            <button class="button-layout-made mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect "\n' +
-        '                                    id="cancel_button" tabindex="7">\n' +
-        '                                Annuleren\n' +
-        '                            </button>\n' +
-        '                        </td>\n' +
-        '                        <td>\n' +
-        '                            <button type="submit"\n' +
-        '                                    class="button-layout-made mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"\n' +
-        '                                    id="save_button" tabindex="8" >\n' +
-        '                                Opslaan\n' +
-        '                            </button>\n' +
-        '                        </td>\n' +
-        '                    </tr>\n' +
-        '                </table>\n' +
-        '            </form>' +
+        html += '                            </div>\n' +
+            '                        </td>\n' +
+            '                    </tr>\n' +
+            '                    <tr>\n' +
+            '                        <td>\n' +
+            '                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\n' +
+            '                                <input class="mdl-textfield__input" type="text" id="achternaam" required tabindex="3" value="' + user.achternaam + '">\n' +
+            '                            </div>\n' +
+            '                        </td>\n' +
+            '                        <td>\n' +
+            '                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">\n' +
+            '<label style="margin-right: 100%"> super user?</label>\n' +
+            '                                <select class="mdl-textfield__input" id="superuser" name="superuser" required tabindex="6">\n' +
+            '                                    <option>nee</option>\n' +
+            '                                    <option>ja</option>\n' +
+            '                                </select>\n' +
+            '                            </div>\n' +
+            '                        </td>\n' +
+            '                    </tr>\n' +
+            '                    <tr>\n' +
+            '                        <td>\n' +
+            '                            <button class="button-layout-made mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect "\n' +
+            '                                    id="cancel_button" tabindex="7">\n' +
+            '                                Annuleren\n' +
+            '                            </button>\n' +
+            '                        </td>\n' +
+            '                        <td>\n' +
+            '                            <button type="submit"\n' +
+            '                                    class="button-layout-made mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"\n' +
+            '                                    id="save_button" tabindex="8" >\n' +
+            '                                Opslaan\n' +
+            '                            </button>\n' +
+            '                        </td>\n' +
+            '                    </tr>\n' +
+            '                </table>\n' +
+            '            </form>' +
             '</div>';
 
         document.getElementById("main").innerHTML = html;
@@ -202,9 +203,9 @@ function editUser(idUser) {
         }
 
 
-            $('#editUser').on('submit', function(e) {
-                e.preventDefault();
-            });
+        $('#editUser').on('submit', function (e) {
+            e.preventDefault();
+        });
 
 
     })

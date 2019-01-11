@@ -42,7 +42,7 @@ function getCasesOfUser() {
         // });
         return response.json();
     }).then(function (cases) {
-        console.log("cases: "+cases);
+        console.log("cases: " + cases);
         // for (let i = 0; i < cases ; i++) {
         //
         // }
@@ -174,7 +174,7 @@ function getCase(idCase) {
             getFilled(idClient, advies, feiten);
 
             var flip = naam;
-            var globalVariable={
+            var globalVariable = {
                 x: 'sachin'
             };
 
@@ -190,27 +190,27 @@ function getCase(idCase) {
                 "            <div class=\"demo-card-wide mdl-card mdl-shadow--2dp mdl-grid \">\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label \">Client naam:</label>\n" +
-                "                    <h6 id=\"clientNaam\">"+naam+"</h6>\n" +
+                "                    <h6 id=\"clientNaam\">" + naam + "</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Aanmaak datum van de zaak:</label>\n" +
-                "                    <h6 id=\"datum\">"+datum+"</h6>\n" +
+                "                    <h6 id=\"datum\">" + datum + "</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label \">Status van de zaak:</label>\n" +
-                "                    <h6 id=\"status\">"+status+"</h6>\n" +
+                "                    <h6 id=\"status\">" + status + "</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Rechtsgebied:</label>\n" +
-                "                    <h6 id=\"rechtsgebied\">"+rechtsgebied+"</h6>\n" +
+                "                    <h6 id=\"rechtsgebied\">" + rechtsgebied + "</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Feiten:</label>\n" +
-                "                    <h6 id=\"feiten\">"+feiten+"</h6>\n" +
+                "                    <h6 id=\"feiten\">" + feiten + "</h6>\n" +
                 "                </div>\n" +
                 "                <div class=\"mdl-cell mdl-cell--6-col\">\n" +
                 "                    <label class=\"label\">Advies:</label>\n" +
-                "                    <h6 id=\"advise\">"+advies+"</h6>\n" +
+                "                    <h6 id=\"advise\">" + advies + "</h6>\n" +
                 "                </div>\n" +
                 "            </div>\n" +
                 "        </div>\n" +
@@ -219,14 +219,13 @@ function getCase(idCase) {
                 "</div>";
 
 
-
             document.getElementById("data").innerHTML = html1;
         }
 
     };
 
 
-    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/"+idCase, true);
+    xmlhttp.open("GET", "http://localhost:8080/wetwinkel_war/rest/casesOverview/case/" + idCase, true);
     xmlhttp.setRequestHeader('authorization', 'bearer ' + localStorage.getItem("token"));
     xmlhttp.send();
 }

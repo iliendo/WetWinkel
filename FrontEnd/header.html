@@ -2,18 +2,18 @@
     document.getElementById("logout-button").onclick = function () {
         localStorage.removeItem("token");
     };
-    
+
     if (localStorage.getItem("superUser") === "false") {
         document.getElementById("userLink").hidden = true;
     }
 </script>
 
 <style>
-    .app-layout-header{
+    .app-layout-header {
         background-color: rgba(64, 42, 229, 0.7);
     }
 
-    .made-layout{
+    .made-layout {
         font-size: 17px;
     }
 </style>
@@ -27,11 +27,11 @@
         <div class="mdl-layout-spacer"></div>
 
         <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="made-layout mdl-navigation__link"  href="cases.html">Home</a>
-            <a class="made-layout mdl-navigation__link"  href="client.html">Cliënt Toevoegen</a>
-            <a class="made-layout mdl-navigation__link"   href="addCase.html">Zaak Toevoegen</a>
+            <a class="made-layout mdl-navigation__link" href="cases.html">Home</a>
+            <a class="made-layout mdl-navigation__link" href="client.html">Cliënt Toevoegen</a>
+            <a class="made-layout mdl-navigation__link" href="addCase.html">Zaak Toevoegen</a>
             <a id="userLink" class="made-layout mdl-navigation__link" href="users.html">Gebruikers</a>
-            <a class="made-layout mdl-navigation__link" id="logout-button"  href="index.html">Uitloggen</a>
+            <a class="made-layout mdl-navigation__link" id="logout-button" href="index.html">Uitloggen</a>
         </nav>
     </div>
 </header>

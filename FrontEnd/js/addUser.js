@@ -1,4 +1,4 @@
-$('#addUser').on('submit', function(e) {
+$('#addUser').on('submit', function (e) {
     e.preventDefault();
 });
 

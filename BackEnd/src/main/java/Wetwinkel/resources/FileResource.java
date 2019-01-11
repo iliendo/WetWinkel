@@ -1,7 +1,6 @@
 package Wetwinkel.resources;
 
 import Wetwinkel.util.Secured;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.google.gson.Gson;
 import org.glassfish.jersey.media.multipart.*;
 
@@ -14,10 +13,16 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Resource for files. Accessible with the following url: http://localhost:8080/wetwinkel_war/rest/file.
+ * For information about the secured tag see the javadoc of the Secured interface.
+ */
 @Secured
 @Path("/file")
 public class FileResource {
-    /** The path to the folder where we want to store the uploaded files */
+    /**
+     * The path to the folder where we want to store the uploaded files
+     */
     private static final String UPLOAD_FOLDER = "../files/cases/";
 
     public FileResource() {
@@ -27,19 +32,19 @@ public class FileResource {
     private UriInfo context;
 
     /**
-     * Returns text response to caller containing uploaded file location
+     * Handles http requests for uploading files. Also checking if the request is right otherwise returning an error.
      *
      * @return error response in case of missing parameters an internal
-     *         exception or success response if file has been stored
-     *         successfully
+     * exception or success response if files have been stored
+     * successfully
      */
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadFile(
+    public Response uploadFiles(
             @FormDataParam("idCase") int caseId,
             @FormDataParam("files") List<FormDataBodyPart> bodyParts,
             @FormDataParam("files") FormDataContentDisposition fileDispositions
-            ) {
+    ) {
 
         for (FormDataBodyPart bodyPart : bodyParts) {
             /*
@@ -70,6 +75,7 @@ public class FileResource {
             try {
                 saveToFile(uploadedInputStream, uploadedFileLocation);
             } catch (IOException e) {
+                e.printStackTrace();
                 return Response.status(500).entity("Can not save file").build();
             }
 
@@ -83,10 +89,8 @@ public class FileResource {
     /**
      * Utility method to save InputStream data to target location/file
      *
-     * @param inStream
-     *            - InputStream to be saved
-     * @param target
-     *            - full path to destination file
+     * @param inStream InputStream to be saved
+     * @param target   full path to destination file
      */
     private void saveToFile(InputStream inStream, String target)
             throws IOException {
@@ -105,32 +109,34 @@ public class FileResource {
     /**
      * Creates a folder to desired location if it not already exists
      *
-     * @param dirName
-     *            - full path to the folder
-     * @throws SecurityException
-     *             - in case you don't have permission to create the folder
+     * @param dirName full path to the folder
+     * @throws SecurityException in case you don't have permission to create the folder
      */
     private String createFolderIfNotExists(String dirName)
             throws SecurityException {
         File theDir = new File(dirName);
-        if (!theDir.exists()) {
-            theDir.mkdirs();
+        if (!theDir.exists() && theDir.mkdirs()) {
+            //do nothing, Folder is created.
         }
-        if (theDir.isDirectory()){
-            return  theDir.getPath();
-        } else {
-            return null;
+        if (theDir.isDirectory()) {
+            return theDir.getPath();
         }
+        return null;
     }
 
+    /**
+     * Generates a list with all the names of the files inside the directory corresponding to the specified case.
+     *
+     * @param idCase The id of the case which the filenames need to be returned.
+     * @return A success response with a json representation of the generated list
+     */
     @GET
     @Path("/{idCase}")
-    public Response listFilesAndFolders(@PathParam("idCase") int idCase){
+    public Response listFilesAndFolders(@PathParam("idCase") int idCase) {
 
         String directoryName = UPLOAD_FOLDER + "/" + idCase;
 
         File directory = new File(directoryName);
-
 
 
         //get all the files from a directory
@@ -139,7 +145,7 @@ public class FileResource {
         List<String> nameList = new ArrayList<>();
 
 
-        for (File file : fList){
+        for (File file : fList) {
             nameList.add(file.getName());
         }
         String json = new Gson().toJson(nameList);
@@ -148,24 +154,38 @@ public class FileResource {
 
     }
 
+    /**
+     * Deletes file from server
+     *
+     * @param caseId   The id of the case of which a file needs to be deleted
+     * @param fileName The name of the file that needs to be deleted
+     * @return An error if the file is not deleted (response 409) or an success response.
+     */
     @DELETE
     @Path("/{caseId}/{fileName}")
-    public Response deleteFile(@PathParam("caseId") int caseId, @PathParam("fileName") String fileName){
+    public Response deleteFile(@PathParam("caseId") int caseId, @PathParam("fileName") String fileName) {
         String filePath = UPLOAD_FOLDER + "/" + caseId + "/" + fileName;
 
         File file = new File(filePath);
 
-        if (file.delete()){
+        if (file.delete()) {
             return Response.ok().build();
         } else {
             return Response.status(409).build();
         }
     }
 
+    /**
+     * A method to download a file at the client side.
+     *
+     * @param caseId   The id of the case of where the file which needs to be downloaded is allocated to.
+     * @param fileName The name of the file that needs to be downloaded.
+     * @return An octetStream representation of the file that needs to be downloaded.
+     */
     @Path("/{caseId}/{fileName}")
     @GET
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    public Response getFile(@PathParam("caseId") int caseId, @PathParam("fileName") String fileName) throws Exception {
+    public Response getFile(@PathParam("caseId") int caseId, @PathParam("fileName") String fileName) {
         String filePath = UPLOAD_FOLDER + "/" + caseId + "/" + fileName;
 
         File file = new File(filePath);

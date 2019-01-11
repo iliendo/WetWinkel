@@ -6,7 +6,8 @@ public enum Status {
     CLOSE("Klaar");
 
     private String dutch;
-    Status(String dutch){
+
+    Status(String dutch) {
         this.dutch = dutch;
     }
 

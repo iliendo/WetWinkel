@@ -9,12 +9,15 @@
     margin-top: -35vh;
     flex-shrink: 0;
 }
+
 .demo-layout-transparent {
     background: url('https://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg') center / cover;
 }
+
 body {
     background: rgba(0, 0, 0, 0.0392156862745098) linear-gradient(-45deg, rgba(16, 0, 78, 0.3686274509803922), rgba(20, 4, 81, 0));
 }
+
 .demo-header .mdl-layout__header-row {
     padding-left: 40px;
 }
@@ -27,20 +30,22 @@ body {
 
 .demo-content {
     margin-top: 30px;
-    padding: 0px 30px 40px;
+    padding: 0 30px 40px;
 
 }
 
 .demo-layout.is-small-screen .demo-content {
-    padding: 0px 28px 40px;
+    padding: 0 28px 40px;
 }
 
 .demo-content h3 {
     margin-top: 48px;
 }
-.mdl-button:hover{
+
+.mdl-button:hover {
     background-color: blueviolet;
 }
+
 .demo-footer {
     padding-left: 40px;
 }
@@ -54,24 +59,24 @@ body {
 }
 
 .tb1 {
-    float:left;
-    width:50%;
+    float: left;
+    width: 50%;
 }
 
 .tb2 {
-    float:right;
-    width:50%;
-    border:none;
+    float: right;
+    width: 50%;
+    border: none;
 }
 
 .hp {
-    float:left;
+    float: left;
 }
 
 .this-button {
     margin-top: 20px;
     color: white;
-    background-color:  rgba(64, 42, 229, 0.7);
+    background-color: rgba(64, 42, 229, 0.7);
 
 }
 
@@ -82,7 +87,7 @@ body {
 
 .success-help {
     padding: 0 15px;
-    vertical-align: 0px;
+    vertical-align: 0;
     display: none;
     font-size: 16px;
     color: #444;
@@ -90,6 +95,6 @@ body {
 
 .mdl-spinner {
     vertical-align: middle;
-    margin: 0px 10px;
+    margin: 0 10px;
     display: none;
 }

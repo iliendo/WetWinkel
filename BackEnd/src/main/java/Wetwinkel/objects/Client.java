@@ -30,7 +30,7 @@ public class Client {
     private List<Case> cases;
 
     public Client(String initialen, String tussenvoegsel, String achternaam, String straatnaam, String postcode, int huisnummer,
-    String toevoeging, String land, int telefoonnummer, String email, int ontdekkingWw) {
+                  String toevoeging, String land, int telefoonnummer, String email, int ontdekkingWw) {
         this.initialen = initialen;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
@@ -55,46 +55,88 @@ public class Client {
         this.land = land;
     }
 
-    public int getIdClient() {return idClient;}
+    public int getIdClient() {
+        return idClient;
+    }
 
-    public String getInitialen() {return initialen;}
+    public String getInitialen() {
+        return initialen;
+    }
 
-    public String getTussenvoegsel() {return tussenvoegsel;}
+    public String getTussenvoegsel() {
+        return tussenvoegsel;
+    }
 
-    public String getAchternaam() {return achternaam;}
+    public String getAchternaam() {
+        return achternaam;
+    }
 
-    public String getStraatnaam() {return straatnaam;}
+    public String getStraatnaam() {
+        return straatnaam;
+    }
 
-    public String getPostcode() {return postcode;}
+    public String getPostcode() {
+        return postcode;
+    }
 
-    public int getHuisnummer() {return huisnummer;}
+    public int getHuisnummer() {
+        return huisnummer;
+    }
 
-    public int getTelefoonnummer() {return telefoonnummer;}
+    public int getTelefoonnummer() {
+        return telefoonnummer;
+    }
 
-    public String getToevoeging() {return toevoeging;}
+    public String getToevoeging() {
+        return toevoeging;
+    }
 
-    public String getEmail() {return email;}
+    public String getEmail() {
+        return email;
+    }
 
-    public int getOntdekkingWw() {return ontdekkingWw;}
+    public int getOntdekkingWw() {
+        return ontdekkingWw;
+    }
 
-    public void setInitialen(String initialen) {this.initialen = initialen;}
+    public void setInitialen(String initialen) {
+        this.initialen = initialen;
+    }
 
-    public void setTussenvoegsel(String tussenvoegsel) {this.tussenvoegsel = tussenvoegsel;}
+    public void setTussenvoegsel(String tussenvoegsel) {
+        this.tussenvoegsel = tussenvoegsel;
+    }
 
-    public void setAchternaam(String achternaam) {this.achternaam = achternaam;}
+    public void setAchternaam(String achternaam) {
+        this.achternaam = achternaam;
+    }
 
-    public void setStraatnaam(String straatnaam) {this.straatnaam = straatnaam;}
+    public void setStraatnaam(String straatnaam) {
+        this.straatnaam = straatnaam;
+    }
 
-    public void setPostcode(String postcode) {this.postcode = postcode;}
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
 
-    public void setHuisnummer(int huisnummer) {this.huisnummer = huisnummer;}
+    public void setHuisnummer(int huisnummer) {
+        this.huisnummer = huisnummer;
+    }
 
-    public void setTelefoonnummer(int telefoonnummer) {this.telefoonnummer = telefoonnummer;}
+    public void setTelefoonnummer(int telefoonnummer) {
+        this.telefoonnummer = telefoonnummer;
+    }
 
-    public void setToevoeging(String toevoeging) {this.toevoeging = toevoeging;}
+    public void setToevoeging(String toevoeging) {
+        this.toevoeging = toevoeging;
+    }
 
-    public void setEmail(String email) {this.email = email;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public void setOntdekkingWw(int ontdekkingWw) {this.ontdekkingWw = ontdekkingWw;}
+    public void setOntdekkingWw(int ontdekkingWw) {
+        this.ontdekkingWw = ontdekkingWw;
+    }
 
 }

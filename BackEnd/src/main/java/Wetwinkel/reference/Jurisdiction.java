@@ -10,7 +10,7 @@ public enum Jurisdiction {
     OTHER_GENERAL("Anders"),
     OTHER_CIVIL("Anders civiel"),
     IMMIGRATION("Immigratie");
-    
+
     private String dutch;
 
     Jurisdiction(String dutch) {

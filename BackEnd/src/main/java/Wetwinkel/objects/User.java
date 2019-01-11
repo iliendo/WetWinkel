@@ -28,7 +28,7 @@ public class User {
     private String wachtwoord;
     private boolean superUser;
     @Generated(GenerationTime.INSERT)
-    @Column(name="nieuw", insertable=false)
+    @Column(name = "nieuw", insertable = false)
     private boolean nieuw;
     private String resetCode;
 
@@ -111,7 +111,7 @@ public class User {
         }
     }
 
-    public void setWachtwoordWithoutHash(String hashedPassword){
+    public void setWachtwoordWithoutHash(String hashedPassword) {
         wachtwoord = hashedPassword;
     }
 
@@ -124,7 +124,7 @@ public class User {
         this.cases = cases;
     }
 
-    public void addCase(Case suit){
+    public void addCase(Case suit) {
         cases.add(suit);
     }
 
