@@ -44,8 +44,7 @@ public class FileResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFiles(
             @FormDataParam("idCase") int caseId,
-            @FormDataParam("files") List<FormDataBodyPart> bodyParts,
-            @FormDataParam("files") FormDataContentDisposition fileDispositions
+            @FormDataParam("files") List<FormDataBodyPart> bodyParts
     ) {
 
         for (FormDataBodyPart bodyPart : bodyParts) {
