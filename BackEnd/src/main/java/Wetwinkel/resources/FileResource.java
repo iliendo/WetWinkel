@@ -16,6 +16,8 @@ import java.util.List;
 /**
  * Resource for files. Accessible with the following url: http://localhost:8080/wetwinkel_war/rest/file.
  * For information about the secured tag see the javadoc of the Secured interface.
+ *
+ * @see <a href="https://javatutorial.net/java-file-upload-rest-service">https://javatutorial.net/java-file-upload-rest-service</a>
  */
 @Secured
 @Path("/file")
